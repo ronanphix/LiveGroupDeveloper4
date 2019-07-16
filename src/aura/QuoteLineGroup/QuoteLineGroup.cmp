@@ -1,0 +1,137 @@
+<aura:component >
+    <aura:attribute name="group" type="SBQQ__QuoteLineGroup__c" />
+    <aura:attribute name="groupDragging" type="boolean" default="false" />
+    <aura:attribute name="lines" type="Object[]"/>
+    <aura:attribute name="editable" type="boolean" default="false"/>
+    <aura:attribute name="revEditable" type="boolean" default="false" />
+    <aura:attribute name="quoteType" type="string" />
+    <aura:attribute name="hasDocument" type="boolean"  />
+    <aura:attribute name="customGroup" type="boolean" />
+    <aura:attribute name="responsePending" type="boolean" default="false" />
+    <aura:attribute name="lineUpdatesPending" type="boolean" default="false" />
+    <aura:attribute name="reconciling" type="boolean" default="false" />
+    <aura:attribute name="expenses" type="Expense__c[]" />
+
+    <aura:registerEvent name="groupNameChangeUp" type="c:GroupNameChangeUp"/>
+    <aura:registerEvent name="addGroupProducts" type="c:AddGroupProducts"/>
+    <aura:registerEvent name="deleteGroup" type="c:DeleteGroupEvent"/>
+    <aura:registerEvent name="cloneGroup" type="c:CloneGroup" />
+    <aura:registerEvent name="lineOrderChange" type="c:LineOrderChange" />
+    <aura:registerEvent name="groupOrderChange" type="c:GroupOrderChange" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="c:DeleteGroupResponse" action="{!c.handleDeleteResponse}"/>
+    <aura:handler event="c:InsertProductsResponse" action="{!c.handleAddLinesResponse}" />
+    <aura:handler event="c:GroupResponsePending" action="{!c.responsePending}"/>
+    <aura:handler name="clonedLine" event="c:ClonedLine" action="{!c.handleLineCloned}" />
+    <aura:handler event="c:LineChangeResponse" action="{!c.handleLineDelete}" />
+    <aura:handler name="lineItemChange" event="c:LineItemChange" action="{!c.handleLineChange}"/>
+    <aura:handler event="c:LineOrderChange" action="{!c.orderLines}" />
+    <!---->
+    <div class="group" id="{!v.group.Id}" ondragover="{!c.dragOver}" ondragleave="{!c.dragLeave}"
+         ondrop="{!c.drop}" draggable="{!not(v.lineUpdatesPending) &amp;&amp; v.customGroup &amp;&amp; !v.hasDocument}"
+         ondragstart="{!c.startGroupDrag}" ondragend="{!c.endGroupDrag}">
+        <lightning:layout class="slds-p-around_small" multipleRows="true" >
+            <lightning:layoutItem size="12" class="slds-p-around__large">
+                <div class="slds-grid" style="margin-bottom:20px;">
+                    <div class="slds-col slds-size_3-of-6" >
+                        <div id="{!v.group.Id + 'name'}" class="groupName"
+                             style="display:flex;" onclick="{!c.editGroupName}">
+                            <div style="font-size:18px;margin-right:5px;">{!v.group.Name}</div>
+                            <aura:if isTrue="{!(v.editable &amp;&amp; v.customGroup &amp;&amp; not(v.hasDocument))}">
+                                <div style="opacity:0.5;">
+                                    <lightning:icon iconName="utility:edit" alternativeText="Edit"
+                                                    size="xx-small" />
+                                </div>
+                            </aura:if>
+                        </div>
+                        <div id="{!v.group.Id + 'nameEdit'}" style="display:none;font-size:18px;margin-right:5px;"
+                             onkeyup="{!c.saveGroupName}" ondragstart="{!c.preventDefault}">
+                            <lightning:input type="text" value="{!v.group.Name}" maxlength="80"/>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_3-of-6">
+                        <aura:if isTrue="{!and(v.editable,v.customGroup)}">
+                            <aura:if isTrue="{!not(v.hasDocument)}">
+                                <aura:if isTrue="{!and(not(v.reconciling),not(v.lineUpdatesPending))}">
+                                    <div style="display:flex;justify-content: flex-end;position:relative;font-size:11px;"  ondragstart="{!c.preventDefault}">
+                                        <lightning:button variant="neutral" label="ADD PRODUCTS" onclick="{!c.showProducts}"/>
+                                        <lightning:button variant="neutral" label="CLONE GROUP" onclick="{!c.cloneGroup}"/>
+                                        <lightning:button variant="neutral" label="DELETE GROUP" onclick="{!c.deleteGroup}"/>
+                                    </div>
+                                </aura:if>
+                            </aura:if>
+                        </aura:if>
+                    </div>
+                </div>
+            </lightning:layoutItem>
+
+            <div style="width:100%;position:relative;">
+                <div class="lineHeaderGrid quoteKey">
+                    <div >PRODUCT</div>
+                    <div class="right">DAYS</div>
+                    <div class="right">QTY</div>
+                    <div class="right">COS</div>
+                    <div class="right">TOTAL</div>
+                    <div class="right">PRICE</div>
+                    <div class="right">TOTAL</div>
+                </div>
+
+                <lightning:layoutItem size="12" >
+                    <aura:iteration items="{!v.lines}" var="line">
+                        <aura:renderIf isTrue="{!or(!line.SBQQ__Optional__c, line.SBQQ__Optional__c &amp;&amp; !v.reconciling)}">
+                            <div style="position:relative;">
+                                <c:QuoteLine line="{!line}"
+                                             groupDragging="{!v.groupDragging}"
+                                             editable="{!v.editable}"
+                                             revEditable="{!v.revEditable}"
+                                             hasDocument="{!v.hasDocument}"
+                                             quoteType="{!v.quoteType}"
+                                             expenses="{!v.expenses}"
+                                             reconciling="{!v.reconciling}"
+                                             lineUpdatesPending="{!v.lineUpdatesPending}"
+                                             sortOrder="{!line.SBQQ__Number__c}"/>
+                            </div>
+                        </aura:renderIf>
+                    </aura:iteration>
+                </lightning:layoutItem>
+
+                <div class="lineHeaderGrid" style="font-weight:bold;margin-top: 10px; font-size:16px;">
+                    <div >{!v.group.Name} total:</div>
+                    <div class="right"></div>
+                    <div class="right"></div>
+                    <div class="right"></div>
+                    <div class="right">
+                        <aura:if isTrue="{!not(v.lineUpdatesPending)}">
+                            <span>
+                                <lightning:formattedNumber value="{!v.group.cosTotal}"
+                                                           style="currency" currencyCode="GBP"/>
+                            </span>
+                            <aura:set attribute="else">
+                                <p class="saving"><span>.</span><span>.</span><span>.</span></p>
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                    <div class="right"></div>
+                    <div class="right">
+                        <aura:if isTrue="{!not(v.lineUpdatesPending)}">
+                            <span>
+                                <lightning:formattedNumber value="{!v.group.revTotal}"
+                                                           style="currency" currencyCode="GBP"/>
+                            </span>
+                            <aura:set attribute="else">
+                                <p class="saving"><span>.</span><span>.</span><span>.</span></p>
+                            </aura:set>
+                        </aura:if>
+                    </div>
+
+                </div>
+            </div>
+
+            <aura:if isTrue="{!v.responsePending}">
+                <lightning:spinner variant="brand" size="small"/>
+            </aura:if>
+        </lightning:layout>
+    </div>
+
+</aura:component>
