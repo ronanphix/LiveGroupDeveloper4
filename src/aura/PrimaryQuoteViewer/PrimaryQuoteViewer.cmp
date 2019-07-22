@@ -468,7 +468,7 @@
                         <div id="listInputBox" style="{!v.cloneDisabled ? '' : 'display: none;'}">
                             <input class="slds-input" aura:id="opplistInput" id="opplistInput"  name="opportunityLookup"
                                    onchange="{!c.deselectThisOpportunity}"/>
-                            <datalist id="opplist" >
+                            <datalist id="{!v.recordId + 'list'}" >
                                 <aura:iteration items="{!v.opportunities}" var="opportunity">
                                     <option value="{!opportunity.Filtered_Job_Number__c + ' ' + opportunity.Name}"
                                             data-oppId="{!opportunity.Id}" onclick="{!c.selectOtherOpportunity}">

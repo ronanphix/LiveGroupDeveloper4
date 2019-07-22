@@ -6,7 +6,7 @@
     afterRender : function(component, helper) {
         var acctlistInputCmp = component.find("opplistInput");
         var acctlistInput = acctlistInputCmp.getElement();
-        acctlistInput.setAttribute("list", "opplist");
+        acctlistInput.setAttribute("list", component.get('v.recordId') + "list");
         return this.superAfterRender();
     }
 
