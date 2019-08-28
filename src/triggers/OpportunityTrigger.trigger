@@ -1,6 +1,7 @@
 trigger OpportunityTrigger on Opportunity (after insert, after update) {
 
 	if (Test.isRunningTest() || TriggerSwitch__c.getInstance('Opportunity').Active__c) {
+//	if (TriggerSwitch__c.getInstance('Opportunity').Active__c) {
 
 		// 1. shipment lists to be sent to trigger handler methods  
 		List<Opportunity> createInvoiceSchedules 		= new List<Opportunity>();

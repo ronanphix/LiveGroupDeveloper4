@@ -49,7 +49,7 @@ public class QuotePreviewController {
 
         System.debug(ApexPages.currentPage().getParameters());
 
-        showOptionals           = (ApexPages.currentPage().getParameters().get('optionals') == 'true') ? true : false;
+        showOptionals           = (ApexPages.currentPage().getParameters().get('optionals') == 'true');
         showOptionalsSummary    = (ApexPages.currentPage().getParameters().get('optSummary') == 'true') ? true : false;
         breakPage               = (ApexPages.currentPage().getParameters().get('breakPage') == 'true') ? true : false;
         showVAT                 = (ApexPages.currentPage().getParameters().get('vat') == 'true') ? true : false;

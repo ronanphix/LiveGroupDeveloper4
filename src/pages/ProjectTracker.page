@@ -1104,7 +1104,7 @@
 
                 var startDate    = new Date(result[x].Project_Start__c);
                 var start        = (startDate.getDay() === 0) ? 7 : startDate.getDay();
-                var endDate      = new Date(result[x].Project_End__c);
+                var endDate      = new Date(result[x].Project_End__c) < startDate ? startDate : new Date(result[x].Project_End__c);
                 var end          = (endDate.getDay() === 0) ? 7 : endDate.getDay();
                 var trueLength   = daysBetween(startDate, endDate);
                 var length       = trueLength;
