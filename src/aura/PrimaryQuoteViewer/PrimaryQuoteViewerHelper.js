@@ -327,14 +327,13 @@
                 TotalPrice : ''
             });
 
-            var lines = element.SBQQ__LineItems__r;
+            var lines   = element.SBQQ__LineItems__r;
+            var regx    = new RegExp("&#39;", 'g');
 
             lines.forEach(function(element){
                 reportData.push({
-                    // Name : '"' + element.SBQQ__Product__r.Name.replace(/(<([^>]+)>)/ig,"").replace(/,/g, "").replace(/\n/g, "") + '"',
-                    Name : '\"' + element.SBQQ__Product__r.Name.replace('\'','') + '\"',
-                    // Description : '"' + element.SBQQ__Description__c.replace(/(<([^>]+)>)/ig,"").replace(/,/g, "").replace(/\n/g, "") + '"',
-                    Description : '\"' + element.SBQQ__Description__c.replace('\'','') + '\"',
+                    Name :  element.SBQQ__Product__r.Name.replace(regx, '?').replace(/&/, ''),
+                    Description : element.SBQQ__Description__c.replace(regx, '?').replace(/&/, ''),
                     Days : (element.SBQQ__SubscriptionTerm__c) ? element.SBQQ__SubscriptionTerm__c : ' ',
                     Quantity : element.SBQQ__Quantity__c,
                     UnitCost : element.SBQQ__UnitCost__c,

@@ -46,11 +46,11 @@ public class InsightsController {
 
         // add any historical balances which fit in the date range
         for (QBBalance__c b : [SELECT Date__c, DayMonthYear__c, Confirmed__c, Weighted__c,
-                Predictive__c
-        FROM QBBalance__c
-        WHERE Date__c >= :startDate
-        AND Date__c <= :endDate
-        ORDER BY Date__c ASC]){
+                                    Predictive__c
+                            FROM QBBalance__c
+                            WHERE Date__c >= :startDate
+                            AND Date__c <= :endDate
+                            ORDER BY Date__c ASC]){
 
             balanceMap.get(b.Date__c)[0] = b.DayMonthYear__c;
             balanceMap.get(b.Date__c)[1] = b.Confirmed__c;

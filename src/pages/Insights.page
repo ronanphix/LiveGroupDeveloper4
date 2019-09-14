@@ -1765,10 +1765,16 @@
                                 <div v-bind:class="stageIndex.split(' ')[0] + 'border'">
                                 <div class="headerDivider stage reportStage" v-bind:class="stageIndex.split(' ')[0]">
                                     <div> {{ stageIndex.toUpperCase() }}</div>
-                                    <div>{{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex][stageIndex + ' Revenue']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
-                                    <div>{{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex][stageIndex + ' COS']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
-                                    <div>{{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex][stageIndex + ' Revenue'] - graphData['REPORTVALUES'][monthIndex][stageIndex + ' COS']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
-                                    <div>{{ (Math.abs((graphData.REPORTVALUES[monthIndex][stageIndex + ' Revenue'] - graphData['REPORTVALUES'][monthIndex][stageIndex + ' COS']) / graphData['REPORTVALUES'][monthIndex][stageIndex + ' Revenue'] * 100).toFixed(0)) + '%'}}</div>
+                                    <div v-bind:style="graphData.REPORTVALUES[monthIndex][stageIndex + ' Revenue'] < 0 ? 'color:red' : ''">
+                                        {{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex][stageIndex + ' Revenue']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
+                                    </div>
+                                    <div v-bind:style="graphData.REPORTVALUES[monthIndex][stageIndex + ' COS'] < 0 ? 'color:red' : ''">
+                                        {{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex][stageIndex + ' COS']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
+                                    </div>
+                                    <div v-bind:style="graphData.REPORTVALUES[monthIndex][stageIndex + ' Revenue'] - graphData['REPORTVALUES'][monthIndex][stageIndex + ' COS'] < 0 ? 'color:red' : ''">
+                                        {{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex][stageIndex + ' Revenue'] - graphData['REPORTVALUES'][monthIndex][stageIndex + ' COS']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
+                                    </div>
+                                    <div >{{ (Math.abs((graphData.REPORTVALUES[monthIndex][stageIndex + ' Revenue'] - graphData['REPORTVALUES'][monthIndex][stageIndex + ' COS']) / graphData['REPORTVALUES'][monthIndex][stageIndex + ' Revenue'] * 100).toFixed(0)) + '%'}}</div>
                                     <div></div>
                                 </div>
 
@@ -1777,9 +1783,15 @@
                                          v-on:click="activeReportRow = activeReportRow !== (stage + ' ' + month) ? (stage + ' ' + month) : ''"
                                          v-bind:style="{fontWeight: activeReportRow === (stage + ' ' + month) ? 'bold' : ''}">
                                         <div>INHERITANCE, COMMISSIONS AND CUSTOM ADJUSTMENTS</div>
-                                        <div>{{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex]['Adjustment Revenue']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
-                                        <div>{{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex]['Adjustment COS']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
-                                        <div>{{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex]['Adjustment Profit']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
+                                        <div v-bind:style="graphData.REPORTVALUES[monthIndex]['Adjustment Revenue'] < 0 ? 'color:red' : ''">
+                                            {{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex]['Adjustment Revenue']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
+                                        </div>
+                                        <div v-bind:style="graphData.REPORTVALUES[monthIndex]['Adjustment COS'] < 0 ? 'color:red' : ''">
+                                            {{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex]['Adjustment COS']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
+                                        </div>
+                                        <div v-bind:style="graphData.REPORTVALUES[monthIndex]['Adjustment Profit'] < 0 ? 'color:red' : ''">
+                                            {{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex]['Adjustment Profit']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
+                                        </div>
                                     </div>
                                     <template v-if="activeReportRow === (stage + ' ' + month)">
                                         <div class="rowContent inheritanceContent" style="width: 98.5%;" >
@@ -1791,18 +1803,18 @@
                                                                 {{ record.Opportunity__r.Filtered_Job_Number__c + ' - ' + record.Opportunity__r.Name }}
                                                             </a>brought forward from {{record.Opportunity__r.EventMonthYear__c}}
                                                         </div>
-                                                        <div>{{ '£' + Math.abs(record.Revenue__c).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
-                                                        <div>{{ '£' + Math.abs(record.CostOfSale__c).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
-                                                        <div>{{ '£' + Math.abs(record.Profit__c).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
+                                                        <div v-bind:style="record.Revenue__c < 0 ? 'color:red' : ''">{{ '£' + Math.abs(record.Revenue__c).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
+                                                        <div v-bind:style="record.CostOfSale__c < 0 ? 'color:red' : ''">{{ '£' + Math.abs(record.CostOfSale__c).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
+                                                        <div v-bind:style="record.Profit__c < 0 ? 'color:red' : ''">{{ '£' + Math.abs(record.Profit__c).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
                                                     </div>
                                                     <div class="headerDivider reportRecord" v-if="!record.Opportunity__c">
                                                         <div>
                                                             <span v-if="record.Calder__c">Calder commission for {{record.Opportunity__r.EventMonthYear__c}}</span>
                                                             <span v-if="!record.Calder__c">Statutory adjustment added on {{ new Date(record.CreatedDate).toString().substring(4,15) }} by {{ record.CreatedBy.Name }}</span>
                                                         </div>
-                                                        <div>{{ '£' + Math.abs(record.Revenue__c).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
-                                                        <div>{{ '£' + Math.abs(record.CostOfSale__c).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
-                                                        <div>{{ '£' + Math.abs(record.Profit__c).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
+                                                        <div v-bind:style="record.Revenue__c < 0 ? 'color:red' : ''">{{ '£' + Math.abs(record.Revenue__c).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
+                                                        <div v-bind:style="record.CostOfSale__c < 0 ? 'color:red' : ''">{{ '£' + Math.abs(record.CostOfSale__c).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
+                                                        <div v-bind:style="record.Profit__c < 0 ? 'color:red' : ''">{{ '£' + Math.abs(record.Profit__c).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</div>
                                                     </div>
                                                 </template>
                                             </template>

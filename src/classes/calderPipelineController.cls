@@ -35,6 +35,7 @@ public class calderPipelineController {
                 AND Event_start__c != NULL
                 AND StageName != 'Closed Lost'
                 ORDER BY Event_end__c DESC
+                LIMIT 100
         ]);
 
         currentOppMap = new Map<String, List<String>>();
