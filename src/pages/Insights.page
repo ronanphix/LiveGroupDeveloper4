@@ -1780,8 +1780,8 @@
 
                                 <template v-if="stageIndex === 'Closed Won'">
                                     <div class="headerDivider inheritanceRow"
-                                         v-on:click="activeReportRow = activeReportRow !== (stage + ' ' + month) ? (stage + ' ' + month) : ''"
-                                         v-bind:style="{fontWeight: activeReportRow === (stage + ' ' + month) ? 'bold' : ''}">
+                                         v-on:click="activeReportRow = activeReportRow !== (stageIndex + ' ' + monthIndex) ? (stageIndex + ' ' + monthIndex) : '';console.log(activeReportRow);"
+                                         v-bind:style="{fontWeight: activeReportRow === (stageIndex + ' ' + monthIndex) ? 'bold' : ''}">
                                         <div>INHERITANCE, COMMISSIONS AND CUSTOM ADJUSTMENTS</div>
                                         <div v-bind:style="graphData.REPORTVALUES[monthIndex]['Adjustment Revenue'] < 0 ? 'color:red' : ''">
                                             {{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex]['Adjustment Revenue']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
@@ -1793,7 +1793,7 @@
                                             {{ '£' + Math.abs(graphData.REPORTVALUES[monthIndex]['Adjustment Profit']).toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
                                         </div>
                                     </div>
-                                    <template v-if="activeReportRow === (stage + ' ' + month)">
+                                    <template v-if="activeReportRow === (stageIndex + ' ' + monthIndex)">
                                         <div class="rowContent inheritanceContent" style="width: 98.5%;" >
                                             <template v-for="record in stage">
                                                 <template v-if="!record.StageName">
@@ -4022,7 +4022,7 @@
                                     chartData.addColumn('number', '');
                                     if (!isSnapshot){
                                         Object.keys(graphData).forEach(function (date) {
-                                            chartData.addRow([date, graphData[date][1]]);
+                                            chartData.addRow([date, graphData[date][2]]);
                                         });
                                     } else {
                                         for (var x = 1; x < 13; x++) {

@@ -179,6 +179,11 @@ public class SalesDashboardUtils  {
 
     public static void adjustOpportunities(){
 
+        Date lastClosedMonth = QBClosedMonth__c.getInstance('SFCommitMonth').Month__c;
+        if (lastClosedMonth == null){
+            lastClosedMonth = Date.today().toStartOfMonth();
+        }
+
         Map<Id,Opportunity> adjustedOpps =
                 new Map<Id,Opportunity>([SELECT Id FROM Opportunity
                                         WHERE Committed__c = TRUE
@@ -238,7 +243,7 @@ public class SalesDashboardUtils  {
                         } else {
                             adjustmentMap.put(opp.Id, new Adjustment__c(
                                     Opportunity__c  = opp.Id,
-                                    Month__c        = Date.today().toStartOfMonth(),
+                                    Month__c        = lastClosedMonth.toStartOfMonth(),
                                     Revenue__c      = (opp.Amount_Calder__c - committedRevenue),
                                     Profit__c       = (opp.Gross_profit_2__c - committedProfit),
                                     CostOfSale__c   = (opp.Filtered_Cost_of_Sale__c - committedCOS)

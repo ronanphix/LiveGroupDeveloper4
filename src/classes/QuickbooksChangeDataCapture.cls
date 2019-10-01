@@ -394,8 +394,7 @@ public class QuickbooksChangeDataCapture {
 	        }
 
         	// STEP 4: TARGET ALLOCATION 
-        	// populate the target Expense__c record lists  
-
+        	// populate the target Expense__c record lists
         	// delete Expense__c records where either the whole bill 
         	// has been deleted, the line item has been deleted or the 
         	// project has been dereferenced on the line item

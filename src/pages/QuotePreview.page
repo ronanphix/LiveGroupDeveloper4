@@ -788,10 +788,6 @@
                 </div>
             </apex:repeat>
 
-
-
-
-
             <!--<div style="page-break-after:always;"/>-->
         </apex:outputPanel>
         <!-- END OPTIONAL LINE ITEMS -->

@@ -78,6 +78,7 @@ public class QuickbooksClassSyncTest {
         mockMap.put('callout:QuickBooksOnline/batch?minorversion=4',postMock);
 
         MultiRequestMock multiMock = new MultiRequestMock(mockMap);
+        Test.setMock(HttpCalloutMock.class, multiMock);
 
         Account acc = (Account)SmartFactory.createSObject('Account');
         insert acc;
@@ -95,6 +96,27 @@ public class QuickbooksClassSyncTest {
         Test.startTest();
         opp.StageName  = 'Closed Won';
         update opp;
+        Test.stopTest();
+    }
+
+    @IsTest
+    public static void testScheduleClassSyncRefresh() {
+
+        // set mock attributes
+        QuickbooksClassQueryMock queryMock  = new QuickbooksClassQueryMock();
+        QuickbooksClassPostMock postMock    = new QuickbooksClassPostMock();
+
+        Map<String, HttpCalloutMock> mockMap = new Map<String,HttpCalloutMock>();
+        mockMap.put('callout:QuickBooksOnline/query?query=select%20%2a%20from%20class%20order%20by%20' +
+                'MetaData.CreateTime%20desc%20maxresults%201000&minorversion=4',queryMock);
+        mockMap.put('callout:QuickBooksOnline/batch?minorversion=4',postMock);
+
+        MultiRequestMock multiMock = new MultiRequestMock(mockMap);
+        Test.setMock(HttpCalloutMock.class, multiMock);
+
+        String CRON_EXP = '0 0 0 28 2 ? 2022';
+        Test.startTest();
+        String jobId = System.schedule('Class sync', CRON_EXP, new ScheduledOppClassId());
         Test.stopTest();
     }
 }

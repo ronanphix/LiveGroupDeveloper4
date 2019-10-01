@@ -280,12 +280,12 @@ public class InsightsController {
 
             if (qpl.Opex__c){
 
-                totalOpex       += (qpl.Actual__c * multiplier);
+                totalOpex       += (qpl.Budget__c * multiplier);
                 totalqbOpex     += (qpl.Actual__c * multiplier);
                 totalBudgetOpex += (qpl.Budget__c * multiplier);
                 opexAggregates.get(qpl.EventMonthYear__c)[1]        += (qpl.Actual__c * multiplier);
                 opexAggregates.get(qpl.EventMonthYear__c)[2]        += (qpl.Budget__c * multiplier);
-                profitAggregates.get(qpl.EventMonthYear__c)[3]      += (qpl.Actual__c * multiplier);
+                profitAggregates.get(qpl.EventMonthYear__c)[3]      += (qpl.Budget__c * multiplier);
 
                 if (qpl.Grouping__c == 'Payroll'){
                     opexAggregates.get(qpl.EventMonthYear__c)[6]    += (qpl.Actual__c * multiplier);
@@ -302,7 +302,7 @@ public class InsightsController {
             } else if (qpl.Parent__c == 'Revenue'){
                 totalqbRevenue      += (qpl.Actual__c * multiplier);
                 totalBudgetRevenue  += (qpl.Budget__c * multiplier);
-                revenueAggregates.get(qpl.EventMonthYear__c)[3]         = (qpl.Actual__c * multiplier);
+                revenueAggregates.get(qpl.EventMonthYear__c)[3]         = (qpl.Budget__c * multiplier);
                 qbRevenueAggregates.get(qpl.EventMonthYear__c)[0]      += (qpl.Actual__c * multiplier);
                 budgetRevenueAggregates.get(qpl.EventMonthYear__c)[0]  += (qpl.Budget__c * multiplier);
 
@@ -315,7 +315,8 @@ public class InsightsController {
         }
 
         for (Integer x = 0; x < months.size(); x++){
-            netProfitAggregates.get(months[x])[0] = (profitAggregates.get(months[x])[0] - opexAggregates.get(months[x])[1]);
+//            netProfitAggregates.get(months[x])[0] = (profitAggregates.get(months[x])[0] - opexAggregates.get(months[x])[1]);
+            netProfitAggregates.get(months[x])[0] = (profitAggregates.get(months[x])[0] - opexAggregates.get(months[x])[2]);
             netProfitAggregates.get(months[x])[1] = (profitAggregates.get(months[x])[1]);
             netProfitAggregates.get(months[x])[2] = (profitAggregates.get(months[x])[2]);
         }
