@@ -742,6 +742,6 @@ public class InsightsTest {
 
     @IsTest
     public static void testPostAdjustment(){
-        InsightsController.postAdjustment('2018-04-06',100,100,100,'Test comment');
+        InsightsController.postAdjustment('2018-04-06',100,100,100,'Test comment',false);
     }
 }

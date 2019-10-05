@@ -173,9 +173,7 @@ public class SalesDashboardUtils  {
         month.Month__c = commitMonth;
         update month;
 
-
     }
-
 
     public static void adjustOpportunities(){
 
@@ -243,7 +241,7 @@ public class SalesDashboardUtils  {
                         } else {
                             adjustmentMap.put(opp.Id, new Adjustment__c(
                                     Opportunity__c  = opp.Id,
-                                    Month__c        = lastClosedMonth.toStartOfMonth(),
+                                    Month__c        = lastClosedMonth.addMonths(1).toStartOfMonth(),
                                     Revenue__c      = (opp.Amount_Calder__c - committedRevenue),
                                     Profit__c       = (opp.Gross_profit_2__c - committedProfit),
                                     CostOfSale__c   = (opp.Filtered_Cost_of_Sale__c - committedCOS)

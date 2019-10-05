@@ -7,4 +7,3 @@ public class ScheduledOppClassId implements Schedulable {
         QuickbooksClassSync.refreshClassSync(new Map<String,String>());
     }
 }
-

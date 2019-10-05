@@ -88,6 +88,7 @@ public class InsightsController {
 
         // declare variables to host response map data keys and values
         Map<String,List<Decimal>> revenueAggregates         = buildMap(start,endD);
+        Map<String,List<Decimal>> rebatesAggregates         = buildMap(start,endD);
         Map<String,List<Decimal>> profitAggregates          = buildMap(start,endD);
         Map<String,List<Decimal>> opexAggregates            = buildMap(start,endD);
         Map<String,List<Decimal>> netProfitAggregates       = buildMap(start,endD);
@@ -105,6 +106,7 @@ public class InsightsController {
         // declare variables to hold all totals figures
         Map<String,Decimal> totals  = new Map<String,Decimal>();
         Decimal totalRevenue        = 0;
+        Decimal totalRebates        = 0;
         Decimal totalProfit         = 0;
         Decimal totalOpex           = 0;
         Decimal totalqbRevenue      = 0;
@@ -232,9 +234,10 @@ public class InsightsController {
             }
         }
 
-        for (Adjustment__c adj : [SELECT Revenue__c, Profit__c, CostOfSale__c, CreatedDate, CreatedBy.Name,
+        for (Adjustment__c adj : [SELECT Revenue__c, Profit__c, CostOfSale__c, CreatedDate, LastModifiedDate, CreatedBy.Name,
                                          EventMonthYear__c, Opportunity__r.Name, Opportunity__r.Filtered_Job_Number__c,
-                                         Opportunity__c, Opportunity__r.EventMonthYear__c, Opportunity__r.Account.Name
+                                         Opportunity__c, Opportunity__r.EventMonthYear__c, Opportunity__r.Account.Name,
+                                         Calder__c
                                     FROM Adjustment__c
                                     WHERE Month__c >= :startDate
                                     AND Month__c <= :endDate
@@ -244,8 +247,10 @@ public class InsightsController {
 
             totalRevenue    += adj.Revenue__c;
             totalProfit     += adj.Profit__c;
+            totalRebates    += adj.Calder__c ? adj.Revenue__c : 0;
             revenueAggregates.get(adj.EventMonthYear__c)[0] += adj.Revenue__c;
             profitAggregates.get(adj.EventMonthYear__c)[0] += adj.Profit__c;
+            rebatesAggregates.get(adj.EventMonthYear__c)[0] += adj.Calder__c ? adj.Revenue__c : 0;
 
             reportValues.get(adj.EventMonthYear__c).put('Closed Won Revenue',
                     reportValues.get(adj.EventMonthYear__c).get('Closed Won Revenue') + adj.Revenue__c);
@@ -315,7 +320,6 @@ public class InsightsController {
         }
 
         for (Integer x = 0; x < months.size(); x++){
-//            netProfitAggregates.get(months[x])[0] = (profitAggregates.get(months[x])[0] - opexAggregates.get(months[x])[1]);
             netProfitAggregates.get(months[x])[0] = (profitAggregates.get(months[x])[0] - opexAggregates.get(months[x])[2]);
             netProfitAggregates.get(months[x])[1] = (profitAggregates.get(months[x])[1]);
             netProfitAggregates.get(months[x])[2] = (profitAggregates.get(months[x])[2]);
@@ -329,6 +333,7 @@ public class InsightsController {
 
 
         totals.put('revenue', totalRevenue);
+        totals.put('rebates', totalRebates);
         totals.put('profit', totalProfit);
         totals.put('opex', totalOpex);
         totals.put('netProfit', totalProfit - totalOpex);
@@ -361,6 +366,7 @@ public class InsightsController {
         // POPULATE FINAL RESPONSE Mp
         figuresMap.put('TOTALSMAP',totalsMap);
         figuresMap.put('revenue',revenueAggregates);
+        figuresMap.put('rebates',rebatesAggregates);
         figuresMap.put('profit',profitAggregates);
         figuresMap.put('opex',opexAggregates);
         figuresMap.put('netProfit',netProfitAggregates);
@@ -507,20 +513,61 @@ public class InsightsController {
     }
 
     @RemoteAction
-    public static Boolean postAdjustment(String monthDate, Decimal revenue, Decimal costOfSale,
-                                         Decimal profit, String commentString){
+    public static Object postAdjustment(String monthDate, Decimal revenue, Decimal costOfSale,
+                                         Decimal profit, String commentString, Boolean isRebate){
+
+        Object res = 'success';
+
+        try {
+            List<Adjustment__c> existingRebates = [SELECT Id FROM Adjustment__c
+            WHERE Month__c = :Date.valueOf(monthDate).toStartOfMonth()
+            AND Calder__c = TRUE];
+
+            Integer multiplier = isRebate ? -1 : 0;
+
+            upsert new Adjustment__c(
+                    Month__c        = Date.valueOf(monthDate).toStartOfMonth(),
+                    Revenue__c      = revenue * multiplier,
+                    CostOfSale__c   = costOfSale,
+                    Profit__c       = profit * multiplier,
+                    Comment__c      = commentString,
+                    Committed__c    = true,
+                    Calder__c       = isRebate,
+                    Id              = isRebate && !existingRebates.isEmpty() ? existingRebates[0].Id : null
+            );
+        } catch (Exception e){
+            res = e.getMessage();
+        }
+
+        return res;
+    }
+
+    @RemoteAction
+    public static Boolean upsertRebate(String monthDate, Decimal revenue, Decimal costOfSale,
+            Decimal profit, String commentString){
+
+        List<Adjustment__c> rebates = [SELECT Id FROM Adjustment__c
+                                        WHERE Month__c = :Date.valueOf(monthDate).toStartOfMonth()
+                                        AND Calder__c = TRUE];
+
+        if (!rebates.isEmpty()){
+            rebates[0].Revenue__c   = revenue;
+            rebates[0].Profit__c    = profit;
+        }
+
 
         insert new Adjustment__c(
-            Month__c        = Date.valueOf(monthDate).toStartOfMonth(),
-            Revenue__c      = revenue,
-            CostOfSale__c   = costOfSale,
-            Profit__c       = profit,
-            Comment__c      = commentString,
-            Committed__c    = true
+                Month__c        = Date.valueOf(monthDate).toStartOfMonth(),
+                Revenue__c      = revenue,
+                CostOfSale__c   = costOfSale,
+                Profit__c       = profit,
+                Comment__c      = commentString,
+                Committed__c    = true
         );
 
         return true;
     }
+
 
     @RemoteAction
     public static Map<String,Object> changeEntryDate(String entryId, String dateString){
