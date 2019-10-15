@@ -542,32 +542,6 @@ public class InsightsController {
         return res;
     }
 
-    @RemoteAction
-    public static Boolean upsertRebate(String monthDate, Decimal revenue, Decimal costOfSale,
-            Decimal profit, String commentString){
-
-        List<Adjustment__c> rebates = [SELECT Id FROM Adjustment__c
-                                        WHERE Month__c = :Date.valueOf(monthDate).toStartOfMonth()
-                                        AND Calder__c = TRUE];
-
-        if (!rebates.isEmpty()){
-            rebates[0].Revenue__c   = revenue;
-            rebates[0].Profit__c    = profit;
-        }
-
-
-        insert new Adjustment__c(
-                Month__c        = Date.valueOf(monthDate).toStartOfMonth(),
-                Revenue__c      = revenue,
-                CostOfSale__c   = costOfSale,
-                Profit__c       = profit,
-                Comment__c      = commentString,
-                Committed__c    = true
-        );
-
-        return true;
-    }
-
 
     @RemoteAction
     public static Map<String,Object> changeEntryDate(String entryId, String dateString){

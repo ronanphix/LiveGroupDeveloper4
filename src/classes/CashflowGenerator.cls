@@ -71,13 +71,14 @@ public class CashflowGenerator {
                                             QuickbooksId__c, AdjustedDate__c, Description__c, Date__c
                                         FROM CashFlowEntry__c]){
 
-            if (entry.QuickbooksId__c == 'Gross Salaries2019-06-30'){
-                system.debug('PAYROLL ENTRY IS ' + entry.Paid__c);
-            }
-
             // add the old entries to a map which will allow new entries to check for any custom values
             // which need to be preserved (amount, date, comments, paid)
             String identifier = (entry.QuickbooksId__c != null) ? entry.QuickbooksId__c : entry.Id;
+
+            System.debug('IDENTIFIER: ' + identifier);
+            System.debug('DESCRIPTION: ' + entry.Description__c);
+            System.debug('ENTRY IS ' + entry);
+
             oldEntryMap.put(identifier, entry);
         }
 
@@ -592,17 +593,25 @@ public class CashflowGenerator {
                               (sum * 0.2).setScale(2) : ((sum * -1) * 0.15).setScale(2);
             String comment  = '';
             Boolean paid    = false;
+            Boolean amtAdjusted     = false;
+            Boolean dateAdjusted    = false;
 
             if (oldEntryMap.containsKey(vatKey)){
                 if (oldEntryMap.get(vatKey).AmountAdjusted__c){
                     vatAmt = oldEntryMap.get(vatKey).Amount__c.setScale(2);
+                    amtAdjusted = true;
+
+                    System.debug('VAT AMOUNT IS ADJUSTED TO ' + vatAmt);
                 }
                 if (oldEntryMap.get(vatKey).AdjustedDate__c != null && !resetValues){
                     vatDate = oldEntryMap.get(vatKey).AdjustedDate__c;
+                    dateAdjusted = true;
                 }
                 paid    = oldEntryMap.get(vatKey).Paid__c;
                 comment = oldEntryMap.get(vatKey).Comment__c;
             }
+
+            System.debug('VAT KEY IS: ' + vatKey);
 
             if (flowMap.containsKey(vatDate)) {
                 if (!vatEntryMap.containsKey(vatKey)) {
@@ -613,6 +622,8 @@ public class CashflowGenerator {
                     vatEntry.Category__c        = 'VAT';
                     vatEntry.Out__c             = true;
                     vatEntry.Amount__c          = 0;
+                    vatEntry.AdjustedDate__c    = dateAdjusted ? vatDate : null;
+                    vatEntry.AmountAdjusted__c  = amtAdjusted;
                     vatEntry.QuickbooksId__c    = vatKey;
                     vatEntry.Source__c          = 'Budget';
                     vatEntry.Comment__c         = comment;
@@ -623,6 +634,9 @@ public class CashflowGenerator {
                 vatEntryMap.get(vatKey).Amount__c += vatAmt;
             }
         }
+
+        System.debug('VAT ENTRY MAP IS: ' + vatEntryMap);
+
 
         newEntries.addAll(vatEntryMap.values());
 
