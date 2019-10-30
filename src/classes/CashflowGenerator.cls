@@ -45,6 +45,8 @@ public class CashflowGenerator {
 
     public static void buildFlow(Boolean resetValues, Boolean resetBudgets, Map<String,HttpResponse> calloutsMap){
 
+        system.debug('build flow called');
+
         // get the cash flow entries in a map ordered by date asc
         Map<Date, CashFlow__c> flowMap = CashFlowUtils.getFlowMap();
 
@@ -67,7 +69,7 @@ public class CashflowGenerator {
         Map<String,CashFlowEntry__c> oldEntryMap    = new Map<String,CashFlowEntry__c>();
         List<CashFlowEntry__c> newEntries           = new List<CashFlowEntry__c>();
 
-        for (CashFlowEntry__c entry : [SELECT Id, Amount__c, AmountAdjusted__c, Adjusted__c, Paid__c, Comment__c,
+        for (CashFlowEntry__c entry : [SELECT Id, Amount__c, Source__c, AmountAdjusted__c, Adjusted__c, Paid__c, Comment__c,
                                             QuickbooksId__c, AdjustedDate__c, Description__c, Date__c
                                         FROM CashFlowEntry__c]){
 
@@ -75,12 +77,14 @@ public class CashflowGenerator {
             // which need to be preserved (amount, date, comments, paid)
             String identifier = (entry.QuickbooksId__c != null) ? entry.QuickbooksId__c : entry.Id;
 
-            System.debug('IDENTIFIER: ' + identifier);
-            System.debug('DESCRIPTION: ' + entry.Description__c);
-            System.debug('ENTRY IS ' + entry);
+            if (entry.Source__c == 'Custom'){
+                newEntries.add(entry);
+            } else {
+                oldEntryMap.put(identifier, entry);
+            }
 
-            oldEntryMap.put(identifier, entry);
         }
+
 
         // get direct debit and freelancer supplier profiles
         Map<String,QBSupplierProfile__c> directDebits   = new Map<String,QBSupplierProfile__c>();
@@ -117,6 +121,13 @@ public class CashflowGenerator {
             JSONParserQBOCurrentAccount parsedResults = JSONParserQBOCurrentAccount.parse(balanceResponse.getBody());
             startingBalance = parsedResults.QueryResponse.Account[0].CurrentBalance;
         } else {
+            EmailError.send(
+                'Cash flow failed to run',
+                'The cash flow generator terminated prematurely because it failed to get ' +
+                        'the current account balance from Quickbooks.\n ' +
+                        'The status code returned in the callout was ' + balanceResponse.getStatusCode() +
+                        ' and the response message was ' + balanceResponse.getBody()
+            );
             return;
         }
 
@@ -205,8 +216,16 @@ public class CashflowGenerator {
                 }
             }
         } else {
+            EmailError.send(
+                    'Cash flow failed to run',
+                    'The cash flow generator terminated prematurely because it failed to get ' +
+                            'the current account balance from Quickbooks.\n ' +
+                            'The status code returned in the callout was ' + invoiceResponse.getStatusCode() +
+                            ' and the response message was ' + invoiceResponse.getBody()
+            );
             return;
         }
+
 
         // STEP 2: GET SALESFORCE INVOICES
         List<Invoice_Schedule__c> schedules = [SELECT Id, Amount__c, Payment_Date__c, Send_Date__c,
@@ -318,6 +337,13 @@ public class CashflowGenerator {
                 }
             }
         } else {
+            EmailError.send(
+                    'Cash flow failed to run',
+                    'The cash flow generator terminated prematurely because it failed to get ' +
+                            'the current account balance from Quickbooks.\n ' +
+                            'The status code returned in the callout was ' + billResponse.getStatusCode() +
+                            ' and the response message was ' + billResponse.getBody()
+            );
             return;
         }
 
@@ -611,8 +637,6 @@ public class CashflowGenerator {
                 comment = oldEntryMap.get(vatKey).Comment__c;
             }
 
-            System.debug('VAT KEY IS: ' + vatKey);
-
             if (flowMap.containsKey(vatDate)) {
                 if (!vatEntryMap.containsKey(vatKey)) {
                     CashFlowEntry__c vatEntry   = new CashFlowEntry__c();
@@ -634,9 +658,6 @@ public class CashflowGenerator {
                 vatEntryMap.get(vatKey).Amount__c += vatAmt;
             }
         }
-
-        System.debug('VAT ENTRY MAP IS: ' + vatEntryMap);
-
 
         newEntries.addAll(vatEntryMap.values());
 
@@ -679,7 +700,7 @@ public class CashflowGenerator {
                     // check if the entity has been marked as already paid
                     paid = oldEntryMap.get(entryKey).Paid__c;
 
-                    system.debug('PAYROLL' + ' the entry for ' + entryKey + ' is ' + oldEntryMap.get(entryKey).Paid__c);
+                    System.debug('PAYROLL' + ' the entry for ' + entryKey + ' is ' + oldEntryMap.get(entryKey).Paid__c);
                 }
 
                 String comment  = oldEntryMap.containsKey(entryKey) ? oldEntryMap.get(entryKey).Comment__c : '';
@@ -707,6 +728,11 @@ public class CashflowGenerator {
         }
 
         delete oldEntryMap.values();
+
+        for (CashFlowEntry__c e : newEntries){
+            System.debug('new entry: ' + e);
+        }
+
         upsert newEntries;
 
         ////////////// STEP 11 - RECALCULATE BALANCES AND ADD OVERHEAD AMOUNTS TO THE 1ST OF EACH MONTH

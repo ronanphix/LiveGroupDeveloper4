@@ -49,7 +49,7 @@ public class PeopleHRCallout {
         }
     }
 
-    @Future(Callout=True)
+//    @Future(Callout=True)
     public static void getHolidays() {
 
         List<Employee1__c> activeEmployees = [
