@@ -1,7 +1,6 @@
 trigger OpportunityTrigger on Opportunity (after insert, after update) {
 
 	if (Test.isRunningTest() || TriggerSwitch__c.getInstance('Opportunity').Active__c) {
-//	if (TriggerSwitch__c.getInstance('Opportunity').Active__c) {
 
 		// 1. shipment lists to be sent to trigger handler methods  
 		List<Opportunity> createInvoiceSchedules 		= new List<Opportunity>();
@@ -18,6 +17,7 @@ trigger OpportunityTrigger on Opportunity (after insert, after update) {
 		// 2. trigger filter to assign records to shipment lists 
 	    for (Opportunity opp : Trigger.new) {
 
+
 		    if (Trigger.isAfter) {
 
 		    	if (Trigger.isInsert) {
@@ -29,12 +29,10 @@ trigger OpportunityTrigger on Opportunity (after insert, after update) {
 	            	if (opp.StageName == 'Closed Won' && opp.AccountQuickbooksId__c == null && 
 	            		!System.isFuture() && !System.isBatch() && opp.Calder_Opportunity__c == false &&
 	            		TestHelper.allowCallout()) {
-//	            		accountsToQuickbooks.add(opp.AccountId);
 	            	}
 					// Opportunity set to closed won on insert and does not have Quickbooks Class Id
 					if (opp.StageName == 'Closed Won' && opp.QuickbooksClassId__c == null &&
 							!System.isFuture() && !System.isBatch() && TestHelper.allowCallout()) {
-//						quickbooksClasses.add(opp.Id);
 					}
 				}
 
@@ -44,18 +42,17 @@ trigger OpportunityTrigger on Opportunity (after insert, after update) {
 	            		opp.Invoice_Schedule__c != null) {
 	            		createInvoiceSchedules.add(opp);
 						createContracts.add(opp.Id);
+						if (Trigger.new.size() == 1) OpportunityTriggerHandler.sendDesignAlerts(opp.Id);
 	            	}
 		    		// Opportunity set to closed won on update and parent account does not have Quickbooks Id            	
 	            	if (opp.StageName == 'Closed Won' && opp.StageName != Trigger.oldMap.get(opp.Id).StageName &&
 	            		opp.AccountQuickbooksId__c == null && !System.isFuture() && !System.isBatch() && opp.Calder_Opportunity__c == false &&
 	            		TestHelper.allowCallout()) {
-//	            		accountsToQuickbooks.add(opp.AccountId);
 	            	}
 					// Opportunity set to closed won on update and parent account does not have Quickbooks Id
 					if (opp.StageName == 'Closed Won' && opp.StageName != Trigger.oldMap.get(opp.Id).StageName &&
-							opp.QuickbooksClassId__c == null && !System.isFuture() && !System.isBatch() &&
-							TestHelper.allowCallout()) {
-//						quickbooksClasses.add(opp.Id);
+						opp.QuickbooksClassId__c == null && !System.isFuture() && !System.isBatch() &&
+						TestHelper.allowCallout()) {
 					}
 	            	// Opportunity changed from closed won to any other status, and has child invoice schedules
 	            	if (opp.StageName != 'Closed Won' && Trigger.oldMap.get(opp.Id).StageName == 'Closed Won' &&

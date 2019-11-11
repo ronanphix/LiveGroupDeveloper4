@@ -744,4 +744,9 @@ public class InsightsTest {
     public static void testPostAdjustment(){
         InsightsController.postAdjustment('2018-04-06',100,100,100,'Test comment',false);
     }
+
+    @IsTest
+    public static void testEmailSend(){
+        EmailError.send('test','test', new List<String>{'test@test.com'});
+    }
 }

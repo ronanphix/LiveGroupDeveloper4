@@ -126,7 +126,9 @@ public class CashflowGenerator {
                 'The cash flow generator terminated prematurely because it failed to get ' +
                         'the current account balance from Quickbooks.\n ' +
                         'The status code returned in the callout was ' + balanceResponse.getStatusCode() +
-                        ' and the response message was ' + balanceResponse.getBody()
+                        ' and the response message was ' + balanceResponse.getBody(),
+                    new List<String>{'helen.kronheim@livegroup.co.uk','dee.simmonite@livegroup.co.uk',
+                            'alina.tursunova@livegroup.co.uk','ronan.williams@livegroup.co.uk'}
             );
             return;
         }
@@ -221,7 +223,9 @@ public class CashflowGenerator {
                     'The cash flow generator terminated prematurely because it failed to get ' +
                             'the current account balance from Quickbooks.\n ' +
                             'The status code returned in the callout was ' + invoiceResponse.getStatusCode() +
-                            ' and the response message was ' + invoiceResponse.getBody()
+                            ' and the response message was ' + invoiceResponse.getBody(),
+                    new List<String>{'helen.kronheim@livegroup.co.uk','dee.simmonite@livegroup.co.uk',
+                            'alina.tursunova@livegroup.co.uk','ronan.williams@livegroup.co.uk'}
             );
             return;
         }
@@ -240,10 +244,12 @@ public class CashflowGenerator {
 
         for (Invoice_Schedule__c schedule : schedules) {
 
+            System.debug('invoice schedule: ' + schedule);
+
             Date adjustedDate   = !resetValues && oldEntryMap.containsKey(schedule.Id) && oldEntryMap.get(schedule.Id).AdjustedDate__c != null ?
                     oldEntryMap.get(schedule.Id).AdjustedDate__c : null;
             Date dueDate        = adjustedDate != null ? adjustedDate : schedule.Send_Date__c.addDays(30) < Date.today().addDays(30) ?
-                    Date.today().addDays((30 + (Integer.valueOf(schedule.Amount__c) / 1000))) :  schedule.Send_Date__c.addDays(30);
+                    Date.today().addDays((30 + (Integer.valueOf(schedule.Amount__c) / 10000))) :  schedule.Send_Date__c.addDays(30);
             String comment      = oldEntryMap.containsKey(schedule.Id) && oldEntryMap.get(schedule.Id).Comment__c != null ?
                     oldEntryMap.get(schedule.Id).Comment__c : '';
 
@@ -342,7 +348,9 @@ public class CashflowGenerator {
                     'The cash flow generator terminated prematurely because it failed to get ' +
                             'the current account balance from Quickbooks.\n ' +
                             'The status code returned in the callout was ' + billResponse.getStatusCode() +
-                            ' and the response message was ' + billResponse.getBody()
+                            ' and the response message was ' + billResponse.getBody(),
+                    new List<String>{'helen.kronheim@livegroup.co.uk','dee.simmonite@livegroup.co.uk',
+                            'alina.tursunova@livegroup.co.uk','ronan.williams@livegroup.co.uk'}
             );
             return;
         }

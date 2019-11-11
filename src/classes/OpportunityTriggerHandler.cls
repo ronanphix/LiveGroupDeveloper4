@@ -244,4 +244,53 @@ public class OpportunityTriggerHandler {
 
 		String result = PrimaryQuoteController.createContractsApex(quotesToConvert);
 	}
+
+	// METHOD PURPOSE: send an email to design teams when an opportunity is closed if the primary quote contains
+	// line items relating to design work
+	public static void sendDesignAlerts(String oppId){
+
+		Opportunity opp = [SELECT Account.Name, Name, Project_Manager__r.Name,Event_start__c, Filtered_Job_Number__c
+							FROM Opportunity WHERE Id = :oppId];
+
+		List<SBQQ__QuoteLine__c> lines = [SELECT Id, SBQQ__Description__c, SBQQ__SubscriptionTerm__c,
+												SBQQ__NetTotal__c
+											FROM SBQQ__QuoteLine__c
+											WHERE SBQQ__ProductFamily__c = 'Design'
+											AND SBQQ__Quote__r.SBQQ__Primary__c = TRUE
+											AND SBQQ__Quote__r.SBQQ__Opportunity2__c = :oppId];
+
+		system.debug('sending design alerts for ' + lines);
+
+		if (!lines.isEmpty()){
+
+			String quoteLineString = '';
+			Decimal totalCost = 0;
+
+			for (SBQQ__QuoteLine__c line : lines){
+				totalCost += line.SBQQ__NetTotal__c;
+				quoteLineString += '&nbsp;&nbsp; - ' + line.SBQQ__Description__c + ' (' + line.SBQQ__SubscriptionTerm__c + ' days ' +
+						'and total cost to client £' + line.SBQQ__NetTotal__c + ')<br/>';
+			}
+
+			String emailBody = 'Hey Sarah,<br/><br/>' +
+			'There’s some new design work coming your way! Woop woop!<br/><br/>' +
+			'<b>' + opp.Account.Name + '</b> wants £' + totalCost + ' worth of design work creating for the ' +
+			'<b>' + opp.Name + '</b>  on ' + opp.Event_start__c.format() + '.<br/><br/>' +
+			opp.Project_Manager__r.Name + ' is project managing the event and the Job Number is ' +
+			opp.Filtered_Job_Number__c + ', so get cracking!<br/><br/>' +
+			'The following things have been quoted for:<br/><br/>' +
+			quoteLineString + +'<br/>' +
+			'Thanks very much,<br/><br/>' +
+			'The Ghost of Salesforce Past (Ronan) x';
+
+			EmailError.send('New design work',
+							emailBody,
+							new List<String>{'sarah.barradell@livegroup.co.uk','ronan.williams@livegroup.co.uk','pippa.leicester@livegroup.co.uk'});
+
+		}
+
+
+
+
+	}
 }
