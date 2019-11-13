@@ -5,8 +5,9 @@
 public class QuotePreviewController {
 
     public Integer pageOneCount {get;set;}
-    public Integer pageTwoCount {get;set;}
-    public Integer pageThreeCount {get;set;}
+    public Integer usedFamilies {get;set;}
+    public Integer optionalCount {get;set;}
+    public Integer tncCount {get;set;}
 
     public SBQQ__Quote__c quote {get;set;}
     public List<SBQQ__QuoteLine__c> lines {get;set;}
@@ -41,7 +42,6 @@ public class QuotePreviewController {
 
     public Boolean showOptionals {get;set;}
     public Boolean showOptionalsSummary {get;set;}
-    public Boolean breakPage {get;set;}
     public Boolean showVAT {get;set;}
     public Boolean showSLA {get;set;}
     public Boolean showTnCs {get;set;}
@@ -52,15 +52,12 @@ public class QuotePreviewController {
 
     public QuotePreviewController(){
 
-        pageOneCount        = 0;
-        pageTwoCount        = 0;
-        pageThreeCount      = 0;
-
-        System.debug(ApexPages.currentPage().getParameters());
+        pageOneCount            = 0;
+        usedFamilies            = 0;
+        optionalCount           = 0;
 
         showOptionals           = (ApexPages.currentPage().getParameters().get('optionals') == 'true') ? true : false;
         showOptionalsSummary    = (ApexPages.currentPage().getParameters().get('optSummary') == 'true') ? true : false;
-        breakPage               = (ApexPages.currentPage().getParameters().get('breakPage') == 'true') ? true : false;
         showVAT                 = (ApexPages.currentPage().getParameters().get('vat') == 'true') ? true : false;
         showSLA                 = (ApexPages.currentPage().getParameters().get('sla') == 'true') ? true : false;
         showTnCs                = (ApexPages.currentPage().getParameters().get('tnc') == 'true') ? true : false;
@@ -383,6 +380,8 @@ public class QuotePreviewController {
         for (String groupKey : groupMap.keySet()){
             if (groupMap.get(groupKey).get('Default').isEmpty()){
                 groupMap.get(groupKey).remove('Default');
+            } else {
+                usedFamilies ++;
             }
             if (groupMap.get(groupKey).get('Removed').isEmpty()){
                 groupMap.get(groupKey).remove('Removed');
@@ -408,7 +407,8 @@ public class QuotePreviewController {
                     optionalGroupSummary.remove(optionalKey);
                     optionalLineCount.remove(optionalKey);
                 } else if (showOptionalsSummary){
-                    pageOneCount += 1;
+                    pageOneCount ++;
+                    optionalCount ++;
                 }
             }
             for (Integer x = 0;x < groupCount; x++){
@@ -439,12 +439,15 @@ public class QuotePreviewController {
             theme3 = '#2c7495';
         }
 
-        system.debug('optionalGroups ' + optionalGroups);
-
-        pageOneCount += groups.size() + (showVaT ? 3 : 1);
+        pageOneCount += ((quote.SBQQ__LineItemsGrouped__c) ? groups.size() : usedFamilies) + (showVaT ? 3 : 1);
         if (showOptionalsSummary){
             pageOneCount += showVAT ? 4 : 2;
         }
+
+        if (showTnCs){
+
+        }
+
 
     }
 

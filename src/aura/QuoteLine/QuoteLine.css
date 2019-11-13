@@ -41,3 +41,15 @@
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1), 0 3px 8px 0 rgba(0, 0, 0, 0.1);
     background-color: #f4f4f4;
 }
+
+.THIS .qb-block {
+    width: 12vw;
+    margin-right: 47%;
+    float: right;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.THIS .qb-icon {
+    margin-right: 3px;
+}

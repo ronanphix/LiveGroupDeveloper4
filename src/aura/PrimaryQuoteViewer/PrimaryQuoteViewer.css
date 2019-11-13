@@ -5,6 +5,12 @@
 	margin-bottom: 7px;
 }
 
+.THIS button {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .THIS .primary {
     border-radius: 3px;
     background-color: black;

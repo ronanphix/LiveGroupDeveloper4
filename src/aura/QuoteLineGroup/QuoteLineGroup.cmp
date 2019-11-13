@@ -45,7 +45,7 @@
                                 </div>
                             </aura:if>
                         </div>
-                        <div id="{!v.group.Id + 'nameEdit'}" style="display:none;font-size:18px;margin-right:5px;"
+                        <div id="{!v.group.Id + 'nameEdit'}" style="display:none;font-size:18px;margin-right:5px;" onfocusout="{!c.saveGroupNameFocusOut}"
                              onkeyup="{!c.saveGroupName}" ondragstart="{!c.preventDefault}">
                             <lightning:input type="text" value="{!v.group.Name}" maxlength="80"/>
                         </div>

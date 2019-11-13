@@ -92,6 +92,19 @@
             nameChange.fire();
   		}
     },
+    saveGroupNameFocusOut : function(component, event, helper){
+        if (!event.keyCode) {
+            document.getElementById(component.get('v.group.Id') + 'name').style.display = 'flex';
+            document.getElementById(component.get('v.group.Id') + 'nameEdit').style.display = 'none';
+
+            var nameChange = component.getEvent('groupNameChangeUp');
+            nameChange.setParams({
+                id : component.get('v.group.Id'),
+                name : component.get('v.group.Name')
+            });
+            nameChange.fire();
+        }
+    },
     showProducts : function(component, event, helper){
         var groupEvent = component.getEvent('addGroupProducts');
         groupEvent.setParams({

@@ -66,7 +66,7 @@
         helper.fireLineChange(component, line,'undo');
     },
     save : function(component, event, helper){
-        if (!component.get('v.lineUpdatesPending')){
+        // if (!component.get('v.lineUpdatesPending')){
             if (event.which === 13 && component.get('v.changed') && helper.inputValid(component)){
                 component.set('v.changed', false);
                 helper.closeEdit(component);
@@ -84,10 +84,10 @@
 
                 helper.fireLineChange(component, line,'save');
             }
-        }
+        // }
     },
     updateLine: function(component, event, helper){
-        if (!component.get('v.lineUpdatesPending')){
+        // if (!component.get('v.lineUpdatesPending')){
             event.stopPropagation();
             if (helper.inputValid(component)){
                 component.set('v.changed', false);
@@ -106,7 +106,7 @@
 
                 helper.fireLineChange(component, line,'save');
             }
-        }
+        // }
     },
     cloneLine: function(component, event, helper){
         event.stopPropagation();

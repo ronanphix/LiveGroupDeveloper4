@@ -1249,8 +1249,7 @@ public with sharing class PrimaryQuoteController {
 
     @AuraEnabled
     public static Boolean saveDocumentApex(String quoteId, String oppId,
-            String userId, String contactId, String text, String optionals, String optSummary,
-            String breakPage, String invoices,
+            String userId, String contactId, String text, String optionals, String optSummary, String invoices,
             String vat, String sla, String tnc, String signed, String isSOW, String SOWEntity,
             String SOWDate, String SOWServices) {
 
@@ -1271,14 +1270,13 @@ public with sharing class PrimaryQuoteController {
 
         PageReference pdf = Page.QuotePreview;
 
-        // add parent id to the parameters for standardcontroller
+        // add parent id to the parameters for standard controller
         pdf.getParameters().put('Id',quoteId);
         pdf.getParameters().put('userId',userId);
         pdf.getParameters().put('contactId',contactId);
         pdf.getParameters().put('text',EncodingUtil.urlDecode(text,'UTF-8'));
         pdf.getParameters().put('optionals',optionals);
         pdf.getParameters().put('optSummary',optSummary);
-        pdf.getParameters().put('breakPage',breakPage);
         pdf.getParameters().put('invoices',invoices);
         pdf.getParameters().put('vat',vat);
         pdf.getParameters().put('sla',sla);

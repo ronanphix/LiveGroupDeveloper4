@@ -15,32 +15,28 @@
     <aura:attribute name="expensesTotal" type="decimal" default="0" />
     <aura:attribute name="reconciling" type="boolean" default="false" />
     <aura:attribute name="sortOrder" type="integer"/>
-
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     <aura:handler event="c:LineSelected" action="{!c.closeEdit}" />
     <aura:handler event="c:LineChangeResponse" action="{!c.processChangeResponse}" />
     <aura:handler event="c:MultipleLineUpdate" action="{!c.handleMultiLineUpdate}" />
     <aura:handler name="change" value="{!v.expenses}" action="{!c.calculateTotal}" />
-
     <aura:registerEvent name="lineEdit" type="c:LineItemChange" />
     <aura:registerEvent name="lineOrderChange" type="c:LineOrderChange" />
     <aura:registerEvent name="clonedLine" type="c:ClonedLine" />
-
-
     <div class="{!v.optional ? 'quoteLine optionalLine ' + (v.editmode ? 'selected' : ' ') : 'quoteLine ' + (v.editmode ? 'selected' : ' ')}"
          ondblclick="{!c.openEdit}" aura:id="line" id="{!v.line.Id}"
          draggable="{!not(v.editmode)  &amp;&amp; v.revEditable  &amp;&amp; not(v.reconciling) &amp;&amp; not(v.hasDocument) &amp;&amp; not(v.lineUpdatesPending)}"
          ondragstart="{!c.startLineDrag}" ondragover="{!c.dragOver}" ondragleave="{!c.dragLeave}" ondrop="{!c.drop}">
-
         <div class="quoteGrid">
             <div class="paddedCol">
                 <div style="font-weight:bold;font-size:14px;">
-                    <span>{!(v.optional ? 'OPTIONAL: ' + v.line.SBQQ__Product__r.Name
-                        : v.line.SBQQ__Product__r.Name)}</span>
+               <span>{!(v.optional ? 'OPTIONAL: ' + v.line.SBQQ__Product__r.Name
+                   : v.line.SBQQ__Product__r.Name)}</span>
                     <aura:if isTrue="{!v.line.SBQQ__AdditionalDiscountAmount__c}">
-                        <span style="color:lightcoral;"><br/>Discounted by:
-                            <lightning:formattedNumber value="{!v.line.SBQQ__AdditionalDiscountAmount__c}" style="currency" currencyCode="GBP" />
-                        </span>
+                  <span style="color:lightcoral;">
+                     <br/>Discounted by:
+                     <lightning:formattedNumber value="{!v.line.SBQQ__AdditionalDiscountAmount__c}" style="currency" currencyCode="GBP" />
+                  </span>
                     </aura:if>
                 </div>
                 <aura:if isTrue="{!v.editmode}">
@@ -59,10 +55,10 @@
                         </aura:set>
                     </aura:if>
                     <aura:set attribute="else">
-                            <div style="max-height: 62px;overflow-y: hidden;position: relative;">
-                                <lightning:formattedRichText value="{!v.line.SBQQ__Description__c}"/>
-                                <div style="position:absolute;top:48px;">........</div>
-                            </div>
+                        <div style="max-height: 62px;overflow-y: hidden;position: relative;">
+                            <lightning:formattedRichText value="{!v.line.SBQQ__Description__c}"/>
+                            <div style="position:absolute;top:48px;">........</div>
+                        </div>
                     </aura:set>
                 </aura:if>
             </div>
@@ -71,15 +67,15 @@
                     <div class="right">
                         <aura:if isTrue="{!and(v.editmode, v.revEditable)}">
                             <aura:if isTrue="{!v.line.SBQQ__Product__r.SBQQ__SubscriptionTerm__c != null}">
-                                    <span onkeyup="{!c.save}">
-                                    <lightning:input class="{!'slds-p-top_none valInput  ' + v.line.Id}"
-                                                     type="decimal"
-                                                     value="{!v.line.SBQQ__SubscriptionTerm__c}"
-                                                     messageWhenValueMissing="Please add a value"
-                                                     aura:id="lineform"
-                                                     required="true"
-                                                     onchange="{!c.setChanged}"/>
-                                    </span>
+                        <span onkeyup="{!c.save}">
+                           <lightning:input class="{!'slds-p-top_none valInput  ' + v.line.Id}"
+                                            type="decimal"
+                                            value="{!v.line.SBQQ__SubscriptionTerm__c}"
+                                            messageWhenValueMissing="Please add a value"
+                                            aura:id="lineform"
+                                            required="true"
+                                            onchange="{!c.setChanged}"/>
+                        </span>
                             </aura:if>
                             <aura:set attribute="else">
                                 {!v.line.SBQQ__SubscriptionTerm__c}
@@ -88,7 +84,7 @@
                     </div>
                     <div class="right">
                         <aura:if isTrue="{!and(v.editmode,v.revEditable)}">
-                            <span onkeyup="{!c.save}">
+                     <span onkeyup="{!c.save}">
                         <lightning:input class="{!'slds-p-top_none valInput  ' + v.line.Id}"
                                          type="decimal"
                                          value="{!v.line.SBQQ__Quantity__c}"
@@ -104,7 +100,7 @@
                     </div>
                     <div class="right">
                         <aura:if isTrue="{!v.editmode}">
-                            <span onkeyup="{!c.save}">
+                     <span onkeyup="{!c.save}">
                         <lightning:input class="{!'slds-p-top_none valInput  ' + v.line.Id}"
                                          type="decimal"
                                          value="{!v.line.SBQQ__UnitCost__c}"
@@ -119,46 +115,46 @@
                     </div>
                     <div class="right">
                         <lightning:formattedNumber value="{!v.line.SBQQ__SubscriptionTerm__c == null ?
-                                                    (v.line.SBQQ__UnitCost__c * v.line.SBQQ__Quantity__c) :
-                                                    (v.line.SBQQ__UnitCost__c * v.line.SBQQ__Quantity__c * v.line.SBQQ__SubscriptionTerm__c)}"
+                     (v.line.SBQQ__UnitCost__c * v.line.SBQQ__Quantity__c) :
+                     (v.line.SBQQ__UnitCost__c * v.line.SBQQ__Quantity__c * v.line.SBQQ__SubscriptionTerm__c)}"
                                                    style="currency" currencyCode="GBP" />
                     </div>
                     <div class="right">
                         <aura:if isTrue="{!not(v.line.SBQQ__Hidden__c) &amp;&amp; v.revEditable &amp;&amp; v.editmode}">
-                                <span onkeyup="{!c.save}">
-                                    <lightning:input class="{!'slds-p-top_none valInput  ' + v.line.Id}"
-                                                     type="decimal"
-                                                     value="{!v.line.SBQQ__ListPrice__c}"
-                                                     messageWhenValueMissing="Your message"
-                                                     aura:id="lineform"
-                                                     onchange="{!c.setChanged}"/>
-                                </span>
+                     <span onkeyup="{!c.save}">
+                        <lightning:input class="{!'slds-p-top_none valInput  ' + v.line.Id}"
+                                         type="decimal"
+                                         value="{!v.line.SBQQ__ListPrice__c}"
+                                         messageWhenValueMissing="Your message"
+                                         aura:id="lineform"
+                                         onchange="{!c.setChanged}"/>
+                     </span>
                             <aura:set attribute="else">
                                 <lightning:formattedNumber value="{!v.line.SBQQ__ListPrice__c}" style="currency" currencyCode="GBP" />
                             </aura:set>
-
                         </aura:if>
                     </div>
                     <div class="right" style="{!v.line.SBQQ__AdditionalDiscountAmount__c ? 'color:lightcoral' : ''}">
                         <lightning:formattedNumber value="{!v.line.SBQQ__SubscriptionTerm__c == null ?
-                                                     (v.line.SBQQ__ListPrice__c * v.line.SBQQ__Quantity__c) - (v.line.SBQQ__AdditionalDiscountAmount__c ? v.line.SBQQ__AdditionalDiscountAmount__c : 0):
-                                                     (v.line.SBQQ__ListPrice__c * v.line.SBQQ__Quantity__c * v.line.SBQQ__SubscriptionTerm__c ) - (v.line.SBQQ__AdditionalDiscountAmount__c ? v.line.SBQQ__AdditionalDiscountAmount__c : 0)}"
+                     (v.line.SBQQ__ListPrice__c * v.line.SBQQ__Quantity__c) - (v.line.SBQQ__AdditionalDiscountAmount__c ? v.line.SBQQ__AdditionalDiscountAmount__c : 0):
+                     (v.line.SBQQ__ListPrice__c * v.line.SBQQ__Quantity__c * v.line.SBQQ__SubscriptionTerm__c ) - (v.line.SBQQ__AdditionalDiscountAmount__c ? v.line.SBQQ__AdditionalDiscountAmount__c : 0)}"
                                                    style="currency" currencyCode="GBP" />
                     </div>
                     <aura:if isTrue="{!v.editmode}">
                         <div class="lineEdits" style="z-index:10;">
                             <aura:if isTrue="{!v.changed}">
-                                <aura:if isTrue="{!not(v.lineUpdatesPending)}">
+<!--                                <aura:if isTrue="{!not(v.lineUpdatesPending)}">-->
                                     <div>
                                         <lightning:icon iconName="action:update_status" alternativeText="Save" size="small" onclick="{!c.updateLine}" />
                                     </div>
-                                </aura:if>
+<!--                                </aura:if>-->
                                 <div>
                                     <lightning:icon iconName="action:recall" alternativeText="Undo" size="small" onclick="{!c.undoChanges}" />
                                 </div>
                             </aura:if>
                             <aura:if isTrue="{!not(v.changed)}">
-                                <aura:if isTrue="{!and(not(v.hasDocument),not(v.lineUpdatesPending))}">
+<!--                                <aura:if isTrue="{!and(not(v.hasDocument),not(v.lineUpdatesPending))}">-->
+                                <aura:if isTrue="{!not(v.hasDocument)}">
                                     <div>
                                         <lightning:icon iconName="action:clone" alternativeText="Clone" size="small" onclick="{!c.cloneLine}" title="Clone" />
                                     </div>
@@ -184,8 +180,8 @@
                             <div></div>
                             <div class="right">
                                 <lightning:formattedNumber value="{!(v.line.SBQQ__SubscriptionTerm__c == null || v.line.SBQQ__SubscriptionTerm__c == 0) ?
-                                                                     (v.expensesTotal / v.line.SBQQ__Quantity__c) :
-                                                                     (v.expensesTotal / v.line.SBQQ__SubscriptionTerm__c / v.line.SBQQ__Quantity__c)}" style="currency" currencyCode="GBP" />
+                           (v.expensesTotal / v.line.SBQQ__Quantity__c) :
+                           (v.expensesTotal / v.line.SBQQ__SubscriptionTerm__c / v.line.SBQQ__Quantity__c)}" style="currency" currencyCode="GBP" />
                             </div>
                             <div class="right">
                                 <lightning:formattedNumber value="{!v.expensesTotal}" style="currency" currencyCode="GBP" />
@@ -210,13 +206,23 @@
                                     </div>
                                 </aura:if>
                             </aura:iteration>
+                            <aura:set attribute="else">
+                                <div class="qb-block">
+                                    <aura:iteration items="{!v.expenses}" var="expense">
+                                        <aura:if isTrue="{!expense.QuoteLine__c == v.line.Id}">
+                                            <div class="qb-icon">
+                                                <img src="{!$Resource.QuickbooksLogoSmall}" style="width:15px;"/>
+                                            </div>
+                                        </aura:if>
+                                    </aura:iteration>
+                                </div>
+                            </aura:set>
                         </aura:if>
                     </div>
                 </aura:if>
             </div>
         </div>
     </div>
-
     <div>
         <aura:if isTrue="{!v.responsePending}">
             <lightning:spinner variant="brand" size="small" />

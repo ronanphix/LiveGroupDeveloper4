@@ -40,13 +40,6 @@
 
         if (event.getParam('operation') === 'uncommitted'){
             var pendingChanges = component.get('v.pendingChanges');
-            // pendingChanges.forEach(function(element){
-            //    if (element.Id === line.Id){
-            //
-            //    }
-            // });
-            // pendingChanges.push(line);
-            // component.set('v.pendingChanges',pendingChanges);
 
             var duplicate = false;
 
@@ -295,8 +288,9 @@
         component.set('v.previewChanged',true);
     },
     selectOption : function(component, event, helper){
-        document.getElementById(event.target.id + 'Checkbox').checked =
-            !document.getElementById(event.target.id + 'Checkbox').checked;
+        var q = component.get('v.quote.Id');
+        document.getElementById(q + event.target.id + 'Checkbox').checked =
+            !document.getElementById(q + event.target.id + 'Checkbox').checked;
         component.set('v.previewChanged',true);
     },
     showDocument : function(component, event, helper){
@@ -320,19 +314,21 @@
     },
     saveDocument : function(component, event, helper){
 
+        var q           = component.get('v.quote.Id');
+
+
         component.find('docSavePending').getElement().style.display = 'block';
 
         var userId 		= component.find('ourContact').get("v.value");
         var contactId 	= component.find('quoteContact').get("v.value");
         var text        = encodeURIComponent(component.find('documentText').get("v.value"));
 
-        var optionals   = document.getElementById('optionalCheckbox').checked;
-        var optSummary  = document.getElementById('optionalSummaryCheckbox').checked;
-        var breakPage   = document.getElementById('breakPageCheckbox').checked;
-        var invoices    = document.getElementById('invoicesCheckbox').checked;
-        var vat         = document.getElementById('vatCheckbox').checked;
-        var tnc         = document.getElementById('termsAndConditionsCheckbox').checked;
-        var signed      = document.getElementById('signatureCheckbox').checked;
+        var optionals   = document.getElementById(q + 'optionalCheckbox').checked;
+        var optSummary  = document.getElementById(q + 'optionalSummaryCheckbox').checked;
+        var invoices    = document.getElementById(q + 'invoicesCheckbox').checked;
+        var vat         = document.getElementById(q + 'vatCheckbox').checked;
+        var tnc         = document.getElementById(q + 'termsAndConditionsCheckbox').checked;
+        var signed      = document.getElementById(q + 'signatureCheckbox').checked;
 
         var isSOW       = component.get('v.quote.SBQQ__Opportunity2__r.Account.SOWRecipient__c')
             && component.get('v.quote.SBQQ__Opportunity2__r.StageName') === 'Closed Won'
@@ -351,7 +347,6 @@
             text : text,
             optionals : optionals,
             optSummary : optSummary,
-            breakPage : breakPage,
             invoices : invoices,
             vat : vat,
             sla : 'false',

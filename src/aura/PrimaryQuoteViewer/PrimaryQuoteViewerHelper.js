@@ -254,37 +254,31 @@
         $A.enqueueAction(getDocumentInfo);
     },
     loadPreview : function(component, event){
-        var quoteId     = component.get('v.quote.Id');
+        var q           = component.get('v.quote.Id');
+
+        console.log('q is',q);
+
         var userId      = component.find('ourContact').get("v.value");
         var contactId   = component.find('quoteContact').get("v.value");
         var text        = encodeURIComponent(component.find('documentText').get("v.value"));
-        var optionals   = document.getElementById('optionalCheckbox').checked;
-        var optSummary  = document.getElementById('optionalSummaryCheckbox').checked;
-        var breakPage   = document.getElementById('breakPageCheckbox').checked;
-        var invoices    = document.getElementById('invoicesCheckbox').checked;
-        var vat         = document.getElementById('vatCheckbox').checked;
-        var tnc         = document.getElementById('termsAndConditionsCheckbox').checked;
-        var signed      = document.getElementById('signatureCheckbox').checked;
-        var isSOW       = document.getElementById('sowCheckbox') ? document.getElementById('sowCheckbox').checked : false;
-            // component.get('v.quote.SBQQ__Opportunity2__r.Account.SOWRecipient__c')
-            //                 && component.get('v.quote.SBQQ__Opportunity2__r.StageName') === 'Closed Won'
-            //                 && component.get('v.quote.SBQQ__Opportunity2__r.QuoteType__c') !== 'Reconciliation';
-
+        var optionals   = document.getElementById(q + 'optionalCheckbox').checked;
+        var optSummary  = document.getElementById(q + 'optionalSummaryCheckbox').checked;
+        var invoices    = document.getElementById(q + 'invoicesCheckbox').checked;
+        var vat         = document.getElementById(q + 'vatCheckbox').checked;
+        var tnc         = document.getElementById(q + 'termsAndConditionsCheckbox').checked;
+        var signed      = document.getElementById(q + 'signatureCheckbox').checked;
+        var isSOW       = document.getElementById(q + 'sowCheckbox') ? document.getElementById(q + 'sowCheckbox').checked : false;
         var SOWEntity   = component.find('sowEntity') ? encodeURIComponent(component.find('sowEntity').get('v.value')) : '';
         var SOWServices = component.find('sowServices') ? encodeURIComponent(component.find('sowServices').get('v.value')) : '';
         var SOWDate     = component.find('sowDate') ? component.find('sowDate').get('v.value') : '';
 
-        console.log('date is ' + SOWDate);
-
-
         document.getElementById(component.get('v.recordId') + 'quotePreviewIFrame').src = '/apex/QuotePreview?' +
-            'id=' + quoteId +
+            'id=' + q +
             '&userId=' + userId +
             '&contactId=' + contactId +
             '&text=' + text +
             '&optionals=' + optionals +
             '&optSummary=' + optSummary +
-            '&breakPage=' + breakPage +
             '&invoices=' + invoices +
             '&vat=' + vat +
             '&draft=true' +
