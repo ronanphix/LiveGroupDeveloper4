@@ -382,6 +382,7 @@
     showCloneModal : function(component){
 
         var modal = component.find("cloneQuoteModal");
+
         $A.util.toggleClass(modal, "toggle");
 
         if (component.get('v.opportunities').length === 0){
@@ -400,37 +401,45 @@
     clearOpportunity : function(component, event, helper){
 
         if (!component.get('v.cloneDisabled')) {
-            document.getElementById('opplistInput').value = null;
-            document.getElementById('listInputBox').style.display = 'none';
-            document.getElementById('thisOpportunity').checked = true;
-            document.getElementById('otherOpportunity').checked = false;
-            document.getElementById('cloneButton').style.display = 'block';
+            var q = component.get('v.quote.Id');
+
+            document.getElementById(q + 'opplistInput').value = null;
+            document.getElementById(q + 'listInputBox').style.display = 'none';
+            document.getElementById(q + 'thisOpportunity').checked = true;
+            document.getElementById(q + 'otherOpportunity').checked = false;
+            document.getElementById(q + 'cloneButton').style.display = 'block';
         }
     },
     deselectThisOpportunity : function(component, event, helper){
-        document.getElementById('listInputBox').style.display = 'block';
-        document.getElementById('otherOpportunity').checked = true;
 
-        if (document.getElementById('opplistInput').value ){
-            document.getElementById('cloneButton').style.display = 'block';
+        var q = component.get('v.quote.Id');
+
+        document.getElementById(q + 'listInputBox').style.display = 'block';
+        document.getElementById(q + 'otherOpportunity').checked = true;
+
+        if (document.getElementById(q + 'opplistInput').value ){
+            document.getElementById(q + 'cloneButton').style.display = 'block';
         } else {
-            document.getElementById('cloneButton').style.display = 'none';
+            document.getElementById(q + 'cloneButton').style.display = 'none';
         }
 
         if (!component.get('v.cloneDisabled')){
-            document.getElementById('thisOpportunity').checked = false;
+            document.getElementById(q + 'thisOpportunity').checked = false;
         }
     },
 
     cloneQuote : function(component, event, helper){
+
+        var q = component.get('v.quote.Id');
+
 
         var modal = component.find("cloneQuoteModal");
         $A.util.toggleClass(modal, "toggle");
         var oppId;
         var type;
 
-        if (document.getElementById('opplistInput').value){
-            var jobNumber = document.getElementById('opplistInput').value.toString().substring(0,5);
+        if (document.getElementById(q + 'opplistInput').value){
+            var jobNumber = document.getElementById(q + 'opplistInput').value.toString().substring(0,5);
             var opps = component.get('v.opportunities');
             opps.forEach(function(element){
                 if (element.Filtered_Job_Number__c == jobNumber){
