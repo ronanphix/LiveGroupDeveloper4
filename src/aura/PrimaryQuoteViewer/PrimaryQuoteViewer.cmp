@@ -83,7 +83,6 @@
                                         <lightning:button variant="neutral" label="{!'RECONCILE (' + v.quote.SBQQ__Opportunity2__r.UnassignedExpenses__c + ')'}" onclick="{!c.openReconcile}" class="slds-truncate"/>
                                     </aura:if>
                                     <aura:if isTrue="{!v.editable &amp;&amp; not(v.quote.HasDocument__c)}">
-                                        <!--<lightning:button variant="neutral" label="IMPORT" class="slds-truncate" disabled="true"/>-->
                                         <aura:if isTrue="{!!v.quote.SBQQ__LineItemsGrouped__c}">
                                             <lightning:button variant="neutral" label="ADD PRODUCTS" onclick="{!c.showModal}" class="slds-truncate"/>
                                             <lightning:button variant="neutral" label="GROUP" onclick="{!c.groupQuote}" class="slds-truncate"/>
@@ -98,10 +97,12 @@
                                             <lightning:button variant="neutral" label="DELETE" onclick="{!c.deleteQuote}" class="slds-truncate"/>
                                         </aura:if>
 
-                                        <lightning:button variant="neutral" label="PREVIEW DOCUMENT" onclick="{!c.previewQuote}" class="slds-truncate"/>
+                                        <lightning:button variant="neutral" label="PREVIEW DOCUMENT" onclick="{!c.previewQuote}"
+                                                          class="slds-truncate" disabled="{!v.contacts.length == 0}"/>
                                     </aura:if>
                                     <aura:if isTrue="{!and(!v.editable,!v.quote.HasDocument__c)}">
-                                        <lightning:button variant="neutral" label="PREVIEW DOCUMENT" onclick="{!c.previewQuote}" class="slds-truncate"/>
+                                        <lightning:button variant="neutral" label="PREVIEW DOCUMENT" onclick="{!c.previewQuote}"
+                                                          class="slds-truncate" disabled="{!v.contacts.length == 0}" />
                                     </aura:if>
                                     <aura:if isTrue="{!and(v.quote.SBQQ__Opportunity2__r.Invoice_Status__c == 'Fully invoiced',v.quote.SBQQ__Opportunity2__r.Legacy__c)}">
                                         <aura:if isTrue="{!v.quote.SBQQ__Opportunity2__r.Quote_Status__c != 'Reconciliation - completed'}">
@@ -312,7 +313,7 @@
                         <div class="slds-col slds-size_8-of-12" style="position:relative;" >
                             <div style="width:100%;height:100%;position:relative;">
                                 <iframe src="/apex/quotePreview" style="position:relative;"
-                                        width="100%" height="100%" framebroder="0" id="quotePreviewIFrame"/>
+                                        width="100%" height="100%" framebroder="0" id="{!v.recordId + 'quotePreviewIFrame'}"/>
                             </div>
                         </div>
                         <div class="slds-col slds-size_4-of-12">
@@ -340,18 +341,18 @@
 
                             <div class="slds-p-around_medium">
 
-                                <lightning:tabset selectedTabId="one" aura:id="quoteTabs" onselect="{!c.changeTab}">
-                                    <lightning:tab label="CONTACTS" id="one"></lightning:tab>
-                                    <lightning:tab label="TEXT" id="two"></lightning:tab>
-                                    <lightning:tab label="SETTINGS" id="three" ></lightning:tab>
+                                <lightning:tabset selectedTabId="" aura:id="quoteTabs" onselect="{!c.changeTab}">
+                                    <lightning:tab label="CONTACTS" id="{!v.recordId + 'one'}"></lightning:tab>
+                                    <lightning:tab label="TEXT" id="{!v.recordId + 'two'}"></lightning:tab>
+                                    <lightning:tab label="SETTINGS" id="{!v.recordId + 'three'}" ></lightning:tab>
                                     <aura:if isTrue="{!and(v.quote.SBQQ__Opportunity2__r.Account.SOWRecipient__c,
                                                     v.quote.SBQQ__Opportunity2__r.StageName == 'Closed Won',
                                                     v.quote.SBQQ__Opportunity2__r.QuoteType__c != 'Reconciliation')}">
-                                        <lightning:tab label="SOW" id="four"></lightning:tab>
+                                        <lightning:tab label="SOW" id="{!v.recordId + 'four'}"></lightning:tab>
                                     </aura:if>
                                 </lightning:tabset>
 
-                                <div style="font-size:16px;" id="one" class="previewTab">
+                                <div style="font-size:16px;" id="{!v.recordId + 'one'}" class="previewTab">
                                     <div>
                                         <div>Select Live Group contact:</div>
                                         <lightning:select name="ourContact" required="true" aura:id="ourContact" onchange="{!c.setPreviewChanged}">
@@ -370,13 +371,13 @@
                                     </div><br/>
                                 </div>
 
-                                <div style="font-size:16px;display: none;" id="two" class="previewTab">
+                                <div style="font-size:16px;display: none;" id="{!v.recordId + 'two'}" class="previewTab">
                                     <div>
                                         <lightning:textarea type="text" value="{!v.quote.Proposal_Introduction__c}"  onchange="{!c.setPreviewChanged}" aura:id="documentText"/>
                                     </div>
                                 </div>
 
-                                <div style="font-size:16px;display: none;cursor:pointer;" id="three" class="previewTab">
+                                <div style="font-size:16px;display: none;cursor:pointer;" id="{!v.recordId + 'three'}" class="previewTab">
                                     <div>Include:</div>
 
                                     <aura:if isTrue="{!and(v.quote.SBQQ__Opportunity2__r.Account.SOWRecipient__c,
@@ -411,7 +412,7 @@
                                                     v.quote.SBQQ__Opportunity2__r.StageName == 'Closed Won',
                                                     v.quote.SBQQ__Opportunity2__r.QuoteType__c != 'Reconciliation')}">
 
-                                    <div style="font-size:16px;display: none;" id="four" class="previewTab">
+                                    <div style="font-size:16px;display: none;" id="{!v.recordId + 'four'}" class="previewTab">
                                         <div>Entity name:</div>
                                         <lightning:input type="text" value="{!v.quote.SOW_Entity_Name__c}"  onchange="{!c.setPreviewChanged}" aura:id="sowEntity"/>
                                         <br/>

@@ -4,48 +4,57 @@
 
 public class QuotePreviewController {
 
-    public SBQQ__Quote__c quote {get; set;}
+    public Integer pageOneCount {get;set;}
+    public Integer pageTwoCount {get;set;}
+    public Integer pageThreeCount {get;set;}
+
+    public SBQQ__Quote__c quote {get;set;}
     public List<SBQQ__QuoteLine__c> lines {get;set;}
-    public String docType {get; set;}
-    public String amendment {get; set;}
-    public String ancestorName {get; set;}
+    public String docType {get;set;}
+    public String amendment {get;set;}
+    public String ancestorName {get;set;}
+
+    public Map<String,Map<String,List<SBQQ__QuoteLine__c>>> groupMap {get;set;}
 
     public List<String> groups {get;set;}
-    public Map<String,Map<String,List<SBQQ__QuoteLine__c>>> groupMap {get; set;}
-    public Map<String,Decimal> groupSummary {get; set;}
-    public Map<String,Integer> groupLineCount {get; set;}
+    public Map<String,Decimal> groupSummary {get;set;}
+    public Map<String,Integer> groupLineCount {get;set;}
 
-    public Map<String,SBQQ__QuoteLine__c> changeMap {get; set;}
+    public Map<String,SBQQ__QuoteLine__c> changeMap {get;set;}
     public Map<String,String> groupAncestorMap {get;set;}
 
     public List<String> optionalGroups {get;set;}
-    public Map<String,Map<String,List<SBQQ__QuoteLine__c>>> optionalGroupMap {get; set;}
-    public Map<String,Decimal> optionalGroupSummary {get; set;}
-    public Map<String,Integer> optionalLineCount {get; set;}
+    public Map<String,Map<String,List<SBQQ__QuoteLine__c>>> optionalGroupMap {get;set;}
+    public Map<String,Decimal> optionalGroupSummary {get;set;}
+    public Map<String,Integer> optionalLineCount {get;set;}
 
-    public List<Invoice_Schedule__c> invoices {get; set;}
+    public List<Invoice_Schedule__c> invoices {get;set;}
 
-    public User user {get; set;}
-    public String userSignature {get; set;}
-    public Contact contact {get; set;}
+    public User user {get;set;}
+    public String userSignature {get;set;}
+    public Contact contact {get;set;}
     public Boolean contactSign {get;set;}
 
-    public String theme {get; set;}
-    public String theme2 {get; set;}
-    public String theme3 {get; set;}
+    public String theme {get;set;}
+    public String theme2 {get;set;}
+    public String theme3 {get;set;}
 
-    public Boolean showOptionals {get; set;}
-    public Boolean showOptionalsSummary {get; set;}
-    public Boolean breakPage {get; set;}
-    public Boolean showVAT {get; set;}
-    public Boolean showSLA {get; set;}
-    public Boolean showTnCs {get; set;}
+    public Boolean showOptionals {get;set;}
+    public Boolean showOptionalsSummary {get;set;}
+    public Boolean breakPage {get;set;}
+    public Boolean showVAT {get;set;}
+    public Boolean showSLA {get;set;}
+    public Boolean showTnCs {get;set;}
 
-    public Boolean isSOW {get; set;}
-    public Boolean trackChanges {get; set;}
-    public Boolean draft {get; set;}
+    public Boolean isSOW {get;set;}
+    public Boolean trackChanges {get;set;}
+    public Boolean draft {get;set;}
 
     public QuotePreviewController(){
+
+        pageOneCount        = 0;
+        pageTwoCount        = 0;
+        pageThreeCount      = 0;
 
         System.debug(ApexPages.currentPage().getParameters());
 
@@ -107,8 +116,9 @@ public class QuotePreviewController {
 
         docType = quote.Stage__c;
 
-        groups          = new List<String>();
         groupMap        = new Map<String,Map<String,List<SBQQ__QuoteLine__c>>>();
+
+        groups          = new List<String>();
         groupSummary    = new Map<String,Decimal>();
         groupLineCount  = new Map<String,Integer>();
 
@@ -130,8 +140,6 @@ public class QuotePreviewController {
         if (quote.Stage__c != 'Estimate' && quote.Version__c !=  'Contract'){
 
             trackChanges = true;
-
-            system.debug('Setting tracked changes to true');
 
             if (quote.Stage__c == 'Contract' && quote.Version__c !=  'Contract'){
                 amendment = (amendment != null) ? quote.Version__c.replace('Contract ','') + ' ' + amendment
@@ -170,13 +178,15 @@ public class QuotePreviewController {
                                                     FROM SBQQ__QuoteLineGroup__c
                                                     WHERE SBQQ__Quote__c = :quote.Id
                                                     ORDER BY SBQQ__Number__c ASC]) {
-                groups.add(lineGroup.Name);
                 Map<String, List<SBQQ__QuoteLine__c>> changeMap = new Map<String, List<SBQQ__QuoteLine__c>>();
                 changeMap.put('Removed', new List<SBQQ__QuoteLine__c>());
                 changeMap.put('Default', new List<SBQQ__QuoteLine__c>());
                 groupMap.put(lineGroup.Name, changeMap);
+
+                groups.add(lineGroup.Name);
                 groupSummary.put(lineGroup.Name, 0);
                 groupLineCount.put(lineGroup.Name, 0);
+
 
                 if (trackChanges && lineGroup.AncestorName__c != null){
                     groupAncestorMap.put(lineGroup.AncestorName__c, lineGroup.Name);
@@ -198,13 +208,15 @@ public class QuotePreviewController {
             List<Schema.PicklistEntry> picklistEntries = productFamilies.getPicklistValues();
 
             for (Schema.PicklistEntry entry : picklistEntries){
-                groups.add(entry.getLabel());
                 Map<String, List<SBQQ__QuoteLine__c>> changeMap = new Map<String, List<SBQQ__QuoteLine__c>>();
                 changeMap.put('Default', new List<SBQQ__QuoteLine__c>());
                 changeMap.put('Removed', new List<SBQQ__QuoteLine__c>());
                 groupMap.put(entry.getLabel(), changeMap);
+
+                groups.add(entry.getLabel());
                 groupSummary.put(entry.getLabel(), 0);
                 groupLineCount.put(entry.getLabel(), 0);
+
                 if (showOptionals || showOptionalsSummary){
                     optionalGroups.add(entry.getLabel());
                     Map<String, List<SBQQ__QuoteLine__c>> optionalChangeMap = new Map<String, List<SBQQ__QuoteLine__c>>();
@@ -233,7 +245,6 @@ public class QuotePreviewController {
 
         // assign all lines and their values to the relevant maps
         if (quote.SBQQ__LineItemsGrouped__c) {
-//            for (SBQQ__QuoteLine__c line : quote.SBQQ__LineItems__r){
             for (SBQQ__QuoteLine__c line : lines){
                 if (!line.SBQQ__Optional__c){
 
@@ -294,7 +305,6 @@ public class QuotePreviewController {
             }
 
         } else {
-//            for (SBQQ__QuoteLine__c line : quote.SBQQ__LineItems__r){
             for (SBQQ__QuoteLine__c line : lines){
                 if (!line.SBQQ__Optional__c) {
                     if (line.Ancestor__c == null && trackChanges) {
@@ -397,6 +407,8 @@ public class QuotePreviewController {
                     optionalGroupMap.remove(optionalKey);
                     optionalGroupSummary.remove(optionalKey);
                     optionalLineCount.remove(optionalKey);
+                } else if (showOptionalsSummary){
+                    pageOneCount += 1;
                 }
             }
             for (Integer x = 0;x < groupCount; x++){
@@ -425,6 +437,13 @@ public class QuotePreviewController {
             theme = '#d43b8f';
             theme2 = '#66C1BF';
             theme3 = '#2c7495';
+        }
+
+        system.debug('optionalGroups ' + optionalGroups);
+
+        pageOneCount += groups.size() + (showVaT ? 3 : 1);
+        if (showOptionalsSummary){
+            pageOneCount += showVAT ? 4 : 2;
         }
 
     }

@@ -137,6 +137,7 @@
             mode : 'pester'
         });
         toastEvent.fire();
+        $A.get('e.force:refreshView').fire();
     },
     insertGroupedProducts : function(component, event){
 
@@ -276,7 +277,7 @@
         console.log('date is ' + SOWDate);
 
 
-        document.getElementById('quotePreviewIFrame').src = '/apex/QuotePreview?' +
+        document.getElementById(component.get('v.recordId') + 'quotePreviewIFrame').src = '/apex/QuotePreview?' +
             'id=' + quoteId +
             '&userId=' + userId +
             '&contactId=' + contactId +

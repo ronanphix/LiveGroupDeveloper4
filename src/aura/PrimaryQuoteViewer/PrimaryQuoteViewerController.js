@@ -308,6 +308,7 @@
     },
     changeTab : function(component, event, helper){
         var selectedId  = component.find('quoteTabs').get('v.selectedTabId');
+        console.log('selected id is ' + selectedId);
         var previewTabs = document.getElementsByClassName('previewTab');
         for (var x = 0; x <previewTabs.length; x++){
             if (previewTabs[x].id === selectedId){
@@ -666,9 +667,11 @@
         });
         togglePrimary.setCallback(this, function(response){
             if (response.getState() === "SUCCESS" && response.getReturnValue()){
-                console.log('rec:');
-                console.log(component.get('v.quote.SBQQ__Opportunity2__r.Quote_Status__c'));
                 helper.showToast('Success!', 'Quote updated','success');
+                if (component.get('v.quote.Stage__c') === 'Reconciliation'){
+                    console.log('something extra should happen here');
+                    helper.getQuote(component, component.get('v.quote.Id') , false);
+                }
                 component.set('v.quote.SBQQ__Primary__c', isPrimary);
                 component.set('v.cloneDisabled', !isPrimary);
                 var refresh = $A.get("e.c:Refresh");

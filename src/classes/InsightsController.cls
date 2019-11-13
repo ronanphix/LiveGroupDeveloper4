@@ -248,6 +248,11 @@ public class InsightsController {
             totalRevenue    += adj.Revenue__c;
             totalProfit     += adj.Profit__c;
             totalRebates    += adj.Calder__c ? adj.Revenue__c : 0;
+
+            revenueTotals[0]    += adj.Revenue__c;
+            cosTotals[0]        += adj.CostOfSale__c;
+            profitTotals[0]     += adj.Profit__c;
+
             revenueAggregates.get(adj.EventMonthYear__c)[0] += adj.Revenue__c;
             profitAggregates.get(adj.EventMonthYear__c)[0] += adj.Profit__c;
             rebatesAggregates.get(adj.EventMonthYear__c)[0] += adj.Calder__c ? adj.Revenue__c : 0;
@@ -862,13 +867,13 @@ public class InsightsController {
 
             for (CashFlow__c flow : [SELECT Date__c, InConfirmed__c, InPipeline__c, InBudget__c,
                                             OutConfirmed__c, OutPipeline__c, OutBudget__c,
-                                    (SELECT Category__c, Amount__c, Out__c, Description__c, Source__c,
-                                            CashFlow__r.DayMonthYear__c, QuickbooksId__c, Comment__c,
-                                            TempDownloadUri__c, Details__c, VendorRef__c, BudgetKey__c,
-                                            AmountAdjusted__c, HiddenBudget__c, AdjustedDate__c
-                                    FROM CashFlowEntries__r
-                                    WHERE Paid__c = FALSE
-                                    ORDER BY CreatedDate )
+                                            (SELECT Category__c, Amount__c, Out__c, Description__c, Source__c,
+                                                    CashFlow__r.DayMonthYear__c, QuickbooksId__c, Comment__c,
+                                                    TempDownloadUri__c, Details__c, VendorRef__c, BudgetKey__c,
+                                                    AmountAdjusted__c, HiddenBudget__c, AdjustedDate__c
+                                            FROM CashFlowEntries__r
+                                            WHERE Paid__c = FALSE
+                                            ORDER BY CreatedDate )
                                     FROM CashFlow__c
                                     WHERE Date__c >= : startDate
                                     AND Date__c <= : endDate]){

@@ -185,17 +185,20 @@ public with sharing class PrimaryQuoteController {
 
         Boolean success = true;
 
-        List<SBQQ__Quote__c> quotes = [SELECT Id, SBQQ__Opportunity2__c
+        List<SBQQ__Quote__c> quotes = [SELECT Id, Stage__c, SBQQ__Opportunity2__c
                                         FROM SBQQ__Quote__c WHERE SBQQ__Opportunity2__c = :oppId];
 
-        Opportunity parentOpp = new Opportunity();
-        parentOpp.Id = oppId;
+        Opportunity parentOpp = new Opportunity(Id = oppId);
 
         for (SBQQ__Quote__c quote : quotes){
             if (quote.Id == quoteId){
                 quote.SBQQ__Primary__c = isPrimary;
                 if (isPrimary){
                     parentOpp.SBQQ__PrimaryQuote__c = quote.Id;
+                    if (quote.Stage__c == 'Reconciliation' || quote.Stage__c == 'Contract'){
+                        migrateExpenses(quoteId, oppId);
+                        system.debug('migration');
+                    }
                 } else {
                     parentOpp.SBQQ__PrimaryQuote__c = null;
                 }
@@ -217,6 +220,41 @@ public with sharing class PrimaryQuoteController {
         return success;
     }
 
+    public static void migrateExpenses(String quoteId, String oppId){
+
+        List<Expense__c> expenses = [SELECT Id, QuoteLine__c FROM Expense__c
+                                    WHERE Opportunity__c = :oppId];
+
+        if (!expenses.isEmpty()){
+            Map<String,String> ancestorMap = new Map<String,String>();
+
+            for (SBQQ__QuoteLine__c line : [SELECT Id, Ancestor__c FROM SBQQ__QuoteLine__c
+                                            WHERE SBQQ__Quote__c = :quoteId
+                                            AND Ancestor__c != NULL]){
+                system.debug('populating ancestor map with ' + line.Ancestor__c + ' mapping to ' + line.Id);
+                ancestorMap.put(line.Ancestor__c,line.Id);
+            }
+
+            for (Expense__c ex : expenses){
+
+                system.debug('expense currently assigned to ' + ex.QuoteLine__c);
+
+                if (ancestorMap.containsKey(ex.QuoteLine__c)){
+                    ex.QuoteLine__c = ancestorMap.get(ex.QuoteLine__c);
+                    ex.Assigned__c = true;
+                    system.debug('found match');
+                } else {
+                    ex.QuoteLine__c = null;
+                    ex.Assigned__c = false;
+                    system.debug('couldnt find match');
+
+                }
+
+            }
+
+            update expenses;
+        }
+    }
 
     @AuraEnabled
     public static String changeLineApex(SBQQ__QuoteLine__c line, String operation, Decimal days){
@@ -853,6 +891,8 @@ public with sharing class PrimaryQuoteController {
     @AuraEnabled
     public static String cloneEstimateApex(SBQQ__Quote__c quote, String oppId, String type){
 
+        system.debug('cloning quote');
+
         String result   = 'error';
         Savepoint sp    = Database.setSavepoint();
 
@@ -943,6 +983,8 @@ public with sharing class PrimaryQuoteController {
             cloneLine.SBQQ__Quote__c = cloneQuote.Id;
 
             if (quote.Stage__c != 'Estimate'){
+                system.debug('assigning ancestor Id');
+
                 cloneLine.Ancestor__c = line.Id;
             }
             if (quote.SBQQ__LineItemsGrouped__c && line.SBQQ__Group__c != null){
@@ -959,21 +1001,25 @@ public with sharing class PrimaryQuoteController {
             }
         }
 
-        List<Expense__c> expenses = [SELECT Id, QuoteLine__c FROM Expense__c WHERE QuoteLine__c IN :lineIdMap.keySet()];
+        if (type != 'Reconciliation'){
+            List<Expense__c> expenses = [SELECT Id, QuoteLine__c FROM Expense__c WHERE QuoteLine__c IN :lineIdMap.keySet()];
 
-        if (!expenses.isEmpty()) {
-            for (Expense__c ex : expenses) {
-                ex.QuoteLine__c = lineIdMap.get(ex.QuoteLine__c).Id;
-            }
+            if (!expenses.isEmpty()) {
+                for (Expense__c ex : expenses) {
+                    ex.QuoteLine__c = lineIdMap.get(ex.QuoteLine__c).Id;
+                }
 
-            Database.SaveResult[] expenseUpdates = Database.update(expenses, true);
-            for (Database.SaveResult expenseUpdate : expenseUpdates) {
-                if (!expenseUpdate.isSuccess()) {
-                    Database.rollback(sp);
-                    return result;
+                Database.SaveResult[] expenseUpdates = Database.update(expenses, true);
+                for (Database.SaveResult expenseUpdate : expenseUpdates) {
+                    if (!expenseUpdate.isSuccess()) {
+                        Database.rollback(sp);
+                        return result;
+                    }
                 }
             }
+
         }
+
 
         List<SBQQ__Quote__c> priorQuotes = [SELECT Id, HasDocument__c, Locked__c, DocumentLocked__c
                                             FROM SBQQ__Quote__c
