@@ -47,9 +47,7 @@
     margin-right: 47%;
     float: right;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row-reverse;
 }
 
-.THIS .qb-icon {
-    margin-right: 3px;
-}

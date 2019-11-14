@@ -172,3 +172,8 @@
     padding-left: 5px;
     border-left: 0.5px solid #d3d3d3;
 }
+
+.THIS .sticky {
+    position: sticky;
+    top: 200px;
+}

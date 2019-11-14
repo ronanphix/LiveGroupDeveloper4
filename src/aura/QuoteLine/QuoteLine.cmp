@@ -143,17 +143,14 @@
                     <aura:if isTrue="{!v.editmode}">
                         <div class="lineEdits" style="z-index:10;">
                             <aura:if isTrue="{!v.changed}">
-<!--                                <aura:if isTrue="{!not(v.lineUpdatesPending)}">-->
-                                    <div>
-                                        <lightning:icon iconName="action:update_status" alternativeText="Save" size="small" onclick="{!c.updateLine}" />
-                                    </div>
-<!--                                </aura:if>-->
+                                <div>
+                                    <lightning:icon iconName="action:update_status" alternativeText="Save" size="small" onclick="{!c.updateLine}" />
+                                </div>
                                 <div>
                                     <lightning:icon iconName="action:recall" alternativeText="Undo" size="small" onclick="{!c.undoChanges}" />
                                 </div>
                             </aura:if>
                             <aura:if isTrue="{!not(v.changed)}">
-<!--                                <aura:if isTrue="{!and(not(v.hasDocument),not(v.lineUpdatesPending))}">-->
                                 <aura:if isTrue="{!not(v.hasDocument)}">
                                     <div>
                                         <lightning:icon iconName="action:clone" alternativeText="Clone" size="small" onclick="{!c.cloneLine}" title="Clone" />
@@ -210,9 +207,7 @@
                                 <div class="qb-block">
                                     <aura:iteration items="{!v.expenses}" var="expense">
                                         <aura:if isTrue="{!expense.QuoteLine__c == v.line.Id}">
-                                            <div class="qb-icon">
-                                                <img src="{!$Resource.QuickbooksLogoSmall}" style="width:15px;"/>
-                                            </div>
+                                            <img src="{!$Resource.QuickbooksLogoSmall}" style="width:15px;"/>
                                         </aura:if>
                                     </aura:iteration>
                                 </div>

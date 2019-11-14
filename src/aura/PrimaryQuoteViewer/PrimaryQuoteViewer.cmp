@@ -62,9 +62,9 @@
 
     <aura:renderIf isTrue="{!v.ready}">
         <aura:renderIf isTrue="{!v.quote}">
-            <lightning:layout class="slds-p-around_small quoteCardPrimary" multipleRows="true">
+            <lightning:layout class="slds-p-around_small quoteCardPrimary" multipleRows="true" >
                 <lightning:layoutItem size="12">
-                    <div style="border-bottom: 0.5px solid #d3d3d3;" class="slds-truncate buttonHolder">
+                    <div style="border-bottom: 0.5px solid #d3d3d3;" class="slds-truncate buttonHolder" >
                         <aura:if isTrue="{!!v.reconciling}">
                             <aura:if isTrue="{!v.pendingChanges.length > 0}">
                                 <lightning:button variant="brand" label="UNDO ALL CHANGES " onclick="{!c.undoAll}" />
