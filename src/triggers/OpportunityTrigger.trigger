@@ -42,7 +42,10 @@ trigger OpportunityTrigger on Opportunity (after insert, after update) {
 	            		opp.Invoice_Schedule__c != null) {
 	            		createInvoiceSchedules.add(opp);
 						createContracts.add(opp.Id);
-						if (Trigger.new.size() == 1) OpportunityTriggerHandler.sendDesignAlerts(opp.Id);
+						if (Trigger.new.size() == 1) {
+							OpportunityTriggerHandler.sendDesignAlerts(opp.Id);
+							if (opp.TogglId__c == null) TogglCallout.postProject(opp.Id);
+						}
 	            	}
 		    		// Opportunity set to closed won on update and parent account does not have Quickbooks Id            	
 	            	if (opp.StageName == 'Closed Won' && opp.StageName != Trigger.oldMap.get(opp.Id).StageName &&
