@@ -891,8 +891,6 @@ public with sharing class PrimaryQuoteController {
     @AuraEnabled
     public static String cloneEstimateApex(SBQQ__Quote__c quote, String oppId, String type){
 
-        system.debug('cloning quote');
-
         String result   = 'error';
         Savepoint sp    = Database.setSavepoint();
 
@@ -907,6 +905,8 @@ public with sharing class PrimaryQuoteController {
 
         String version = (type == 'Contract') ? 'Contract Amendment' + ' ' + count.size() :
                 type + ' ' + (count.size() + 1);
+
+        system.debug('type is ' + type + ' so setting version ' + version);
 
         SBQQ__Quote__c cloneQuote           = quote.clone(false,true);
         cloneQuote.SBQQ__Opportunity2__c    = oppId;

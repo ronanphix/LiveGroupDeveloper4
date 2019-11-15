@@ -342,7 +342,6 @@ public class QuoteInterfaceTest {
 
         QuotePreviewController qpc = new QuotePreviewController();
 
-
     }
 
     @IsTest
@@ -365,9 +364,9 @@ public class QuoteInterfaceTest {
 
         PrimaryQuoteController.cloneEstimateApex(contracts[0], opp.Id, 'Contract');
 
-        List<SBQQ__Quote__c> amendments = PrimaryQuoteController.getQuoteApex(opp.Id, 'default');
+        List<SBQQ__Quote__c> amendments = PrimaryQuoteController.getQuoteApex(opp.Id, [SELECT Id FROM SBQQ__Quote__c
+                                                            WHERE Version__c = 'Contract Amendment 1' LIMIT 1].Id);
 
-//        Test.startTest();
         PrimaryQuoteController.insertUngroupedLinesApex(amendments[0].Id,productIds);
 
         Test.startTest();
@@ -391,8 +390,6 @@ public class QuoteInterfaceTest {
         pdf.getParameters().put('sla','false');
         pdf.getParameters().put('tnc','false');
         Test.setCurrentPage(pdf);
-
-//        QuotePreviewController qpcUngrouped = new QuotePreviewController();
 
         PrimaryQuoteController.groupLinesApex(amendments[0].Id);
         returnedLines[0].SBQQ__Group__c         = null;
@@ -431,7 +428,8 @@ public class QuoteInterfaceTest {
 
         PrimaryQuoteController.cloneEstimateApex(contracts[0], opp.Id, 'Contract');
 
-        List<SBQQ__Quote__c> amendments = PrimaryQuoteController.getQuoteApex(opp.Id, 'default');
+        List<SBQQ__Quote__c> amendments = PrimaryQuoteController.getQuoteApex(opp.Id, [SELECT Id FROM SBQQ__Quote__c
+                                                                WHERE Version__c = 'Contract Amendment 1' LIMIT 1].Id);
 
         Test.startTest();
         PrimaryQuoteController.insertUngroupedLinesApex(amendments[0].Id,productIds);
@@ -466,6 +464,63 @@ public class QuoteInterfaceTest {
         Test.stopTest();
 
     }
+
+//    @IsTest
+//    public static void testDocPreviewContractAmendmentOptional(){
+//        Opportunity opp = [SELECT Id FROM Opportunity WHERE Name = 'QuoteTestOpportunity' LIMIT 1];
+//
+//        // attempt to insert a new quote
+//        String quoteId = PrimaryQuoteController.createNewEstimateApex(opp.Id);
+//        PrimaryQuoteController.togglePrimaryApex(quoteId,opp.Id, true);
+//
+//        // test insert four ungrouped lines
+//        List<Product2> products = [SELECT Id FROM Product2];
+//        List<String> productIds = new List<String>{products[0].Id,products[1].Id};
+//        PrimaryQuoteController.insertUngroupedLinesApex(quoteId,productIds);
+//
+//        opp.StageName = 'Closed Won';
+//        update opp;
+//
+//        List<SBQQ__Quote__c> contracts = PrimaryQuoteController.getQuoteApex(opp.Id, 'default');
+//
+//        PrimaryQuoteController.cloneEstimateApex(contracts[0], opp.Id, 'Contract');
+//
+//        List<SBQQ__Quote__c> amendments = PrimaryQuoteController.getQuoteApex(opp.Id, 'default');
+//
+//        Test.startTest();
+//        PrimaryQuoteController.insertUngroupedLinesApex(amendments[0].Id,productIds);
+//
+//        List<SBQQ__QuoteLine__c> returnedLines = [SELECT Id, SBQQ__UnitCost__c, SBQQ__Optional__c, SBQQ__Number__c
+//                                                    FROM SBQQ__QuoteLine__c
+//                                                    WHERE SBQQ__Quote__c = :quoteId
+//                                                    ORDER BY CreatedDate ASC];
+//
+//        PrimaryQuoteController.changeLineApex(returnedLines[0],'optional',0.5);
+//        PrimaryQuoteController.changeLineApex(returnedLines[1],'optional',0.5);
+//
+//        PageReference pdf = Page.QuotePreview;
+//
+//        // add parent id to the parameters for standardcontroller
+//        pdf.getParameters().put('Id',amendments[0].Id);
+//        pdf.getParameters().put('userId',UserInfo.getUserId());
+//        pdf.getParameters().put('contactId',[SELECT Id FROM Contact LIMIT 1].Id);
+//        pdf.getParameters().put('text',EncodingUtil.urlDecode('proposal intro','UTF-8'));
+//        pdf.getParameters().put('optionals','true');
+//        pdf.getParameters().put('invoices','true');
+//        pdf.getParameters().put('vat','false');
+//        pdf.getParameters().put('sla','false');
+//        pdf.getParameters().put('tnc','false');
+//        Test.setCurrentPage(pdf);
+//
+//        QuotePreviewController qpcUngrouped = new QuotePreviewController();
+//
+//        PrimaryQuoteController.groupLinesApex(amendments[0].Id);
+//        QuotePreviewController qpcGrouped = new QuotePreviewController();
+//
+//        Test.stopTest();
+//
+//    }
+
 
     @IsTest
     public static void testDocumentSaveAndDelete(){
