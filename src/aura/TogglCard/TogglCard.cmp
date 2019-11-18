@@ -19,7 +19,7 @@
         <div style="height:calc(95% - 50px); overflow-y:scroll;"  ondragover="{!c.dragOver}"
              ondragleave="{!c.dragLeave}" ondrop="{!c.drop}">
             <aura:iteration items="{!v.entries}" var="entry" >
-                <aura:if isTrue="{!entry.QuoteLine__c == null}">
+                <aura:if isTrue="{!entry.Quote_Line__c == null}">
                     <c:TogglEntry entry="{!entry}" />
                 </aura:if>
             </aura:iteration>

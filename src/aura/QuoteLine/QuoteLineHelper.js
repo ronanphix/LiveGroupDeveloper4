@@ -37,6 +37,19 @@
         }       
         component.set('v.expensesTotal',total);
     },
+    calculateTimeTotal : function(component, event){
+        var id = component.get('v.line.Id');
+        var entries = component.get('v.entries');
+
+        var total = 0;
+        for (var x = 0; x < entries.length; x++){
+            if (entries[x].Quote_Line__c === id){
+                total += entries[x].Days__c;
+            }
+        }
+        component.set('v.entriesTotal',total);
+    },
+
     formatDescription : function(description){
         if (description.substring(0, 3) === '<p>'){
             description = description.substring(3);

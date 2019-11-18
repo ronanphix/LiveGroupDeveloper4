@@ -682,7 +682,7 @@
                 if (entries[x].Id === component.get('v.activeEntryId')){
 
                     var entry = Object.assign({},entries[x]);
-                    entry.QuoteLine__c = event.getParam('lineId');
+                    entry.Quote_Line__c = event.getParam('lineId');
                     entry.Assigned__c = (event.getParam('lineId') !== null);
                     entries.splice(x,1);
                     entries.push(entry);
@@ -701,20 +701,20 @@
 
             component.set('v.quote',quote);
 
-            // var updateExpense = component.get('c.assignExpenseApex');
-            // updateExpense.setParams({
-            //     lineId : event.getParam('lineId'),
-            //     expenseId : component.get('v.activeExpenseId')
-            // });
-            // updateExpense.setCallback(this, function(response){
-            //     if (response.getState() === "SUCCESS" && response.getReturnValue()){
-            //         helper.showToast('Success!', 'Expense updated','success');
-            //     } else {
-            //         helper.showToast('Error', 'There was an error updating the expense', 'error');
-            //
-            //     }
-            // });
-            // $A.enqueueAction(updateExpense);
+            var updateTime = component.get('c.assignTimeApex');
+            updateTime.setParams({
+                lineId : event.getParam('lineId'),
+                timeId : component.get('v.activeEntryId')
+            });
+            updateTime.setCallback(this, function(response){
+                if (response.getState() === "SUCCESS" && response.getReturnValue()){
+                    helper.showToast('Success!', 'Time entry updated','success');
+                } else {
+                    helper.showToast('Error', 'There was an error updating the time entry', 'error');
+
+                }
+            });
+            $A.enqueueAction(updateTime);
         }
     },
 

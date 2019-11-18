@@ -2,6 +2,7 @@
     doInit: function (component, event, helper) {
         helper.clone(component);
         helper.calculateTotal(component, event);
+        helper.calculateTimeTotal(component, event);
         component.set('v.optional', component.get('v.line.SBQQ__Optional__c'));
     },
     openEdit: function (component, event, helper) {
@@ -26,7 +27,6 @@
         helper.closeEdit(component);
     },
     setChanged: function (component, event, helper) {
-        // if (!component.get('v.changed')  && event.which !== 37 && event.which !== 38
         if (event.which !== 37 && event.which !== 38 && event.which !== 39 && event.which !== 40) {
             component.set('v.changed', true);
 
@@ -66,47 +66,41 @@
         helper.fireLineChange(component, line,'undo');
     },
     save : function(component, event, helper){
-        // if (!component.get('v.lineUpdatesPending')){
-            if (event.which === 13 && component.get('v.changed') && helper.inputValid(component)){
-                component.set('v.changed', false);
-                helper.closeEdit(component);
-                var line = component.get('v.line');
+        if (event.which === 13 && component.get('v.changed') && helper.inputValid(component)){
+            component.set('v.changed', false);
+            helper.closeEdit(component);
+            var line = component.get('v.line');
 
-                console.log('before');
-                console.log(line.SBQQ__Description__c);
+            console.log('before');
+            console.log(line.SBQQ__Description__c);
 
-                line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<\/p><p><br><\/p><p>/g,'\n<br><br>');
-                line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<\/p><p>/g,'\n<br>');
-                line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<p>/g,'');
-                line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<\/p>/g,'');
-                console.log('after');
-                console.log(line.SBQQ__Description__c);
+            line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<\/p><p><br><\/p><p>/g,'\n<br><br>');
+            line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<\/p><p>/g,'\n<br>');
+            line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<p>/g,'');
+            line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<\/p>/g,'');
 
-                helper.fireLineChange(component, line,'save');
-            }
-        // }
+            helper.fireLineChange(component, line,'save');
+        }
     },
     updateLine: function(component, event, helper){
-        // if (!component.get('v.lineUpdatesPending')){
-            event.stopPropagation();
-            if (helper.inputValid(component)){
-                component.set('v.changed', false);
-                helper.closeEdit(component);
-                var line = component.get('v.line');
+        event.stopPropagation();
+        if (helper.inputValid(component)){
+            component.set('v.changed', false);
+            helper.closeEdit(component);
+            var line = component.get('v.line');
 
-                console.log('before');
-                console.log(line.SBQQ__Description__c);
+            console.log('before');
+            console.log(line.SBQQ__Description__c);
 
-                line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<\/p><p><br><\/p><p>/g,'\n<br><br>');
-                line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<\/p><p>/g,'\n<br>');
-                line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<p>/g,'');
-                line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<\/p>/g,'');
-                console.log('after');
-                console.log(line.SBQQ__Description__c);
+            line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<\/p><p><br><\/p><p>/g,'\n<br><br>');
+            line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<\/p><p>/g,'\n<br>');
+            line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<p>/g,'');
+            line.SBQQ__Description__c = line.SBQQ__Description__c.replace(/<\/p>/g,'');
+            console.log('after');
+            console.log(line.SBQQ__Description__c);
 
-                helper.fireLineChange(component, line,'save');
-            }
-        // }
+            helper.fireLineChange(component, line,'save');
+        }
     },
     cloneLine: function(component, event, helper){
         event.stopPropagation();
@@ -276,6 +270,9 @@
     },
     calculateTotal : function(component, event, helper){
         helper.calculateTotal(component, event);
+    },
+    calculateTimeTotal : function(component, event, helper){
+        helper.calculateTimeTotal(component, event);
     },
     reconcileLine : function(component, event, helper){
 

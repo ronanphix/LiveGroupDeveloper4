@@ -20,12 +20,20 @@
         <div style="padding-left: 5px;">
             <div>
                 <span style="font-weight: bold;margin-right: 5px;">
-                    <lightning:formattedNumber value="{!(v.entry.Days__c * 24 * 60)}" maximumFractionDigits="2"/> mins
+                    <aura:if isTrue="{!(v.entry.Days__c * 24 * 60) &lt; 60}">
+                        <lightning:formattedNumber value="{!(v.entry.Days__c * 24 * 60)}" maximumFractionDigits="2"/> mins
+                    </aura:if>
+                    <aura:if isTrue="{!and(not((v.entry.Days__c * 24 * 60) &lt; 60),(v.entry.Days__c * 24) &lt; 24)}">
+                        <lightning:formattedNumber value="{!(v.entry.Days__c * 24)}" maximumFractionDigits="2"/> hrs
+                    </aura:if>
+                    <aura:if isTrue="{!not((v.entry.Days__c * 24) &lt; 24)}">
+                        <lightning:formattedNumber value="{!(v.entry.Days__c)}" maximumFractionDigits="2"/> days
+                    </aura:if>
                 </span>
                 <span>{!(v.entry.Employee__r ? v.entry.Employee__r.FirstName__c : '[unknown]')} - on </span>
                 <span><lightning:formattedDateTime value="{!v.entry.End__c}"/></span>
             </div>
-            <div style="color:grey;">{!v.entry.Description__c}</div>
+            <div style="color:grey;">{!v.entry.Description__c} </div>
         </div>
     </div>
 

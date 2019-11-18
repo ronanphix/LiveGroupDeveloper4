@@ -48,7 +48,7 @@ public class TogglCallout {
 
             HttpRequest tagRequest = togglAuth('api/v8/tags', 'POST');
             tagRequest.setBody('{"tag":{"name":"' + prod.Name + '","wid":' + System.Label.TogglWorkspaceId + '}}');
-            HttpResponse tagResponse  = Test.isRunningTest() ? MockHandler.getTogglClientMock() : new Http().send(tagRequest);
+            HttpResponse tagResponse  = Test.isRunningTest() ? MockHandler.getTogglTagMock() : new Http().send(tagRequest);
 
             if (tagResponse.getStatusCode() == 200){
                 Map<String,Object> resMap   = (Map<String,Object>)JSON.deserializeUntyped(tagResponse.getBody());
@@ -88,7 +88,6 @@ public class TogglCallout {
                     idEmailMap.put(String.valueOf((Integer)empMap.get('uid')),(String)empMap.get('email'));
                 } else if (!employeeMap.containsKey((String)empMap.get('email'))){
                     unknownUsers.add(String.valueOf((Integer)empMap.get('uid')));
-//                    system.debug('adding unknown user ' + empMap.get('uid'));
                 }
             }
         }
@@ -160,7 +159,8 @@ public class TogglCallout {
                     if (oppLineMap.containsKey(entry.Opportunity__c) &&
                             oppLineMap.get(entry.Opportunity__c).containsKey(entry.TagName__c)){
                         system.debug('matching line item fount');
-                        entry.Quote_Line__c =  oppLineMap.get(entry.Opportunity__c).get(entry.TagName__c);
+                        entry.Quote_Line__c = oppLineMap.get(entry.Opportunity__c).get(entry.TagName__c);
+                        entry.Assigned__c   = true;
 
                     }
 

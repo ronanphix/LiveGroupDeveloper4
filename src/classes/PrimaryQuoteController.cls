@@ -1185,7 +1185,7 @@ public with sharing class PrimaryQuoteController {
 
         return [SELECT Id, Description__c, Start__c, End__c, Days__c, Duration__c,
                         Employee__r.FirstName__c, Employee__r.LastName__c,
-                        Employee__r.ImageLink__c
+                        Employee__r.ImageLink__c, Quote_Line__c
                 FROM TimeEntry__c
                 WHERE Opportunity__c = :oppId];
 
@@ -1240,6 +1240,26 @@ public with sharing class PrimaryQuoteController {
         );
 
         Database.SaveResult result = Database.update(expense);
+
+        if (!result.isSuccess()){
+            success = false;
+        }
+
+        return success;
+    }
+
+    @AuraEnabled
+    public static Boolean assignTimeApex(String lineId, String timeId){
+
+        Boolean success = true;
+
+        TimeEntry__c entry = new TimeEntry__c(
+                Id = timeId,
+                Quote_Line__c = lineId,
+                Assigned__c = (lineId != null)
+        );
+
+        Database.SaveResult result = Database.update(entry);
 
         if (!result.isSuccess()){
             success = false;

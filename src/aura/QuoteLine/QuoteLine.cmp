@@ -23,6 +23,7 @@
     <aura:handler event="c:LineChangeResponse" action="{!c.processChangeResponse}" />
     <aura:handler event="c:MultipleLineUpdate" action="{!c.handleMultiLineUpdate}" />
     <aura:handler name="change" value="{!v.expenses}" action="{!c.calculateTotal}" />
+    <aura:handler name="change" value="{!v.entries}" action="{!c.calculateTimeTotal}" />
     <aura:registerEvent name="lineEdit" type="c:LineItemChange" />
     <aura:registerEvent name="lineOrderChange" type="c:LineOrderChange" />
     <aura:registerEvent name="clonedLine" type="c:ClonedLine" />
@@ -176,7 +177,11 @@
                 <aura:if isTrue="{!and(!v.line.SBQQ__Optional__c,or(v.quoteType == 'Contract', v.quoteType == 'Reconciliation'))}">
                     <div>
                         <div class="quickbooksTotal figures">
-                            <div></div>
+<!--                            <div class="right" style="padding-right: 3px;">-->
+                            <div class="right" >
+                                <lightning:formattedNumber value="{!v.entriesTotal}" maximumFractionDigits="2"/>
+                                ({!v.line.SBQQ__SubscriptionTerm__c ? v.line.SBQQ__SubscriptionTerm__c * v.line.SBQQ__Quantity__c : 0})
+                            </div>
                             <div></div>
                             <div class="right">
                                 <lightning:formattedNumber value="{!(v.line.SBQQ__SubscriptionTerm__c == null || v.line.SBQQ__SubscriptionTerm__c == 0) ?
@@ -206,7 +211,26 @@
                                     </div>
                                 </aura:if>
                             </aura:iteration>
-                            <aura:set attribute="else">
+                        </aura:if>
+
+                        <aura:if isTrue="{!v.allocating}">
+                            <aura:iteration items="{!v.entries}" var="entry">
+                                <aura:if isTrue="{!entry.Quote_Line__c == v.line.Id}">
+                                    <div style="width:31vw;margin-right:15%;float:right;">
+                                        <c:TogglEntry entry="{!entry}" opacity="0.7" />
+                                    </div>
+                                </aura:if>
+                            </aura:iteration>
+                        </aura:if>
+                        <aura:if isTrue="{!and(not(v.reconciling),not(v.allocating))}">
+                            <div class="mini-block-holder">
+                                <div class="tg-block">
+                                    <aura:iteration items="{!v.entries}" var="entry">
+                                        <aura:if isTrue="{!entry.Quote_Line__c == v.line.Id}">
+                                            <img src="{!$Resource.TogglLogo}" style="width:15px;"/>
+                                        </aura:if>
+                                    </aura:iteration>
+                                </div>
                                 <div class="qb-block">
                                     <aura:iteration items="{!v.expenses}" var="expense">
                                         <aura:if isTrue="{!expense.QuoteLine__c == v.line.Id}">
@@ -214,27 +238,8 @@
                                         </aura:if>
                                     </aura:iteration>
                                 </div>
-                            </aura:set>
+                            </div>
                         </aura:if>
-                        <aura:if isTrue="{!v.allocating}">
-                            <aura:iteration items="{!v.entries}" var="entry">
-                                <aura:if isTrue="{!entry.QuoteLine__c == v.line.Id}">
-                                    <div style="width:31vw;margin-right:15%;float:right;">
-                                        <c:TogglEntry entry="{!entry}" opacity="0.7" />
-                                    </div>
-                                </aura:if>
-                            </aura:iteration>
-<!--                            <aura:set attribute="else">-->
-<!--                                <div class="qb-block">-->
-<!--                                    <aura:iteration items="{!v.expenses}" var="expense">-->
-<!--                                        <aura:if isTrue="{!expense.QuoteLine__c == v.line.Id}">-->
-<!--                                            <img src="{!$Resource.QuickbooksLogoSmall}" style="width:15px;"/>-->
-<!--                                        </aura:if>-->
-<!--                                    </aura:iteration>-->
-<!--                                </div>-->
-<!--                            </aura:set>-->
-                        </aura:if>
-
                     </div>
                 </aura:if>
             </div>
