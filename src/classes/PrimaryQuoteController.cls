@@ -18,7 +18,8 @@ public with sharing class PrimaryQuoteController {
                         'SBQQ__LineItemsGrouped__c, SBQQ__Opportunity2__c, SBQQ__Opportunity2__r.Name, ' +
                         'SBQQ__Opportunity2__r.StageName, SBQQ__Opportunity2__r.Committed__c, Event_End__c, ' +
                         'SBQQ__Opportunity2__r.Quickbooks_COS__c, SBQQ__Opportunity2__r.COSRemaining__c, ' +
-                        'SBQQ__Opportunity2__r.UnassignedExpenses__c,SBQQ__Opportunity2__r.Quote_Status__c,' +
+                        'SBQQ__Opportunity2__r.UnassignedExpenses__c,SBQQ__Opportunity2__r.UnassignedTime__c,' +
+                        'SBQQ__Opportunity2__r.Quote_Status__c,' +
                         'SBQQ__Opportunity2__r.SBQQ__PrimaryQuote__c, SBQQ__LineItemCount__c,' +
                         'SBQQ__Opportunity2__r.Percent_Invoiced__c, SBQQ__Opportunity2__r.Invoice_Status__c,' +
                         'SOW_Entity_Name__c, SOW_Entity_Name_Caps__c, SOW_Service_Description__c, SOW_Services__c, SOWDate__c,' +
@@ -38,7 +39,8 @@ public with sharing class PrimaryQuoteController {
 
         SBQQ__Quote__c quote = [SELECT Id, SBQQ__NetAmount__c, SBQQ__LineItemsGrouped__c, HasDocument__c,
                                         SBQQ__LineItemCount__c, Cost_of_sale__c, Gross_Profit__c, Gross_Margin__c, SBQQ__Primary__c,
-                                        SBQQ__Opportunity2__r.UnassignedExpenses__c, SBQQ__Opportunity2__r.Quote_Status__c
+                                        SBQQ__Opportunity2__r.UnassignedExpenses__c, SBQQ__Opportunity2__r.UnassignedTime__c,
+                                        SBQQ__Opportunity2__r.Quote_Status__c
                                 FROM SBQQ__Quote__c WHERE Id = :quoteId];
 
         responseMap.put('SBQQ__NetAmount__c',quote.SBQQ__NetAmount__c);
@@ -49,6 +51,7 @@ public with sharing class PrimaryQuoteController {
         responseMap.put('HasDocument__c',quote.HasDocument__c);
         responseMap.put('SBQQ__LineItemCount__c',quote.SBQQ__LineItemCount__c);
         responseMap.put('SBQQ__Opportunity2__r.UnassignedExpenses__c',quote.SBQQ__Opportunity2__r.UnassignedExpenses__c);
+        responseMap.put('SBQQ__Opportunity2__r.UnassignedTime__c',quote.SBQQ__Opportunity2__r.UnassignedTime__c);
         responseMap.put('SBQQ__Opportunity2__r.Quote_Status__c',quote.SBQQ__Opportunity2__r.Quote_Status__c);
 
         if (quote.SBQQ__LineItemsGrouped__c){
@@ -1173,6 +1176,17 @@ public with sharing class PrimaryQuoteController {
         return [SELECT Id, Name, Amount__c, Supplier__c, Paid__c, Description__c, Due_Date__c,
                         CreatedDate, QuoteLine__c, Assigned__c
                 FROM Expense__c
+                WHERE Opportunity__c = :oppId];
+
+    }
+
+    @AuraEnabled
+    public static List<TimeEntry__c> getTimeEntriesApex(String oppId){
+
+        return [SELECT Id, Description__c, Start__c, End__c, Days__c, Duration__c,
+                        Employee__r.FirstName__c, Employee__r.LastName__c,
+                        Employee__r.ImageLink__c
+                FROM TimeEntry__c
                 WHERE Opportunity__c = :oppId];
 
     }

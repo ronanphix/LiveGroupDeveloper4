@@ -544,8 +544,8 @@
                 quote.HasDocument__c        = response.getReturnValue()['HasDocument__c'];
                 quote.SBQQ__LineItemCount__c = response.getReturnValue()['SBQQ__LineItemCount__c'];
                 quote.SBQQ__Opportunity2__r.UnassignedExpenses__c = response.getReturnValue()['SBQQ__Opportunity2__r.UnassignedExpenses__c'];
+                quote.SBQQ__Opportunity2__r.UnassignedTime__c = response.getReturnValue()['SBQQ__Opportunity2__r.UnassignedTime__c'];
                 quote.SBQQ__Opportunity2__r.Quote_Status__c = response.getReturnValue()['SBQQ__Opportunity2__r.Quote_Status__c'];
-                // component.set('v.quote', component.get('v.quote'));
                 component.set('v.quote', quote);
 
                 if (!component.get('v.revEditable') && !quote.HasDocument__c){
@@ -604,8 +604,18 @@
         selectEvt.setParams({ "Id" : '' });
         selectEvt.fire();
     },
-    closeReconcile : function(component, event, helper){
+    closeReconcileAllocate : function(component, event, helper){
         component.set('v.reconciling', false);
+        component.set('v.allocating', false);
+    },
+    openToggl : function(component, event, helper){
+        component.set('v.allocating', true);
+        var selectEvt = $A.get("e.c:LineSelected");
+        selectEvt.setParams({ "Id" : '' });
+        selectEvt.fire();
+    },
+    closeToggl : function(component, event, helper){
+        component.set('v.allocating', false);
     },
     undoAll : function(component, event, helper){
         var pendingChanges = component.get('v.pendingChanges');
@@ -615,6 +625,9 @@
     },
     setActiveExpenseId : function(component, event, hepler){
         component.set('v.activeExpenseId', event.getParam('expenseId'));
+    },
+    setActiveEntryId : function(component, event, hepler){
+        component.set('v.activeEntryId', event.getParam('entryId'));
     },
     updateLineId : function(component, event, helper) {
         var expenses    = component.get('v.expenses');
@@ -660,6 +673,51 @@
             $A.enqueueAction(updateExpense);
         }
     },
+    updateEntryLineId : function(component, event, helper) {
+        var entries    = component.get('v.entries');
+
+        if (component.get('v.quote') && component.get('v.entries').length > 0){
+
+            for (var x = 0; x < entries.length; x++){
+                if (entries[x].Id === component.get('v.activeEntryId')){
+
+                    var entry = Object.assign({},entries[x]);
+                    entry.QuoteLine__c = event.getParam('lineId');
+                    entry.Assigned__c = (event.getParam('lineId') !== null);
+                    entries.splice(x,1);
+                    entries.push(entry);
+                    component.set('v.entries',entries);
+                    break;
+                }
+            }
+
+            var quote = component.get('v.quote');
+
+            if (event.getParam('lineId') !== null){
+                quote.SBQQ__Opportunity2__r.UnassignedTime__c -= 1;
+            } else {
+                quote.SBQQ__Opportunity2__r.UnassignedTime__c += 1;
+            }
+
+            component.set('v.quote',quote);
+
+            // var updateExpense = component.get('c.assignExpenseApex');
+            // updateExpense.setParams({
+            //     lineId : event.getParam('lineId'),
+            //     expenseId : component.get('v.activeExpenseId')
+            // });
+            // updateExpense.setCallback(this, function(response){
+            //     if (response.getState() === "SUCCESS" && response.getReturnValue()){
+            //         helper.showToast('Success!', 'Expense updated','success');
+            //     } else {
+            //         helper.showToast('Error', 'There was an error updating the expense', 'error');
+            //
+            //     }
+            // });
+            // $A.enqueueAction(updateExpense);
+        }
+    },
+
     togglePrimary : function(component, event, helper){
         var isPrimary = (component.get('v.quote.SBQQ__Primary__c')) ? false : true;
 

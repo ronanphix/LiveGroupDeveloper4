@@ -1,0 +1,28 @@
+<!--
+ - Created by ronanwilliams on 2019-11-15.
+ -->
+
+<aura:component >
+    <aura:attribute name="opportunityId" type="string" access="public"/>
+    <aura:attribute name="entries" type="TimeEntry__c[]" />
+    <aura:attribute name="allocating" type="boolean" />
+
+    <div class="togglHolder">
+        <div style="height:50px;position:relative;display:grid;grid-template-columns: 80% 20%;">
+            <img src="{!$Resource.TogglLogoFull}" style="height:50px;" />
+
+            <div>
+                <lightning:button variant="neutral" label="CLOSE" onclick="{!c.closeAllocate}"/>
+            </div>
+        </div>
+        <br/>
+        <div style="height:calc(95% - 50px); overflow-y:scroll;"  ondragover="{!c.dragOver}"
+             ondragleave="{!c.dragLeave}" ondrop="{!c.drop}">
+            <aura:iteration items="{!v.entries}" var="entry" >
+                <aura:if isTrue="{!entry.QuoteLine__c == null}">
+                    <c:TogglEntry entry="{!entry}" />
+                </aura:if>
+            </aura:iteration>
+        </div>
+    </div>
+</aura:component>

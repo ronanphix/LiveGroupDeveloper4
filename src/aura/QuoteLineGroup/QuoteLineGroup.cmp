@@ -10,7 +10,9 @@
     <aura:attribute name="responsePending" type="boolean" default="false" />
     <aura:attribute name="lineUpdatesPending" type="boolean" default="false" />
     <aura:attribute name="reconciling" type="boolean" default="false" />
+    <aura:attribute name="allocating" type="boolean" default="false" />
     <aura:attribute name="expenses" type="Expense__c[]" />
+    <aura:attribute name="entries" type="TimeEntry__c[]" />
 
     <aura:registerEvent name="groupNameChangeUp" type="c:GroupNameChangeUp"/>
     <aura:registerEvent name="addGroupProducts" type="c:AddGroupProducts"/>
@@ -88,7 +90,9 @@
                                              hasDocument="{!v.hasDocument}"
                                              quoteType="{!v.quoteType}"
                                              expenses="{!v.expenses}"
+                                             entries="{!v.entries}"
                                              reconciling="{!v.reconciling}"
+                                             allocating="{!v.allocating}"
                                              lineUpdatesPending="{!v.lineUpdatesPending}"
                                              sortOrder="{!line.SBQQ__Number__c}"/>
                             </div>

@@ -11,6 +11,7 @@
     <aura:attribute name="groupDragging" type="boolean" default="false" />
     <aura:attribute name="products" type="Product2[]" />
     <aura:attribute name="expenses" type="Expense__c[]" />
+    <aura:attribute name="entries" type="TimeEntry__c[]" />
     <aura:attribute name="activeGroupId" type="string" />
     <aura:attribute name="previewing" type="boolean" default="false"/>
     <aura:attribute name="previewChanged" type="boolean" default="false"/>
@@ -26,8 +27,10 @@
     <aura:attribute name="lineUpdatesPending" type="boolean" default="false" />
     <aura:attribute name="pendingChanges" type="SBQQ__QuoteLine__c[]" />
     <aura:attribute name="reconciling" type="boolean" default="false" />
+    <aura:attribute name="allocating" type="boolean" default="false" />
     <aura:attribute name="cloneOptions" type="List" default="[{'label': 'this', 'value': 'This opportunity'},{'label': 'other', 'value': 'Another Opportunity'}]"/>
     <aura:attribute name="activeExpenseId" type="string" />
+    <aura:attribute name="activeEntryId" type="string" />
 
     <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
     <aura:handler name="addGroupProducts" event="c:AddGroupProducts" action="{!c.showModal}" />
@@ -42,6 +45,8 @@
     <aura:handler event="c:DragExpense" action="{!c.setDraggedExpense}" />
     <aura:handler event="c:ExpenseDrag" action="{!c.setActiveExpenseId}" />
     <aura:handler event="c:ExpenseDrop" action="{!c.updateLineId}" />
+    <aura:handler event="c:TimeEntryDrag" action="{!c.setActiveEntryId}" />
+    <aura:handler event="c:TimeEntryDrop" action="{!c.updateEntryLineId}" />
     <aura:handler event="c:LineOrderChange" action="{!c.orderLines}" />
     <aura:handler event="c:GroupOrderChange" action="{!c.orderGroups}" />
 
@@ -65,7 +70,7 @@
             <lightning:layout class="slds-p-around_small quoteCardPrimary" multipleRows="true" >
                 <lightning:layoutItem size="12">
                     <div style="border-bottom: 0.5px solid #d3d3d3;" class="slds-truncate buttonHolder" >
-                        <aura:if isTrue="{!!v.reconciling}">
+                        <aura:if isTrue="{!and(not(v.reconciling),not(v.allocating))}">
                             <aura:if isTrue="{!v.pendingChanges.length > 0}">
                                 <lightning:button variant="brand" label="UNDO ALL CHANGES " onclick="{!c.undoAll}" />
                                 <lightning:button variant="brand" label="{!('SAVE ALL (' + v.pendingChanges.length) + ')'}" onclick="{!c.saveAll}" />
@@ -81,6 +86,7 @@
 
                                     <aura:if isTrue="{!and(v.quote.Stage__c != 'Estimate',v.quote.SBQQ__Primary__c)}">
                                         <lightning:button variant="neutral" label="{!'RECONCILE (' + v.quote.SBQQ__Opportunity2__r.UnassignedExpenses__c + ')'}" onclick="{!c.openReconcile}" class="slds-truncate"/>
+                                        <lightning:button variant="neutral" label="{!'TOGGL (' + v.quote.SBQQ__Opportunity2__r.UnassignedTime__c + ')'}" onclick="{!c.openToggl}" class="slds-truncate"/>
                                     </aura:if>
                                     <aura:if isTrue="{!v.editable &amp;&amp; not(v.quote.HasDocument__c)}">
                                         <aura:if isTrue="{!!v.quote.SBQQ__LineItemsGrouped__c}">
@@ -116,7 +122,7 @@
                                 </aura:set>
                             </aura:if>
                             <aura:set attribute="else">
-                                <lightning:button variant="neutral" label="CLOSE" onclick="{!c.closeReconcile}" class="slds-truncate"/>
+                                <lightning:button variant="neutral" label="CLOSE" onclick="{!c.closeReconcileAllocate}" class="slds-truncate"/>
                             </aura:set>
                         </aura:if>
                     </div>
@@ -295,7 +301,9 @@
                                   customGroup="{!v.quote.SBQQ__LineItemsGrouped__c}"
                                   lineUpdatesPending="{!v.lineUpdatesPending}"
                                   reconciling="{!v.reconciling}"
-                                  expenses="{!v.expenses}"/>
+                                  allocating="{!v.allocating}"
+                                  expenses="{!v.expenses}"
+                                  entries="{!v.entries}"  />
             </div>
         </aura:iteration>
 
@@ -485,6 +493,12 @@
         <aura:renderIf isTrue="{!v.reconciling}" >
             <div id="quickbooksCard">
                 <c:QuickbooksCard opportunityId="{!v.recordId}" expenses="{!v.expenses}" reconciling="{!v.reconciling}"/>
+            </div>
+        </aura:renderIf>
+
+        <aura:renderIf isTrue="{!v.allocating}" >
+            <div id="togglCard">
+                <c:TogglCard opportunityId="{!v.recordId}" entries="{!v.entries}" allocating="{!v.allocating}"/>
             </div>
         </aura:renderIf>
 

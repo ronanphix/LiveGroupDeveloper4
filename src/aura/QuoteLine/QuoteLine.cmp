@@ -13,7 +13,10 @@
     <aura:attribute name="lineUpdatesPending" type="boolean" default="false" />
     <aura:attribute name="expenses" type="Expense__c[]" />
     <aura:attribute name="expensesTotal" type="decimal" default="0" />
+    <aura:attribute name="entries" type="TimeEntry__c[]" />
+    <aura:attribute name="entriesTotal" type="decimal" default="0" />
     <aura:attribute name="reconciling" type="boolean" default="false" />
+    <aura:attribute name="allocating" type="boolean" default="false" />
     <aura:attribute name="sortOrder" type="integer"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     <aura:handler event="c:LineSelected" action="{!c.closeEdit}" />
@@ -213,6 +216,25 @@
                                 </div>
                             </aura:set>
                         </aura:if>
+                        <aura:if isTrue="{!v.allocating}">
+                            <aura:iteration items="{!v.entries}" var="entry">
+                                <aura:if isTrue="{!entry.QuoteLine__c == v.line.Id}">
+                                    <div style="width:31vw;margin-right:15%;float:right;">
+                                        <c:TogglEntry entry="{!entry}" opacity="0.7" />
+                                    </div>
+                                </aura:if>
+                            </aura:iteration>
+<!--                            <aura:set attribute="else">-->
+<!--                                <div class="qb-block">-->
+<!--                                    <aura:iteration items="{!v.expenses}" var="expense">-->
+<!--                                        <aura:if isTrue="{!expense.QuoteLine__c == v.line.Id}">-->
+<!--                                            <img src="{!$Resource.QuickbooksLogoSmall}" style="width:15px;"/>-->
+<!--                                        </aura:if>-->
+<!--                                    </aura:iteration>-->
+<!--                                </div>-->
+<!--                            </aura:set>-->
+                        </aura:if>
+
                     </div>
                 </aura:if>
             </div>

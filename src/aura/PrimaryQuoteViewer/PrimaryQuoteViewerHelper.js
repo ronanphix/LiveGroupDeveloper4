@@ -65,8 +65,10 @@
 
                     if (quote.Stage__c  !== 'Estimate' && quote.SBQQ__Primary__c){
                         this.getExpenses(component, component.get('v.recordId'));
+                        this.getTimeEntries(component, component.get('v.recordId'));
                     } else {
                         component.set('v.expenses',[]);
+                        component.set('v.entries',[]);
                     }
 
                     // clear the value of the quote clone opportunity data set
@@ -128,6 +130,17 @@
         });
         $A.enqueueAction(getExpenses);
     },
+    getTimeEntries : function(component, oppId){
+        var getExpenses = component.get('c.getTimeEntriesApex');
+        getExpenses.setParams({ oppId : oppId});
+        getExpenses.setCallback(this, function(response){
+            if (response.getState() === 'SUCCESS'){
+                component.set('v.entries',response.getReturnValue());
+            }
+        });
+        $A.enqueueAction(getExpenses);
+    },
+
     showToast : function(title, message, type){
         var toastEvent = $A.get("e.force:showToast");
         toastEvent.setParams({

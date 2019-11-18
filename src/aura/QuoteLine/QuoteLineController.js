@@ -260,6 +260,12 @@
                 var line = component.get('v.line');
                 dropEvent.setParams({lineId: line.Id});
                 dropEvent.fire();
+            } else if (data.type === 'TimeEntry'){
+                console.log('time entry dropped');
+                var dropEvent = $A.get("e.c:TimeEntryDrop");
+                var line = component.get('v.line');
+                dropEvent.setParams({lineId: line.Id});
+                dropEvent.fire();
             }
         }
     },
