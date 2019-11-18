@@ -730,7 +730,7 @@
         togglePrimary.setCallback(this, function(response){
             if (response.getState() === "SUCCESS" && response.getReturnValue()){
                 helper.showToast('Success!', 'Quote updated','success');
-                if (component.get('v.quote.Stage__c') === 'Reconciliation'){
+                if (component.get('v.quote.Stage__c') !== 'Estimate'){
                     console.log('something extra should happen here');
                     helper.getQuote(component, component.get('v.quote.Id') , false);
                 }

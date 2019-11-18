@@ -301,7 +301,7 @@
                     <!-- THANKYOU AND SIGNATURE -->
                     <apex:outputPanel layout="none" rendered="{!pageOneCount < 20}" >
                         <div style="width: 90%;color:{!theme};font-size: 30px;margin-top: 30px;">
-                            Thank you {!pageOneCount}
+                            Thank you
                         </div>
                         <div style="width: 95%;color:{!theme};font-size: 11px;margin-top: 5px;font-weight: lighter;">
                             Dear {!contact.FirstName},<br/><br/>

@@ -33,7 +33,7 @@
                 <span>{!(v.entry.Employee__r ? v.entry.Employee__r.FirstName__c : '[unknown]')} - on </span>
                 <span><lightning:formattedDateTime value="{!v.entry.End__c}"/></span>
             </div>
-            <div style="color:grey;">{!v.entry.Description__c} </div>
+            <div style="color:grey;">{!v.entry.TagName__c + ': ' + v.entry.Description__c} </div>
         </div>
     </div>
 

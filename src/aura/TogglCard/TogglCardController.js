@@ -16,7 +16,7 @@
         //console.log('dragg leave');
     },
     drop : function(component, event, helper){
-        var dropEvent = $A.get("e.c:ExpenseDrop");
+        var dropEvent = $A.get("e.c:TimeEntryDrop");
         dropEvent.setParams({ lineId : null});
         dropEvent.fire();
     },

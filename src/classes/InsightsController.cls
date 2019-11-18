@@ -873,7 +873,7 @@ public class InsightsController {
                                                     AmountAdjusted__c, HiddenBudget__c, AdjustedDate__c
                                             FROM CashFlowEntries__r
                                             WHERE Paid__c = FALSE
-                                            ORDER BY CreatedDate )
+                                            ORDER BY Name DESC)
                                     FROM CashFlow__c
                                     WHERE Date__c >= : startDate
                                     AND Date__c <= : endDate]){

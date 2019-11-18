@@ -13,7 +13,6 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"/>
-<!--        <apex:stylesheet value="{!$Resource.insightsStylesheet}" />-->
 
     </head>
 
@@ -3956,8 +3955,15 @@
                     Visualforce.remoting.Manager.invokeAction(
                         '{!$RemoteAction.InsightsController.getCashflowData}',true,
                         function (result) {
+                            result['RECORDS'] = result['RECORDS'].sort(function(a, b){
+                                var x = a.Description__c.toLowerCase();
+                                var y = b.Description__c.toLowerCase();
+                                if (x < y) {return -1;}
+                                if (x > y) {return 1;}
+                                return 0;
+                            });
+
                             app.cashflowData = result;
-                            console.log(result);
                         },
                         {escape: false});
                 },
