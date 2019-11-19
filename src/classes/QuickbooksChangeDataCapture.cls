@@ -66,8 +66,8 @@ public class QuickbooksChangeDataCapture {
         	// add all schedule ids found in call to set
         	if (parsedResults.CDCResponse.size() > 0 && parsedResults.CDCResponse[0].QueryResponse.size() > 0 
         		&& parsedResults.CDCResponse[0].QueryResponse[0].Invoice != null) {
-	            for (JSONParserQBOInvoiceCDC.cls_Invoice inv : parsedResults.CDCResponse[0].QueryResponse[0].Invoice) {	            	
-	            	
+	            for (JSONParserQBOInvoiceCDC.cls_Invoice inv : parsedResults.CDCResponse[0].QueryResponse[0].Invoice) {
+
 	            	// Todo: iterating through all custom fields returned, filtering by Name value
 	            	// for the one called scheulde number, if it has a string value, add to lists 	
 	            	if (inv.CustomField != null) {
@@ -143,7 +143,8 @@ public class QuickbooksChangeDataCapture {
 	            	} else if (updateSchedules.containsKey(inv.CustomField[0].StringValue)){
 		            	// check to see if the salesforce record has already been updated and
 		            	// remove from the map if so, otherwise apply updates
-		            	if (inv.MetaData.LastUpdatedTime == updateSchedules.get(inv.CustomField[0].StringValue).QBOInvoiceLastUpdate__c) {
+		            	if (inv.MetaData.LastUpdatedTime == updateSchedules.get(inv.CustomField[0].StringValue).QBOInvoiceLastUpdate__c &&
+								updateSchedules.get(inv.CustomField[0].StringValue).Invoice_Amount__c == inv.TxnTaxDetail.TaxLine[0].TaxLineDetail.NetAmountTaxable) {
 		            		updateSchedules.remove(inv.CustomField[0].StringValue);
 		            	} else {
 
@@ -167,20 +168,9 @@ public class QuickbooksChangeDataCapture {
 	            }
 
 	            if (updateSchedules.size() > 0) {
-
-					for (Invoice_Schedule__c is : updateSchedules.values()){
-						system.debug('update list: ' + is);
-					}
-
 	            	update updateSchedules.values();
 	            } 
 	            if (deleteSchedules.size() > 0) {
-					for (Invoice_Schedule__c is : deleteSchedules.values()){
-						system.debug('delete list: ' + is);
-					}
-
-
-
 					update deleteSchedules.values();
 	        	}
 	        }
@@ -294,7 +284,8 @@ public class QuickbooksChangeDataCapture {
 	            	} else if (updateSchedules.containsKey(cm.CustomField[0].StringValue)){
 		            	// check to see if the salesforce record has already been updated and
 		            	// remove from the map if so, otherwise apply updates
-		            	if (cm.MetaData.LastUpdatedTime == updateSchedules.get(cm.CustomField[0].StringValue).QBOCreditMemoLastUpdate__c) {
+		            	if (cm.MetaData.LastUpdatedTime == updateSchedules.get(cm.CustomField[0].StringValue).QBOCreditMemoLastUpdate__c &&
+								updateSchedules.get(cm.CustomField[0].StringValue).Credit_Note__c == cm.TxnTaxDetail.TaxLine[0].TaxLineDetail.NetAmountTaxable) {
 		            		updateSchedules.remove(cm.CustomField[0].StringValue);
 		            	} else {
 		            		// populate invoice schedule fields with updates	
