@@ -45,23 +45,17 @@ public class TogglCallout {
                                     AND TogglId__c = NULL];
 
         for (Product2 prod : product2s){
-
             HttpRequest tagRequest = togglAuth('api/v8/tags', 'POST');
             tagRequest.setBody('{"tag":{"name":"' + prod.Name + '","wid":' + System.Label.TogglWorkspaceId + '}}');
             HttpResponse tagResponse  = Test.isRunningTest() ? MockHandler.getTogglTagMock() : new Http().send(tagRequest);
-
-            if (tagResponse.getStatusCode() == 200){
-                Map<String,Object> resMap   = (Map<String,Object>)JSON.deserializeUntyped(tagResponse.getBody());
-                Map<String,Object> dataMap  = resMap.containsKey('data') ? (Map<String,Object>)resMap.get('data') : null;
-                prod.TogglId__c             = dataMap != null && dataMap.containsKey('id') ? String.valueOf((Integer)dataMap.get('id')) : null;
-            }
+            prod.TogglId__c = tagResponse.getStatusCode() == 200 ? getPostResponseId(tagResponse) : null;
         }
 
         update product2s;
     }
 
     // get time entries on sync
-
+    @Future(Callout=true)
     public static void getTimeEntries(){
 
         // get map of all users by email
@@ -121,9 +115,6 @@ public class TogglCallout {
 
                     Map<String,Object> objMap = (Map<String,Object>)entryObj;
 
-                    system.debug('entry object tags: ' + objMap.get('tags'));
-
-
                     if (oppIdMap.containsKey(String.valueOf((Integer)objMap.get('pid')))
                             && objMap.get('start') != null && objMap.get('end') != null){
 
@@ -142,11 +133,8 @@ public class TogglCallout {
                         if (!tagObjs.isEmpty()){
                             entry.TagName__c = (String)tagObjs[0];
                             affectedOppIds.add(oppIdMap.get(String.valueOf((Integer)objMap.get('pid'))));
-                            system.debug('adding affected opp for ' + tagObjs[0]);
                         }
                         entries.add(entry);
-
-
                     }
                 }
             }
@@ -158,16 +146,10 @@ public class TogglCallout {
                 for (TimeEntry__c entry : entries){
                     if (oppLineMap.containsKey(entry.Opportunity__c) &&
                             oppLineMap.get(entry.Opportunity__c).containsKey(entry.TagName__c)){
-                        system.debug('matching line item fount');
                         entry.Quote_Line__c = oppLineMap.get(entry.Opportunity__c).get(entry.TagName__c);
                         entry.Assigned__c   = true;
-
                     }
-
                 }
-
-                system.debug(oppLineMap);
-
             }
 
             Schema.SObjectField togglId = TimeEntry__c.fields.TogglId__c;
@@ -180,7 +162,7 @@ public class TogglCallout {
     @TestVisible
     private static HttpRequest togglAuth(String endpoint, String method){
 
-        String code             = '535104bb8ec99db2e0718f65e04e1579:api_token';
+        String code             = System.Label.TogglAPIToken + ':api_token';
         Blob codeBlob           = Blob.valueOf(code);
         String personalEncode   = EncodingUtil.base64Encode(codeBlob);
         HttpRequest req         = new HttpRequest();

@@ -15,7 +15,7 @@ public class ProductTriggerHandler {
         }
 
         if (productIds.size() < 60){
-
+            TogglCallout.postProduct(productIds);
         }
 
     }
@@ -30,7 +30,7 @@ public class ProductTriggerHandler {
             }
         }
         if (productIds.size() < 60){
-
+            TogglCallout.postProduct(productIds);
         }
 
     }
