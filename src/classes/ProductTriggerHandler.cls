@@ -9,7 +9,7 @@ public class ProductTriggerHandler {
         Set<Id> productIds = new Set<Id>();
 
         for (Product2 product : triggerNew){
-            if (product.IsActive && product.TogglId__c == null){
+            if (product.IsActive && product.TogglId__c == null && product.SBQQ__SubscriptionTerm__c == 1){
                 productIds.add(product.Id);
             }
         }
@@ -25,7 +25,8 @@ public class ProductTriggerHandler {
         Set<Id> productIds = new Set<Id>();
 
         for (Product2 product : triggerNew){
-            if (product.TogglId__c == null && product.IsActive && !triggerOldMap.get(product.Id).IsActive){
+            if (product.TogglId__c == null && product.IsActive && !triggerOldMap.get(product.Id).IsActive &&
+                    product.SBQQ__SubscriptionTerm__c == 1){
                 productIds.add(product.Id);
             }
         }

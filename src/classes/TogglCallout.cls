@@ -42,7 +42,8 @@ public class TogglCallout {
 
         List<Product2> product2s  = [SELECT Name, TogglId__c, Id
                                     FROM Product2 WHERE Id IN :productIds
-                                    AND TogglId__c = NULL];
+                                    AND TogglId__c = NULL
+                                    AND SBQQ__SubscriptionTerm__c = 1];
 
         for (Product2 prod : product2s){
             HttpRequest tagRequest = togglAuth('api/v8/tags', 'POST');
@@ -55,7 +56,7 @@ public class TogglCallout {
     }
 
     // get time entries on sync
-//    @Future(Callout=true)
+    @Future(Callout=true)
     public static void getTimeEntries(){
 
         // get map of all users by email
