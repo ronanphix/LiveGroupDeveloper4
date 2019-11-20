@@ -11,7 +11,7 @@
     <aura:registerEvent name="entryDrag" type="c:TimeEntryDrag" />
 
     <div  class="expenseRow" draggable="true" ondragstart="{!c.dragEntry}"
-         style="{!'opacity:' + v.opacity + ';display:grid;grid-template-columns:10% 90%'}">
+         style="{!'opacity:' + v.opacity + ';display:grid;grid-template-columns:10% 90%;min-height:50px;'}">
         <div style="text-align:left;position: relative;">
             <img src="{!$Resource.TogglLogo}" style="width:20px;margin-left: -3px;z-index:10;position: absolute;"/>
             <aura:if isTrue="{!not(v.entry.Employee__r)}">

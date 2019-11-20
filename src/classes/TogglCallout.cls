@@ -23,7 +23,7 @@ public class TogglCallout {
 
         HttpRequest projectRequest = togglAuth('api/v8/projects', 'POST');
         projectRequest.setBody('{"project":{"name":"' + opp.Filtered_Job_Number__c + ' ' +
-                                opp.Name + '","wid":3375044,"is_private":false,"cid":' + clientId + '}}');
+                                opp.Name + '","wid":' + System.Label.TogglWorkspaceId + ',"is_private":false,"cid":' + clientId + '}}');
         HttpResponse projectResponse  = Test.isRunningTest() ? MockHandler.getTogglProjectMock() : new Http().send(projectRequest);
         projectId = projectResponse.getStatusCode() == 200 ? getPostResponseId(projectResponse) : null;
 

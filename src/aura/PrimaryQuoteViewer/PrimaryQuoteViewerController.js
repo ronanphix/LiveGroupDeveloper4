@@ -630,12 +630,15 @@
         component.set('v.activeEntryId', event.getParam('entryId'));
     },
     updateLineId : function(component, event, helper) {
-        var expenses    = component.get('v.expenses');
+        var expenses        = component.get('v.expenses');
+        var priorAssignment = false;
 
         if (component.get('v.quote') && component.get('v.expenses').length > 0){
 
             for (var x = 0; x < expenses.length; x++){
                 if (expenses[x].Id === component.get('v.activeExpenseId')){
+
+                    priorAssignment = expenses[x].Assigned__c;
 
                     var expense = Object.assign({},expenses[x]);
                     expense.QuoteLine__c = event.getParam('lineId');
@@ -650,9 +653,9 @@
             var quote = component.get('v.quote');
 
             if (event.getParam('lineId') !== null){
-                quote.SBQQ__Opportunity2__r.UnassignedExpenses__c -= 1;
+                quote.SBQQ__Opportunity2__r.UnassignedExpenses__c -= priorAssignment ? 0 : 1;
             } else {
-                quote.SBQQ__Opportunity2__r.UnassignedExpenses__c += 1;
+                quote.SBQQ__Opportunity2__r.UnassignedExpenses__c += priorAssignment ? 0 : 1;
             }
 
             component.set('v.quote',quote);
@@ -674,12 +677,19 @@
         }
     },
     updateEntryLineId : function(component, event, helper) {
-        var entries    = component.get('v.entries');
+        var entries         = component.get('v.entries');
+        var priorAssignment = false;
 
         if (component.get('v.quote') && component.get('v.entries').length > 0){
 
             for (var x = 0; x < entries.length; x++){
                 if (entries[x].Id === component.get('v.activeEntryId')){
+
+                    console.log('assigned',entries[x]);
+
+                    priorAssignment = entries[x].Assigned__c;
+
+
 
                     var entry = Object.assign({},entries[x]);
                     entry.Quote_Line__c = event.getParam('lineId');
@@ -694,9 +704,9 @@
             var quote = component.get('v.quote');
 
             if (event.getParam('lineId') !== null){
-                quote.SBQQ__Opportunity2__r.UnassignedTime__c -= 1;
+                quote.SBQQ__Opportunity2__r.UnassignedTime__c -= priorAssignment ? 0 : 1;
             } else {
-                quote.SBQQ__Opportunity2__r.UnassignedTime__c += 1;
+                quote.SBQQ__Opportunity2__r.UnassignedTime__c += priorAssignment ? 0 : 1;
             }
 
             component.set('v.quote',quote);

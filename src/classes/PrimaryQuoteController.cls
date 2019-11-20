@@ -1203,7 +1203,7 @@ public with sharing class PrimaryQuoteController {
 
         return [SELECT Id, Description__c, Start__c, End__c, Days__c, Duration__c,
                         Employee__r.FirstName__c, Employee__r.LastName__c,
-                        Employee__r.ImageLink__c, Quote_Line__c, TagName__c
+                        Employee__r.ImageLink__c, Quote_Line__c, TagName__c, Assigned__c
                 FROM TimeEntry__c
                 WHERE Opportunity__c = :oppId];
 
