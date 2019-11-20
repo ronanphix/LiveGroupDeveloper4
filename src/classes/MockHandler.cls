@@ -31,7 +31,7 @@ public class MockHandler {
 
     }
 
-    public static HttpResponse getUsersMock(){
+    public static HttpResponse getTogglUsersMock(){
 
         HttpResponse res = new HttpResponse();
         res.setStatusCode(200);
@@ -51,37 +51,34 @@ public class MockHandler {
 
     }
 
-    public static HttpResponse getEntriesMock(){
+    public static HttpResponse getTogglEntriesMock(){
 
         HttpResponse res = new HttpResponse();
         res.setStatusCode(200);
         res.setBody(
                 '{"total_grand":415866000,"total_billable":null,"total_currencies":[{"currency":null,"amount":null}],' +
-                '"total_count":19,"per_page":50,"data":[{"id":1365070171,"pid":155350599,"tid":null,"uid":4782855,' +
-                '"description":"","start":"2019-11-18T13:07:35+00:00","end":"2019-11-18T13:07:41+00:00","updated":' +
-                '"2019-11-18T13:07:41+00:00","dur":6000,"user":"Ronan Williams","use_stop":true,"client":"Ernst & Young LLP",' +
-                '"project":"19214 togglTest2","project_color":"0","project_hex_color":"#205500","task":null,"billable":null,' +
-                '"is_billable":false,"cur":null,"tags":["18 tonne truck"]},{"id":1365069533,"pid":155350599,"tid":null,' +
-                '"uid":4782855,"description":"","start":"2019-11-18T13:07:06+00:00","end":"2019-11-18T13:07:06+00:00",' +
-                '"updated":"2019-11-18T13:07:20+00:00","dur":0,"user":"Ronan Williams","use_stop":true,"client":"Ernst & Young LLP",' +
-                '"project":"19214 togglTest2","project_color":"0","project_hex_color":"#205500","task":null,"billable":null,' +
-                '"is_billable":false,"cur":null,"tags":["18 tonne truck"]},{"id":1365069518,"pid":155350599,"tid":null,' +
-                '"uid":4782855,"description":"","start":"2019-11-18T13:07:06+00:00","end":"2019-11-18T13:07:06+00:00",' +
-                '"updated":"2019-11-18T13:07:20+00:00","dur":0,"user":"Ronan Williams","use_stop":true,"client":' +
-                '"Ernst & Young LLP","project":"19214 togglTest2","project_color":"0","project_hex_color":"#205500",' +
-                '"task":null,"billable":null,"is_billable":false,"cur":null,"tags":["18 tonne truck"]},{"id":1365070310,' +
-                '"pid":155350599,"tid":null,"uid":4782855,"description":"","start":"2019-11-18T01:07:41+00:00","end":' +
-                '"2019-11-18T13:08:01+00:00","updated":"2019-11-18T13:08:01+00:00","dur":43220000,"user":"Ronan Williams",' +
-                '"use_stop":true,"client":"Ernst & Young LLP","project":"19214 togglTest2","project_color":"0",' +
-                '"project_hex_color":"#205500","task":null,"billable":null,"is_billable":false,"cur":null,"tags":["18 tonne truck"]},' +
-                '{"id":1363325896,"pid":null,"tid":null,"uid":4952567,"description":"","start":"2019-11-15T12:44:02+00:00",' +
-                '"end":"2019-11-15T12:44:03+00:00","updated":"2019-11-15T12:44:03+00:00","dur":1000,"user":"Alina Tursunova",' +
-                '"use_stop":true,"client":null,"project":null,"project_color":"0","project_hex_color":null,"task":null,' +
-                '"billable":null,"is_billable":false,"cur":null,"tags":[]},{"id":1363300570,"pid":155350574,"tid":null,' +
-                '"uid":4782855,"description":"bringing sexy back","start":"2019-11-15T12:19:26+00:00","end":"2019-11-15T12:29:34+00:00",' +
-                '"updated":"2019-11-18T13:02:56+00:00","dur":608000,"user":"Ronan Williams","use_stop":true,"client":"Ernst & Young LLP",' +
-                '"project":"19212 togglTest1","project_color":"0","project_hex_color":"#e20505","task":null,"billable":null,"is_billable":' +
-                'false,"cur":null,"tags":["Videoconference bridge"]}]}'
+                '"total_count":19,"per_page":50,"data":[' +
+                        '{"id":1365070171,"pid":1,"tid":null,"uid":4782855,' +
+                        '"description":"","start":"2019-11-18T13:07:35+00:00","end":"2019-11-18T13:07:41+00:00","updated":' +
+                        '"2019-11-18T13:07:41+00:00","dur":6000,"user":"Ronan Williams","use_stop":true,"client":"Ernst & Young LLP",' +
+                        '"project":"19214 togglTest2","project_color":"0","project_hex_color":"#205500","task":null,"billable":null,' +
+                        '"is_billable":false,"cur":null,"tags":["18 tonne truck"]},' +
+                        '{"id":1365069533,"pid":1,"tid":null,' +
+                        '"uid":4782855,"description":"","start":"2019-11-18T13:07:06+00:00","end":"2019-11-18T13:07:06+00:00",' +
+                        '"updated":"2019-11-18T13:07:20+00:00","dur":0,"user":"Ronan Williams","use_stop":true,"client":"Ernst & Young LLP",' +
+                        '"project":"19214 togglTest2","project_color":"0","project_hex_color":"#205500","task":null,"billable":null,' +
+                        '"is_billable":false,"cur":null,"tags":["18 tonne truck"]},' +
+                        '{"id":1365069518,"pid":155350599,"tid":null,' +
+                        '"uid":4782855,"description":"","start":"2019-11-18T13:07:06+00:00","end":"2019-11-18T13:07:06+00:00",' +
+                        '"updated":"2019-11-18T13:07:20+00:00","dur":0,"user":"Ronan Williams","use_stop":true,"client":' +
+                        '"Ernst & Young LLP","project":"19214 togglTest2","project_color":"0","project_hex_color":"#205500",' +
+                        '"task":null,"billable":null,"is_billable":false,"cur":null,"tags":["18 tonne truck"]},' +
+                        '{"id":1365070310,' +
+                        '"pid":155350599,"tid":null,"uid":4782855,"description":"","start":"2019-11-18T01:07:41+00:00","end":' +
+                        '"2019-11-18T13:08:01+00:00","updated":"2019-11-18T13:08:01+00:00","dur":43220000,"user":"Ronan Williams",' +
+                        '"use_stop":true,"client":"Ernst & Young LLP","project":"19214 togglTest2","project_color":"0",' +
+                        '"project_hex_color":"#205500","task":null,"billable":null,"is_billable":false,"cur":null,"tags":["18 tonne truck"]}' +
+                    ']}'
 
         );
         return res;

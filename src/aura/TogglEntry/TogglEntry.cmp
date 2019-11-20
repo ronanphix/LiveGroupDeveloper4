@@ -11,11 +11,18 @@
     <aura:registerEvent name="entryDrag" type="c:TimeEntryDrag" />
 
     <div  class="expenseRow" draggable="true" ondragstart="{!c.dragEntry}"
-         style="{!'opacity:' + v.opacity + ';display:grid:grid-template-columns:20% 80%'}">
+         style="{!'opacity:' + v.opacity + ';display:grid;grid-template-columns:10% 90%'}">
         <div style="text-align:left;position: relative;">
             <img src="{!$Resource.TogglLogo}" style="width:20px;margin-left: -3px;z-index:10;position: absolute;"/>
-            <img src="{!v.entry.Employee__r.ImageLink__c ? v.entry.Employee__r.ImageLink__c : $Resource.UnkownPerson}"
-                 style="width:38px;position: absolute; top: 1px;left: 4px;border-radius: 50%;z-index:5;"/>
+            <aura:if isTrue="{!not(v.entry.Employee__r)}">
+                    <img src="{!$Resource.UnkownPerson}" style="width:38px;position: absolute; top: 1px;left: 4px;border-radius: 50%;z-index:5;opacity:0.4;"/>
+            </aura:if>
+            <aura:if isTrue="{!v.entry.Employee__r.ImageLink__c}">
+                <img src="{!v.entry.Employee__r.ImageLink__c}" style="width:38px;position: absolute; top: 1px;left: 4px;border-radius: 50%;z-index:5;"/>
+            </aura:if>
+            <aura:if isTrue="{!and(v.entry.Employee__r,not(v.entry.Employee__r.ImageLink__c))}">
+                <div style="width:38px;position: absolute; top: 1px;left: 4px;border-radius: 50%;z-index:5;">IN</div>
+            </aura:if>
         </div>
         <div style="padding-left: 5px;">
             <div>
@@ -33,7 +40,14 @@
                 <span>{!(v.entry.Employee__r ? v.entry.Employee__r.FirstName__c : '[unknown]')} - on </span>
                 <span><lightning:formattedDateTime value="{!v.entry.End__c}"/></span>
             </div>
-            <div style="color:grey;">{!v.entry.TagName__c + ': ' + v.entry.Description__c} </div>
+            <div style="color:grey;">
+                <aura:if isTrue="{!v.entry.TagName__c}">
+                    <span><img src="{!$Resource.TagIcon}" style="height: 14px;margin-right: 4px;"/>{!v.entry.TagName__c}</span><br/>
+                </aura:if>
+                <span><img src="{!$Resource.CommentIcon}" style="height: 14px;margin-right: 4px;"/>{!v.entry.Description__c}</span>
+
+
+            </div>
         </div>
     </div>
 

@@ -16,6 +16,27 @@ public class TogglCalloutTest {
         emp.Active__c       = true;
         insert emp;
 
+        // create and insert account
+        Account acc         = new Account();
+        acc.Name            = 'TestClient';
+        insert acc;
+
+        // create and insert opportunity
+        Opportunity opp     = new Opportunity();
+        opp.Name            = 'TestProject';
+        opp.CloseDate       = Date.today();
+        opp.StageName       = 'Costed prospect';
+        opp.Amount          = 1;
+        opp.AccountId       = acc.Id;
+        opp.Invoice_Schedule__c = 'Single post-event invoice';
+        opp.Event_start__c  = Date.today();
+        opp.Event_end__c    = Date.today();
+        opp.TogglId__c      = '1';
+        insert opp;
+
+        opp.StageName   = 'Closed Won';
+        update opp;
+
     }
 
 
@@ -50,9 +71,9 @@ public class TogglCalloutTest {
     }
 
     @IsTest
-    public static void testTagPost(){
+    public static void testTagPostOnInsert(){
 
-        // create and insert product
+        // insert product with correct criteria to be posted to Toggl
         Product2 prod   = new Product2();
         prod.Name       = 'TestTag';
         prod.IsActive   = true;
@@ -65,17 +86,41 @@ public class TogglCalloutTest {
     }
 
     @IsTest
+    public static void testTagPostOnUpdate(){
+
+        // insert product with correct criteria to be posted to Toggl
+        Product2 prod   = new Product2();
+        prod.Name       = 'TestTag';
+        insert prod;
+
+        Test.startTest();
+        prod.IsActive   = true;
+        update prod;
+        Test.stopTest();
+
+        System.assertEquals('1',[SELECT Id, TogglId__c FROM Product2 WHERE Id = :prod.Id].TogglId__c);
+    }
+
+
+    @IsTest
     public static void testGetTimeEntries(){
 
         // get time entries
         Test.startTest();
         TogglCallout.getTimeEntries();
-
-
         Test.stopTest();
 
+        System.assertEquals(2, [SELECT Id FROM TimeEntry__c].size());
 
+    }
 
+    @IsTest
+    public static void testSchedule(){
+        Test.startTest();
+        String jobId = System.schedule('ScheduledApexTest',
+                '0 0 0 15 3 ? 2022',
+                new ScheduledTogglCallout());
+        Test.stopTest();
     }
 
 }

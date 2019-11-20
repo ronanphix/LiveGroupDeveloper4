@@ -36,7 +36,7 @@ public class TogglCallout {
 
     }
 
-    // single post opportunity to project
+    // post product to project
     @Future(Callout=true)
     public static void postProduct(Set<Id> productIds){
 
@@ -55,7 +55,7 @@ public class TogglCallout {
     }
 
     // get time entries on sync
-    @Future(Callout=true)
+//    @Future(Callout=true)
     public static void getTimeEntries(){
 
         // get map of all users by email
@@ -68,7 +68,7 @@ public class TogglCallout {
         Map<String,String> oppIdMap = getOppExternalIds();
 
         HttpRequest usersRequest    = togglAuth('api/v8/workspaces/' + System.Label.TogglWorkspaceId + '/workspace_users', 'GET');
-        HttpResponse usersResponse  = Test.isRunningTest() ? MockHandler.getUsersMock() : new Http().send(usersRequest);
+        HttpResponse usersResponse  = Test.isRunningTest() ? MockHandler.getTogglUsersMock() : new Http().send(usersRequest);
 
         if (usersResponse.getStatusCode() == 200){
             List<Object> employees = (List<Object>)JSON.deserializeUntyped(usersResponse.getBody());
@@ -93,7 +93,7 @@ public class TogglCallout {
                         '&until=' + String.valueOf(Date.today()) +
                         '&user_agent=535104bb8ec99db2e0718f65e04e1579',
                 'GET');
-        HttpResponse entriesResponse  = Test.isRunningTest() ? MockHandler.getTogglClientMock() : new Http().send(entriesRequest);
+        HttpResponse entriesResponse  = Test.isRunningTest() ? MockHandler.getTogglEntriesMock() : new Http().send(entriesRequest);
 
         // before inserting time entries, update employee records
         update employeeMap.values();
@@ -101,9 +101,9 @@ public class TogglCallout {
         if (entriesResponse.getStatusCode() == 200){
 
             // new list of time entries to upsert
-            List<TimeEntry__c> entries = new List<TimeEntry__c>();
-
-            Set<Id> affectedOppIds  = new Set<Id>();
+            List<TimeEntry__c> entries  = new List<TimeEntry__c>();
+            Set<Id> affectedOppIds      = new Set<Id>();
+            Set<String> unassignedIds   = new Set<String>();
 
             Map<String,Object> dataMap = (Map<String,Object>)JSON.deserializeUntyped(entriesResponse.getBody());
 
@@ -127,14 +127,19 @@ public class TogglCallout {
                         entry.Duration__c               = Integer.valueOf(objMap.get('dur'));
                         entry.TogglId__c                = String.valueOf(objMap.get('id'));
                         entry.Description__c            = String.valueOf(objMap.get('description'));
+                        entry.TagName__c                = '';
 
                         List<Object> tagObjs = (List<Object>)objMap.get('tags');
 
                         if (!tagObjs.isEmpty()){
-                            entry.TagName__c = (String)tagObjs[0];
                             affectedOppIds.add(oppIdMap.get(String.valueOf((Integer)objMap.get('pid'))));
+                            List<String> tags = new List<String>();
+                            for (Object tagObj : tagObjs) tags.add((String)tagObj);
+                            entry.TagName__c = String.join(tags,', ');
                         }
+
                         entries.add(entry);
+                        unassignedIds.add(String.valueOf(objMap.get('id')));
                     }
                 }
             }
@@ -142,11 +147,21 @@ public class TogglCallout {
             if (!affectedOppIds.isEmpty()){
 
                 Map<String,Map<String,String>> oppLineMap = getOppLineMap(affectedOppIds);
+                unassignedIds = getUnassignedEntries(unassignedIds);
 
                 for (TimeEntry__c entry : entries){
-                    if (oppLineMap.containsKey(entry.Opportunity__c) &&
-                            oppLineMap.get(entry.Opportunity__c).containsKey(entry.TagName__c)){
-                        entry.Quote_Line__c = oppLineMap.get(entry.Opportunity__c).get(entry.TagName__c);
+
+                    String tag = entry.TagName__c.split(',')[0];
+
+                    system.debug('when id is ' + entry.TogglId__c +  ' tag id is ' + tag +
+                    ' and ' + unassignedIds.contains(tag) + ' ' + oppLineMap.containsKey(entry.Opportunity__c));
+
+
+
+                    if (unassignedIds.contains(entry.TogglId__c) &&
+                            oppLineMap.containsKey(entry.Opportunity__c) &&
+                            oppLineMap.get(entry.Opportunity__c).containsKey(tag)){
+                        entry.Quote_Line__c = oppLineMap.get(entry.Opportunity__c).get(tag);
                         entry.Assigned__c   = true;
                     }
                 }
@@ -224,5 +239,14 @@ public class TogglCallout {
         return oppLineMap;
     }
 
+    @TestVisible
+    private static Set<String> getUnassignedEntries(Set<String> allIds){
+
+        for (TimeEntry__c entry : [SELECT Id, TogglId__c FROM TimeEntry__c WHERE Assigned__c = TRUE AND TogglId__c IN :allIds]){
+            allIds.remove(entry.TogglId__c);
+        }
+
+        return allIds;
+    }
 
 }
