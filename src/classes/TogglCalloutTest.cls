@@ -77,6 +77,7 @@ public class TogglCalloutTest {
         Product2 prod   = new Product2();
         prod.Name       = 'TestTag';
         prod.IsActive   = true;
+        prod.SBQQ__SubscriptionTerm__c = 1;
 
         Test.startTest();
         insert prod;
@@ -91,6 +92,7 @@ public class TogglCalloutTest {
         // insert product with correct criteria to be posted to Toggl
         Product2 prod   = new Product2();
         prod.Name       = 'TestTag';
+        prod.SBQQ__SubscriptionTerm__c = 1;
         insert prod;
 
         Test.startTest();
