@@ -44,16 +44,13 @@
 
 .THIS .mini-block-holder {
     margin-left: 9%;
-    width: 18vw;
+    width: 19.4vw;
     display: grid;
     grid-template-columns: 50% 50%;
-
 }
 
 
 .THIS .qb-block {
-    width: 9vw;
-    /*margin-right: 47%;*/
     float: right;
     display: flex;
     flex-wrap: wrap;
@@ -61,9 +58,6 @@
 }
 
 .THIS .tg-block {
-    width: 9vw;
-    /*margin-right: 30%;*/
-    /*float: right;*/
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
