@@ -15,6 +15,7 @@ public class JSONParserQBOVendorCreditFlow {
     public class cls_VendorCredit {
         public String domain;	//QBO
         public Boolean sparse;
+        public Decimal Balance;
         public String Id;	//22304
         public String SyncToken;	//0
         public cls_MetaData MetaData;

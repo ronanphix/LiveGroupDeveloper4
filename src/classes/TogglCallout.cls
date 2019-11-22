@@ -56,7 +56,7 @@ public class TogglCallout {
     }
 
     // get time entries on sync
-//    @Future(Callout=true)
+    @Future(Callout=true)
     public static void getTimeEntries(){
 
         // get map of all users by email
@@ -115,7 +115,6 @@ public class TogglCallout {
                 for (Object entryObj : dataList){
 
                     Map<String,Object> objMap = (Map<String,Object>)entryObj;
-                    system.debug('entry is ' + objMap);
 
                     if (oppIdMap.containsKey(String.valueOf((Integer)objMap.get('pid')))
                             && objMap.get('start') != null && objMap.get('end') != null){

@@ -625,9 +625,12 @@ public class InsightsTest {
     @IsTest
     public static void testCashflowGenerator() {
 
-        JSONParserQBOInvoiceFlowMock invMock    = new JSONParserQBOInvoiceFlowMock();
-        JSONParserQBOBillFlowMock billMock1     = new JSONParserQBOBillFlowMock();
-        JSONParserQBOCurrentAccountMock accMock = new JSONParserQBOCurrentAccountMock(200);
+        String range = String.valueOf(Date.today().addMonths(-6)).substring(0, 10);
+
+        JSONParserQBOInvoiceFlowMock invMock        = new JSONParserQBOInvoiceFlowMock();
+        JSONParserQBOBillFlowMock billMock1         = new JSONParserQBOBillFlowMock();
+        JSONParserQBOCurrentAccountMock accMock     = new JSONParserQBOCurrentAccountMock(200);
+        JSONParserQBOVendorCreditFlowMock vcMock    = new JSONParserQBOVendorCreditFlowMock();
 
         Map<String, HttpCalloutMock> endpoint2TestResp = new Map<String, HttpCalloutMock>();
         endpoint2TestResp.put('callout:QuickBooksOnline/query?query=select%20%2a%20from%20i' +
@@ -636,6 +639,8 @@ public class InsightsTest {
                 'bill%20where%20Balance%20%21%3d%20%270%27&minorversion=4', billMock1);
         endpoint2TestResp.put('callout:QuickBooksOnline/query?query=select%20%2a%20from%20account' +
                 '%20where%20name%20%3d%20%27Bank%20Current%20Account%27&minorversion=4', accMock);
+        endpoint2TestResp.put('callout:QuickBooksOnline/query?query=select%20%2a%20from%20VendorCredit%20where%20TxnDate%20%3e%20%27' +
+                range + '%27&minorversion=12',vcMock);
 
         CashFlowMultiRequestMock cashMultiMock = new CashFlowMultiRequestMock(endpoint2TestResp);
         Test.setMock(HttpCalloutMock.class, cashMultiMock);
@@ -649,9 +654,12 @@ public class InsightsTest {
     @IsTest
     public static void testCashflowScheduler() {
 
-        JSONParserQBOInvoiceFlowMock invMock    = new JSONParserQBOInvoiceFlowMock();
-        JSONParserQBOBillFlowMock billMock1     = new JSONParserQBOBillFlowMock();
-        JSONParserQBOCurrentAccountMock accMock = new JSONParserQBOCurrentAccountMock(200);
+        String range = String.valueOf(Date.today().addMonths(-6)).substring(0, 10);
+
+        JSONParserQBOInvoiceFlowMock invMock        = new JSONParserQBOInvoiceFlowMock();
+        JSONParserQBOBillFlowMock billMock1         = new JSONParserQBOBillFlowMock();
+        JSONParserQBOCurrentAccountMock accMock     = new JSONParserQBOCurrentAccountMock(200);
+        JSONParserQBOVendorCreditFlowMock vcMock    = new JSONParserQBOVendorCreditFlowMock();
 
         Map<String, HttpCalloutMock> endpoint2TestResp = new Map<String, HttpCalloutMock>();
         endpoint2TestResp.put('callout:QuickBooksOnline/query?query=select%20%2a%20from%20i' +
@@ -660,6 +668,8 @@ public class InsightsTest {
                 'bill%20where%20Balance%20%21%3d%20%270%27&minorversion=4', billMock1);
         endpoint2TestResp.put('callout:QuickBooksOnline/query?query=select%20%2a%20from%20account' +
                 '%20where%20name%20%3d%20%27Bank%20Current%20Account%27&minorversion=4', accMock);
+        endpoint2TestResp.put('callout:QuickBooksOnline/query?query=select%20%2a%20from%20VendorCredit%20where%20TxnDate%20%3e%20%27' +
+                range + '%27&minorversion=12',vcMock);
 
         CashFlowMultiRequestMock cashMultiMock = new CashFlowMultiRequestMock(endpoint2TestResp);
         Test.setMock(HttpCalloutMock.class, cashMultiMock);

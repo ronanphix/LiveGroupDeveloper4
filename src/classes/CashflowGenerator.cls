@@ -40,12 +40,21 @@ public class CashflowGenerator {
         HttpResponse billResponse       = billHttp.send(billRequest);
         responseMap.put('bills',billResponse);
 
+        //  CALLOUT 4: Get vendor credits from Quickbooks Online
+        String range = String.valueOf(Date.today().addMonths(-6)).substring(0, 10);
+        String vendorCreditQuery = 'query?query=select%20%2a%20from%20VendorCredit%20where%20TxnDate%20%3e%20%27' +
+                range + '%27&minorversion=12';
+
+        // do callout
+        Http vendorCreditHttp                   = new Http();
+        HttpRequest vendorCreditRequest         = CashFlowUtils.doCallout(vendorCreditQuery);
+        HttpResponse vendorCreditResponse       = vendorCreditHttp.send(vendorCreditRequest);
+        responseMap.put('vendorCredits',vendorCreditResponse);
+
         buildFlow(resetValues, resetBudgets, responseMap);
     }
 
     public static void buildFlow(Boolean resetValues, Boolean resetBudgets, Map<String,HttpResponse> calloutsMap){
-
-        system.debug('build flow called');
 
         // get the cash flow entries in a map ordered by date asc
         Map<Date, CashFlow__c> flowMap = CashFlowUtils.getFlowMap();
@@ -134,7 +143,6 @@ public class CashflowGenerator {
         }
 
         // STEP 1: GET QUICKBOOKS INVOICES
-
         HttpResponse invoiceResponse = new HttpResponse();
 
         if (calloutsMap == null || !calloutsMap.containsKey('invoices')) {
@@ -355,7 +363,89 @@ public class CashflowGenerator {
             return;
         }
 
-        // STEP 4: GET SALESFORCE COS
+
+        // STEP 4: GET QUICKBOOKS VENDOR CREDITS
+        HttpResponse vendorCreditResponse = new HttpResponse();
+
+        if (calloutsMap == null || !calloutsMap.containsKey('vendorCredits')) {
+
+            String range = String.valueOf(Date.today().addMonths(-6)).substring(0, 10);
+            String vendorCreditQuery = 'query?query=select%20%2a%20from%20VendorCredit%20where%20TxnDate%20%3e%20%27' +
+                    range + '%27&minorversion=12';
+
+            // do callout
+            Http vendorCreditHttp                   = new Http();
+            HttpRequest vendorCreditRequest         = CashFlowUtils.doCallout(vendorCreditQuery);
+            vendorCreditResponse                    = vendorCreditHttp.send(vendorCreditRequest);
+        } else {
+            vendorCreditResponse = calloutsMap.get('vendorCredits');
+        }
+
+
+        if (vendorCreditResponse.getStatusCode() == 200) {
+            JSONParserQBOVendorCreditFlow parsedResults = JSONParserQBOVendorCreditFlow.parse(vendorCreditResponse.getBody());
+
+            if (parsedResults.QueryResponse != null && parsedResults.QueryResponse.VendorCredit != null) {
+
+                for (JSONParserQBOVendorCreditFlow.cls_VendorCredit vendorCredit : parsedResults.QueryResponse.VendorCredit) {
+
+                    if (vendorCredit.Balance > 0){
+                        if (!directDebits.containsKey(vendorCredit.VendorRef.value)) {
+
+                            Date adjustedDate   = !resetValues && oldEntryMap.containsKey(vendorCredit.Id) && oldEntryMap.get(vendorCredit.Id).AdjustedDate__c != null ?
+                                    oldEntryMap.get(vendorCredit.Id).AdjustedDate__c : null;
+                            Date dueDate        = adjustedDate != null ? adjustedDate : Date.valueOf(vendorCredit.TxnDate) < Date.today().addDays(1) ?
+                                    Date.today().addDays(1) :  Date.valueOf(vendorCredit.TxnDate);
+                            String comment      = oldEntryMap.containsKey(vendorCredit.Id) ? oldEntryMap.get(vendorCredit.Id).Comment__c : null;
+                            String category     = 'Payment run';
+
+                            Set<String> budgetKeys = new Set<String>();
+                            String budgetKeyString = '';
+
+                            for (JSONParserQBOVendorCreditFlow.cls_Line line : vendorCredit.Line){
+                                String account      = line.AccountBasedExpenseLineDetail.AccountRef.name.split(' ',2)[1].split(':',2)[0];
+                                String budgetKey    = String.valueOf(dueDate.month()) + String.valueOf(dueDate.year()) + account;
+                                budgetKeys.add(line.AccountBasedExpenseLineDetail.AccountRef.name.split(' ',2)[1].split(':',2)[0]);
+                                budgetKeyString     = line.AccountBasedExpenseLineDetail.AccountRef.name.split(' ',2)[1].split(':',2)[0];
+                                if (budgetMap.containsKey(budgetKey)){
+                                    budgetMap.get(budgetKey).Actual__c -= (line.Amount * -1);
+                                }
+                            }
+
+                            if (flowMap.containsKey(dueDate)) {
+                                newEntries.add(new CashFlowEntry__c(
+                                        CashFlow__c         = flowMap.get(dueDate).Id,
+                                        Out__c              = true,
+                                        Source__c           = 'Quickbooks',
+                                        Stage__c            = 'Confirmed',
+                                        BudgetKey__c        = budgetKeys.size() == 1 ? budgetKeyString : null,
+                                        Category__c         = category,
+                                        Description__c      = vendorCredit.VendorRef.name + ' SUPPLIER CREDIT (' + budgetKeyString + ')',
+                                        Amount__c           = (vendorCredit.Balance * -1).setScale(2),
+                                        QuickbooksId__c     = vendorCredit.Id,
+                                        VendorRef__c        = vendorCredit.VendorRef.value,
+                                        Comment__c          = comment,
+                                        AdjustedDate__c     = adjustedDate));
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            EmailError.send(
+                    'Cash flow failed to run',
+                    'The cash flow generator terminated prematurely because it failed to get ' +
+                            'the current account balance from Quickbooks.\n ' +
+                            'The status code returned in the callout was ' + vendorCreditResponse.getStatusCode() +
+                            ' and the response message was ' + vendorCreditResponse.getBody(),
+                    new List<String>{'helen.kronheim@livegroup.co.uk','dee.simmonite@livegroup.co.uk',
+                            'alina.tursunova@livegroup.co.uk','ronan.williams@livegroup.co.uk'}
+            );
+            return;
+        }
+
+
+        // STEP 5: GET SALESFORCE COS
         List<Opportunity> opps = [SELECT Filtered_Cost_of_Sale__c, Name, COSRemaining__c,
                                         Quickbooks_COS__c, Event_end__c, Filtered_Job_Number__c
                                 FROM Opportunity

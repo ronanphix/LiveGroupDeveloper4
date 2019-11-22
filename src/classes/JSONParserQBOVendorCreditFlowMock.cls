@@ -14,6 +14,7 @@ global class JSONParserQBOVendorCreditFlowMock implements HttpCalloutMock {
                 '        "domain": "QBO",'+
                 '        "sparse": false,'+
                 '        "Id": "22304",'+
+                '        "Balance": "0",'+
                 '        "SyncToken": "0",'+
                 '        "MetaData": {'+
                 '          "CreateTime": "2018-11-14T04:47:59-08:00",'+
@@ -84,6 +85,7 @@ global class JSONParserQBOVendorCreditFlowMock implements HttpCalloutMock {
                 '        "domain": "QBO",'+
                 '        "sparse": false,'+
                 '        "Id": "22021",'+
+                '        "Balance": "10",'+
                 '        "SyncToken": "2",'+
                 '        "MetaData": {'+
                 '          "CreateTime": "2018-11-01T07:00:08-07:00",'+
@@ -493,7 +495,7 @@ global class JSONParserQBOVendorCreditFlowMock implements HttpCalloutMock {
                 '        },'+
                 '        "TotalAmt": 261.6,'+
                 '        "GlobalTaxCalculation": "TaxExcluded"'+
-                '      },'+
+                '      }'+
                 '    ],'+
                 '    "startPosition": 1,'+
                 '    "maxResults": 41,'+
