@@ -4526,6 +4526,17 @@
                             app.rerunConfig.resetBudgets    = false;
                             app.responsePending             = false;
                             app.message                     = '';
+
+                            result['RECORDS'] = result['RECORDS'].sort(function(a, b){
+                                var x = a.Description__c.toLowerCase();
+                                var y = b.Description__c.toLowerCase();
+                                if (x < y) {return -1;}
+                                if (x > y) {return 1;}
+                                return 0;
+                            });
+
+                            app.cashflowData = result;
+
                             Object.assign(app.cashflowData,result);
                             app.drawLine('cashFlow', false, app.cashflowData['CASHFLOW']);
                             app.getCashflowLong(false);
