@@ -123,7 +123,6 @@
                 <apex:outputPanel rendered="{!amendment == null}" layout="none">
                     <div style="width: 90%;color:{!theme2};font-size: 16px;font-weight: bold;padding-left: 3px;">
                         {!quote.SBQQ__Opportunity2__r.Name}
-                        num is: {!pageOneCount} opt is : {!optionalCount}
                     </div>
                     <div style="font-family: sans-serif;width: 100%;color:{!theme};font-size: 55px;margin-bottom: 1px;" class="showBorder">
                         {!quote.Version__c}
