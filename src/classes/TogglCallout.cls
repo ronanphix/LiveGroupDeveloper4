@@ -4,6 +4,22 @@
 
 public class TogglCallout {
 
+    // single post account to client
+    @Future(Callout=true)
+    public static void postClient(Id accId){
+
+        Account acc  = [SELECT Name, TogglId__c FROM Account WHERE Id = :accId];
+
+        HttpRequest clientRequest = togglAuth('api/v8/clients', 'POST');
+        clientRequest.setBody('{"client":{"name":"' + acc.Name + '","wid":' + System.Label.TogglWorkspaceId + '}}');
+        HttpResponse clientResponse  = Test.isRunningTest() ? MockHandler.getTogglClientMock() : new Http().send(clientRequest);
+        acc.TogglId__c = clientResponse.getStatusCode() == 200 ? getPostResponseId(clientResponse) : null;
+
+        update acc;
+
+    }
+
+
     // single post opportunity to project
     @Future(Callout=true)
     public static void postProject(Id oppId){
@@ -71,8 +87,10 @@ public class TogglCallout {
         HttpRequest usersRequest    = togglAuth('api/v8/workspaces/' + System.Label.TogglWorkspaceId + '/workspace_users', 'GET');
         HttpResponse usersResponse  = Test.isRunningTest() ? MockHandler.getTogglUsersMock() : new Http().send(usersRequest);
 
+
         if (usersResponse.getStatusCode() == 200){
             List<Object> employees = (List<Object>)JSON.deserializeUntyped(usersResponse.getBody());
+
 
             for (Object employee : employees){
                 Map<String,Object> empMap = (Map<String,Object>)employee;
@@ -87,91 +105,102 @@ public class TogglCallout {
             }
         }
 
-        // callout for time entries
-        HttpRequest entriesRequest    = togglAuth(
-                '/reports/api/v2/details?workspace_id=' + System.Label.TogglWorkspaceId + '&' +
-                        'since=' + String.valueOf(Date.today().addDays(-10)) + '' +
-                        '&until=' + String.valueOf(Date.today()) +
-                        '&user_agent=535104bb8ec99db2e0718f65e04e1579',
-                'GET');
-        HttpResponse entriesResponse  = Test.isRunningTest() ? MockHandler.getTogglEntriesMock() : new Http().send(entriesRequest);
+        // declare object list to hold report values
+        List<Object> dataList = new List<Object>();
+
+        Boolean blank   = false;
+        Integer page    = 1;
+
+        while (!blank && page < 11){
+
+            // callout for time entries
+            HttpRequest entriesRequest    = togglAuth(
+                    '/reports/api/v2/details?workspace_id=' + System.Label.TogglWorkspaceId + '&' +
+                            'since=' + String.valueOf(Date.today().addDays(-1)) + '' +
+                            '&until=' + String.valueOf(Date.today()) +
+                            '&user_agent=535104bb8ec99db2e0718f65e04e1579' +
+                            '&page=' + page + '',
+                    'GET');
+            HttpResponse entriesResponse  = Test.isRunningTest() ? MockHandler.getTogglEntriesMock() : new Http().send(entriesRequest);
+
+            if (entriesResponse.getStatusCode() == 200) {
+
+                Map<String,Object> dataMap  = (Map<String,Object>)JSON.deserializeUntyped(entriesResponse.getBody());
+                List<Object> pageResults    = (List<Object>)dataMap.get('data');
+
+                dataList.addAll(pageResults);
+                page  = page + 1;
+                blank = pageResults.size() < 50;
+
+            }
+
+        }
 
         // before inserting time entries, update employee records
         update employeeMap.values();
 
-        if (entriesResponse.getStatusCode() == 200){
+        // new list of time entries to upsert
+        List<TimeEntry__c> entries  = new List<TimeEntry__c>();
+        Set<Id> affectedOppIds      = new Set<Id>();
+        Set<String> unassignedIds   = new Set<String>();
 
-            // new list of time entries to upsert
-            List<TimeEntry__c> entries  = new List<TimeEntry__c>();
-            Set<Id> affectedOppIds      = new Set<Id>();
-            Set<String> unassignedIds   = new Set<String>();
 
-            Map<String,Object> dataMap = (Map<String,Object>)JSON.deserializeUntyped(entriesResponse.getBody());
+        for (Object entryObj : dataList){
 
-            if (dataMap.containsKey('data')){
+            Map<String,Object> objMap = (Map<String,Object>)entryObj;
 
-                List<Object> dataList = (List<Object>)dataMap.get('data');
+            if (oppIdMap.containsKey(String.valueOf((Integer)objMap.get('pid')))
+                    && objMap.get('start') != null && objMap.get('end') != null){
 
-                for (Object entryObj : dataList){
+                TimeEntry__c entry = new TimeEntry__c();
+                entry.Opportunity__c            = oppIdMap.get(String.valueOf((Integer)objMap.get('pid')));
+                entry.Employee__r               = !unknownUsers.contains(String.valueOf(objMap.get('uid'))) ?
+                                                    new Employee1__c(TogglId__c = String.valueOf(objMap.get('uid'))) : null;
+                entry.Start__c                  = (Datetime)JSON.deserialize('"' + String.valueOf(objMap.get('start')) + '"', Datetime.class);
+                entry.End__c                    = (Datetime)JSON.deserialize('"' + String.valueOf(objMap.get('end')) + '"', Datetime.class);
+                entry.Duration__c               = Integer.valueOf(objMap.get('dur'));
+                entry.TogglId__c                = String.valueOf(objMap.get('id'));
+                entry.Description__c            = String.valueOf(objMap.get('description'));
+                entry.TagName__c                = '';
 
-                    Map<String,Object> objMap = (Map<String,Object>)entryObj;
+                List<Object> tagObjs = (List<Object>)objMap.get('tags');
 
-                    if (oppIdMap.containsKey(String.valueOf((Integer)objMap.get('pid')))
-                            && objMap.get('start') != null && objMap.get('end') != null){
-
-                        TimeEntry__c entry = new TimeEntry__c();
-                        entry.Opportunity__c            = oppIdMap.get(String.valueOf((Integer)objMap.get('pid')));
-                        entry.Employee__r               = !unknownUsers.contains(String.valueOf(objMap.get('uid'))) ?
-                                                            new Employee1__c(TogglId__c = String.valueOf(objMap.get('uid'))) : null;
-                        entry.Start__c                  = (Datetime)JSON.deserialize('"' + String.valueOf(objMap.get('start')) + '"', Datetime.class);
-                        entry.End__c                    = (Datetime)JSON.deserialize('"' + String.valueOf(objMap.get('end')) + '"', Datetime.class);
-                        entry.Duration__c               = Integer.valueOf(objMap.get('dur'));
-                        entry.TogglId__c                = String.valueOf(objMap.get('id'));
-                        entry.Description__c            = String.valueOf(objMap.get('description'));
-                        entry.TagName__c                = '';
-
-                        List<Object> tagObjs = (List<Object>)objMap.get('tags');
-
-                        if (!tagObjs.isEmpty()){
-                            affectedOppIds.add(oppIdMap.get(String.valueOf((Integer)objMap.get('pid'))));
-                            List<String> tags = new List<String>();
-                            for (Object tagObj : tagObjs) tags.add((String)tagObj);
-                            entry.TagName__c = String.join(tags,', ');
-                        }
-
-                        entries.add(entry);
-                        unassignedIds.add(String.valueOf(objMap.get('id')));
-                    }
+                if (!tagObjs.isEmpty()){
+                    affectedOppIds.add(oppIdMap.get(String.valueOf((Integer)objMap.get('pid'))));
+                    List<String> tags = new List<String>();
+                    for (Object tagObj : tagObjs) tags.add((String)tagObj);
+                    entry.TagName__c = String.join(tags,', ');
                 }
+
+                entries.add(entry);
+                unassignedIds.add(String.valueOf(objMap.get('id')));
             }
-
-            if (!affectedOppIds.isEmpty()){
-
-                Map<String,Map<String,String>> oppLineMap = getOppLineMap(affectedOppIds);
-                unassignedIds = getUnassignedEntries(unassignedIds);
-
-                for (TimeEntry__c entry : entries){
-
-                    String tag = entry.TagName__c.split(',')[0];
-
-                    if (unassignedIds.contains(entry.TogglId__c) &&
-                            oppLineMap.containsKey(entry.Opportunity__c) &&
-                            oppLineMap.get(entry.Opportunity__c).containsKey(tag)){
-                        entry.Quote_Line__c = oppLineMap.get(entry.Opportunity__c).get(tag);
-                        entry.Assigned__c   = true;
-                    }
-                }
-            }
-
-            Schema.SObjectField togglId = TimeEntry__c.fields.TogglId__c;
-
-            Database.UpsertResult [] upsertResults = Database.upsert(entries, togglId, false);
         }
+
+        if (!affectedOppIds.isEmpty()) {
+
+            Map<String, Map<String, String>> oppLineMap = getOppLineMap(affectedOppIds);
+            unassignedIds = getUnassignedEntries(unassignedIds);
+
+            for (TimeEntry__c entry : entries) {
+
+                String tag = entry.TagName__c.split(',')[0];
+
+                if (unassignedIds.contains(entry.TogglId__c) &&
+                        oppLineMap.containsKey(entry.Opportunity__c) &&
+                        oppLineMap.get(entry.Opportunity__c).containsKey(tag)) {
+                    entry.Quote_Line__c = oppLineMap.get(entry.Opportunity__c).get(tag);
+                    entry.Assigned__c = true;
+                }
+            }
+        }
+
+        Schema.SObjectField togglId = TimeEntry__c.fields.TogglId__c;
+
+        Database.UpsertResult [] upsertResults = Database.upsert(entries, togglId, false);
     }
 
-
-    @TestVisible
-    private static HttpRequest togglAuth(String endpoint, String method){
+    public static HttpRequest togglAuth(String endpoint, String method){
 
         String code             = System.Label.TogglAPIToken + ':api_token';
         Blob codeBlob           = Blob.valueOf(code);
@@ -185,15 +214,13 @@ public class TogglCallout {
         return req;
     }
 
-    @TestVisible
-    private static String getPostResponseId(HttpResponse response){
+    public static String getPostResponseId(HttpResponse response){
         Map<String,Object> resMap = (Map<String,Object>)JSON.deserializeUntyped(response.getBody());
         Map<String,Object> data   = (Map<String,Object>)resMap.get('data');
         return String.valueOf((Integer)data.get('id'));
     }
 
-    @TestVisible
-    private static Map<String,Employee1__c> getEmployeeMap(){
+    public static Map<String,Employee1__c> getEmployeeMap(){
 
         Map<String,Employee1__c> employeeMap = new Map<String,Employee1__c>();
         for (Employee1__c emp : [SELECT Id, TogglId__c, Email__c FROM Employee1__c WHERE Email__c != NULL]){
@@ -203,8 +230,7 @@ public class TogglCallout {
         return employeeMap;
     }
 
-    @TestVisible
-    private static Map<String,String> getOppExternalIds(){
+    public static Map<String,String> getOppExternalIds(){
 
         Map<String,String> idMap = new Map<String,String>();
         for (Opportunity opp : [SELECT Id, TogglId__c FROM Opportunity WHERE TogglId__c != NULL]){
@@ -214,8 +240,7 @@ public class TogglCallout {
         return idMap;
     }
 
-    @TestVisible
-    private static Map<String,Map<String,String>> getOppLineMap(Set<Id> oppIds){
+    public static Map<String,Map<String,String>> getOppLineMap(Set<Id> oppIds){
 
         Map<String,Map<String,String>> oppLineMap = new Map<String,Map<String,String>>();
 
@@ -235,8 +260,7 @@ public class TogglCallout {
         return oppLineMap;
     }
 
-    @TestVisible
-    private static Set<String> getUnassignedEntries(Set<String> allIds){
+    public static Set<String> getUnassignedEntries(Set<String> allIds){
 
         for (TimeEntry__c entry : [SELECT Id, TogglId__c FROM TimeEntry__c WHERE Assigned__c = TRUE AND TogglId__c IN :allIds]){
             allIds.remove(entry.TogglId__c);

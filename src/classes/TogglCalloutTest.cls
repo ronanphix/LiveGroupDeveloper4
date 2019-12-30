@@ -40,6 +40,19 @@ public class TogglCalloutTest {
     }
 
 
+    @IsTest
+    public static void testProjectClient(){
+
+        // create and insert account
+        Account acc         = new Account();
+        acc.Name            = 'TestClient';
+
+        Test.startTest();
+        insert acc;
+        Test.stopTest();
+
+        System.assertEquals('1',[SELECT Id, TogglId__c FROM Account WHERE Id = :acc.Id].TogglId__c);
+    }
 
     @IsTest
     public static void testProjectPost(){

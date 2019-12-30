@@ -1005,43 +1005,6 @@ public with sharing class PrimaryQuoteController {
             }
         }
 
-//        if (type != 'Reconciliation'){
-//
-//            // migrate existing expense assignments from the old quote lines to the lines on the new quote
-//            List<Expense__c> expenses = [SELECT Id, QuoteLine__c FROM Expense__c WHERE QuoteLine__c IN :lineIdMap.keySet()];
-//
-//            if (!expenses.isEmpty()) {
-//                for (Expense__c ex : expenses) {
-//                    ex.QuoteLine__c = lineIdMap.get(ex.QuoteLine__c).Id;
-//                }
-//
-//                Database.SaveResult[] expenseUpdates = Database.update(expenses, true);
-//                for (Database.SaveResult expenseUpdate : expenseUpdates) {
-//                    if (!expenseUpdate.isSuccess()) {
-//                        Database.rollback(sp);
-//                        return result;
-//                    }
-//                }
-//            }
-//
-//            // migrate existing time entry assignments from the old quote lines to the lines on the new quote
-//            List<TimeEntry__c> entries = [SELECT Id, Quote_Line__c FROM TimeEntry__c WHERE Quote_Line__c IN :lineIdMap.keySet()];
-//
-//            if (!entries.isEmpty()) {
-//                for (TimeEntry__c entry : entries) {
-//                    entry.Quote_Line__c = lineIdMap.get(entry.Quote_Line__c).Id;
-//                }
-//
-//                Database.SaveResult[] entriesUpdates = Database.update(entries, true);
-//                for (Database.SaveResult entryUpdate : entriesUpdates) {
-//                    if (!entryUpdate.isSuccess()) {
-//                        Database.rollback(sp);
-//                        return result;
-//                    }
-//                }
-//            }
-//        }
-
         List<SBQQ__Quote__c> priorQuotes = [SELECT Id, HasDocument__c, Locked__c, DocumentLocked__c
                                             FROM SBQQ__Quote__c
                                             WHERE SBQQ__Opportunity2__c = :oppId
@@ -1390,5 +1353,12 @@ public with sharing class PrimaryQuoteController {
         }
     }
 
+    @Future
+    public static void cloneEstimateAsync(String quoteId, String oppId, String type){
+
+        SBQQ__Quote__c quote = getQuoteApex(oppId, quoteId)[0];
+        cloneEstimateApex(quote, oppId, type);
+
+    }
 
 }
