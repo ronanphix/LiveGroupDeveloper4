@@ -133,7 +133,6 @@ public class TogglCallout {
                 blank = pageResults.size() < 50;
 
             }
-
         }
 
         // before inserting time entries, update employee records
@@ -145,15 +144,21 @@ public class TogglCallout {
         Set<String> unassignedIds   = new Set<String>();
 
 
+        // get id of operations opportunity
+        String operationsId;
+        List<Opportunity> opps      = [SELECT Id FROM Opportunity WHERE Id = :Label.OperationsId];
+        if (!opps.isEmpty()) operationsId = opps[0].Id;
+
         for (Object entryObj : dataList){
 
             Map<String,Object> objMap = (Map<String,Object>)entryObj;
 
-            if (oppIdMap.containsKey(String.valueOf((Integer)objMap.get('pid')))
-                    && objMap.get('start') != null && objMap.get('end') != null){
+            if (objMap.get('start') != null && objMap.get('end') != null){
 
                 TimeEntry__c entry = new TimeEntry__c();
-                entry.Opportunity__c            = oppIdMap.get(String.valueOf((Integer)objMap.get('pid')));
+
+                entry.Opportunity__c            = oppIdMap.containsKey(String.valueOf((Integer)objMap.get('pid'))) ?
+                                                    oppIdMap.get(String.valueOf((Integer)objMap.get('pid'))) : operationsId;
                 entry.Employee__r               = !unknownUsers.contains(String.valueOf(objMap.get('uid'))) ?
                                                     new Employee1__c(TogglId__c = String.valueOf(objMap.get('uid'))) : null;
                 entry.Start__c                  = (Datetime)JSON.deserialize('"' + String.valueOf(objMap.get('start')) + '"', Datetime.class);
@@ -172,7 +177,7 @@ public class TogglCallout {
                     entry.TagName__c = String.join(tags,', ');
                 }
 
-                entries.add(entry);
+                if (entry.Opportunity__c != null) entries.add(entry);
                 unassignedIds.add(String.valueOf(objMap.get('id')));
             }
         }
