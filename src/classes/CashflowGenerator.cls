@@ -322,13 +322,15 @@ public class CashflowGenerator {
                         String budgetKeyString = '';
 
                         for (JSONParserQBOBillFlow.cls_Line line : bill.Line){
-                            String account      = (category == 'Freelancers') ? 'Freelancers' :
-                                    line.AccountBasedExpenseLineDetail.AccountRef.name.split(' ',2)[1].split(':',2)[0];
-                            String budgetKey    = String.valueOf(dueDate.month()) + String.valueOf(dueDate.year()) + account;
-                            budgetKeys.add(line.AccountBasedExpenseLineDetail.AccountRef.name.split(' ',2)[1].split(':',2)[0]);
-                            budgetKeyString     = line.AccountBasedExpenseLineDetail.AccountRef.name.split(' ',2)[1].split(':',2)[0];
-                            if (budgetMap.containsKey(budgetKey)){
-                                budgetMap.get(budgetKey).Actual__c -= line.Amount;
+                            if (line.AccountBasedExpenseLineDetail != null){
+                                String account      = (category == 'Freelancers') ? 'Freelancers' :
+                                        line.AccountBasedExpenseLineDetail.AccountRef.name.split(' ',2)[1].split(':',2)[0];
+                                String budgetKey    = String.valueOf(dueDate.month()) + String.valueOf(dueDate.year()) + account;
+                                budgetKeys.add(line.AccountBasedExpenseLineDetail.AccountRef.name.split(' ',2)[1].split(':',2)[0]);
+                                budgetKeyString     = line.AccountBasedExpenseLineDetail.AccountRef.name.split(' ',2)[1].split(':',2)[0];
+                                if (budgetMap.containsKey(budgetKey)){
+                                    budgetMap.get(budgetKey).Actual__c -= line.Amount;
+                                }
                             }
                         }
 

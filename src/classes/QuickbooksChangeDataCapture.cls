@@ -364,7 +364,7 @@ public class QuickbooksChangeDataCapture {
 	            		// 3. bill is associated with an Opportunity 
 	            		for (JSONParserQBOBillCDC.cls_Line line : bill.Line) {
 
-                            if (line.AccountBasedExpenseLineDetail.ClassRef != null){
+                            if (line.AccountBasedExpenseLineDetail != null && line.AccountBasedExpenseLineDetail.ClassRef != null){
                                 jobNumbers.add(oppClassMap.get(line.AccountBasedExpenseLineDetail.ClassRef.value));
                                 String itemId = bill.Id + '-' + line.Id;
                                 activeLineItemIds.add(itemId);
@@ -423,15 +423,7 @@ public class QuickbooksChangeDataCapture {
 
 	            		for (JSONParserQBOBillCDC.cls_Line line : bill.Line) {
 
-//	            			if (li.AccountBasedExpenseLineDetail != null
-//	            				&& li.AccountBasedExpenseLineDetail.CustomerRef != null
-//	            				&& li.AccountBasedExpenseLineDetail.CustomerRef.name != null
-//	            				&& li.AccountBasedExpenseLineDetail.CustomerRef.name.contains(':')) {
-//
-//								String extendedName 	= li.AccountBasedExpenseLineDetail.CustomerRef.name.substring(li.AccountBasedExpenseLineDetail.CustomerRef.name.lastIndexOf(':') + 1);
-//	            				String jobNumber 		= extendedName.substring(0,5);
-
-                            if (line.AccountBasedExpenseLineDetail.ClassRef != null){
+                            if (line.AccountBasedExpenseLineDetail != null){
 	            				if (jobNumberOppMap.containsKey(oppClassMap.get(line.AccountBasedExpenseLineDetail.ClassRef.value))){
 
                                     Id oppId                = jobNumberOppMap.get(oppClassMap.get(line.AccountBasedExpenseLineDetail.ClassRef.value));
