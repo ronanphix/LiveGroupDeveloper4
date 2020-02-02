@@ -1,0 +1,7 @@
+<!--
+ - Created by ronanwilliams on 2019-11-15.
+ -->
+
+<aura:event type="APPLICATION" description="Time entry drag" >
+    <aura:attribute name="entryId" type="string" />
+</aura:event>
