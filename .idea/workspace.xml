@@ -1,0 +1,1357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/../PRR Disco/src/aura/svgIcon/svgIconHelper.js" description=" */&#10;&#10;({});" line="3" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0f913885-d6c5-4dd4-bfb5-4c818d84e219" name="Default Changelist" comment="" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="75" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Live Group Developer 4" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/classes/CashflowGenerator.cls">
+          <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+          <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/classes/SalesDashboardUtils.cls">
+          <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+          <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/classes/QuickbooksChangeDataCapture.cls">
+          <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+          <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/aura/QuickbooksExpense/QuickbooksExpense.cmp">
+          <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+          <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+          <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningControllerFileEditorProvider" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/triggers/AccountTrigger.trigger">
+          <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+          <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/triggers/OpportunityTrigger.trigger">
+          <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+          <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/cashFlowReview.page">
+          <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+          <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/classes/MockHandler.cls">
+          <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+          <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/classes/UnsupportedObjectTypeException.cls">
+          <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+          <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/aura/QuickbooksCard/QuickbooksCard.cmp">
+          <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+          <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+          <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningStyleFileEditorProvider" />
+          <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningControllerFileEditorProvider" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="CSS File" />
+        <option value="Lightning Style" />
+        <option value="Lightning Component" />
+        <option value="Lightning Application Event" />
+        <option value="Lightning Controller" />
+        <option value="Apex Class" />
+        <option value="Apex Trigger" />
+        <option value="Apex Metadata" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>geten</find>
+      <find>drop</find>
+      <find>total</find>
+      <find>calculateTotal</find>
+      <find>assignExpenseApex</find>
+      <find>expensesTotal</find>
+      <find>timeEn</find>
+      <find>Records</find>
+      <find>RECORDS</find>
+      <find>cashflowData</find>
+      <find>primary</find>
+      <find>togglePrimary</find>
+      <find>thank you</find>
+      <find>getCashflowData</find>
+      <find>toggl</find>
+      <find>testLineUpdateOperations</find>
+      <find>getT</find>
+      <find>status</find>
+      <find>payment</find>
+      <find>TxnDate</find>
+      <find>pa</find>
+      <find>buildCallou</find>
+      <find>refun</find>
+      <find>ve</find>
+      <find>vendor</find>
+      <find>paid</find>
+      <find>calculate</find>
+      <find>redo</find>
+      <find>rerunningFlow</find>
+      <find>rerunFlow</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Ronan Williams" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="017ba78d-b52a-4f40-b77b-c2bf78060351" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/classes/QuickbooksClassSyncTest.cls" />
+        <option value="$PROJECT_DIR$/src/staticresources/insights.css.resource" />
+        <option value="$PROJECT_DIR$/src/classes/SalesDashboardUtils.cls" />
+        <option value="$PROJECT_DIR$/src/staticresources/insightscss.resource" />
+        <option value="$PROJECT_DIR$/src/staticresources/insights.css" />
+        <option value="$PROJECT_DIR$/src/staticresources/insightsScript.js" />
+        <option value="$PROJECT_DIR$/src/staticresources/insights/insights.css" />
+        <option value="$PROJECT_DIR$/src/staticresources/insightsStylesheet.css" />
+        <option value="$PROJECT_DIR$/src/classes/ProjectTrackerRemoter.cls" />
+        <option value="$PROJECT_DIR$/src/classes/PeopleHRCallout.cls" />
+        <option value="$PROJECT_DIR$/src/classes/EmailError.cls" />
+        <option value="$PROJECT_DIR$/src/classes/OpportunityTriggerHandler.cls" />
+        <option value="$PROJECT_DIR$/src/aura/QuoteLineGroup/QuoteLineGroupController.js" />
+        <option value="$PROJECT_DIR$/src/classes/QuotePreviewController.cls" />
+        <option value="$PROJECT_DIR$/src/aura/PrimaryQuoteViewer/PrimaryQuoteViewer.css" />
+        <option value="$PROJECT_DIR$/src/aura/TogglCard/TogglCard.css" />
+        <option value="$PROJECT_DIR$/src/aura/PrimaryQuoteViewer/PrimaryQuoteViewerHelper.js" />
+        <option value="$PROJECT_DIR$/src/aura/TimeEntryDrag/TimeEntryDrag.evt" />
+        <option value="$PROJECT_DIR$/src/aura/TimeEntryDrop/TimeEntryDrop.evt" />
+        <option value="$PROJECT_DIR$/src/aura/TogglEntry/TogglEntryController.js" />
+        <option value="$PROJECT_DIR$/src/aura/QuoteLineGroup/QuoteLineGroup.cmp" />
+        <option value="$PROJECT_DIR$/src/aura/PrimaryQuoteViewer/PrimaryQuoteViewer.cmp" />
+        <option value="$PROJECT_DIR$/src/aura/TogglCard/TogglCard.cmp" />
+        <option value="$PROJECT_DIR$/src/aura/QuoteLine/QuoteLineHelper.js" />
+        <option value="$PROJECT_DIR$/src/aura/QuoteLine/QuoteLineController.js" />
+        <option value="$PROJECT_DIR$/src/aura/QuoteLine/QuoteLine.cmp" />
+        <option value="$PROJECT_DIR$/src/aura/TogglCard/TogglCardController.js" />
+        <option value="$PROJECT_DIR$/src/classes/InsightsController.cls" />
+        <option value="$PROJECT_DIR$/src/triggers/OpportunityTrigger.trigger" />
+        <option value="$PROJECT_DIR$/src/triggers/ProductTrigger.trigger" />
+        <option value="$PROJECT_DIR$/src/classes/MockHandler.cls" />
+        <option value="$PROJECT_DIR$/src/classes/ScheduledTogglCallout.cls" />
+        <option value="$PROJECT_DIR$/src/classes/ProductTriggerHandler.cls" />
+        <option value="$PROJECT_DIR$/src/classes/QuoteInterfaceTest.cls" />
+        <option value="$PROJECT_DIR$/src/aura/PrimaryQuoteViewer/PrimaryQuoteViewerController.js" />
+        <option value="$PROJECT_DIR$/src/aura/QuoteLine/QuoteLine.css" />
+        <option value="$PROJECT_DIR$/src/aura/TogglEntry/TogglEntry.cmp" />
+        <option value="$PROJECT_DIR$/src/classes/QuickbooksMonthEndCOS.cls" />
+        <option value="$PROJECT_DIR$/src/classes/JSONParserQBOVendorCreditFlow.cls" />
+        <option value="$PROJECT_DIR$/src/classes/CashflowGeneratorTest.cls" />
+        <option value="$PROJECT_DIR$/src/classes/JSONParserQBOVendorCreditFlowMock.cls" />
+        <option value="$PROJECT_DIR$/src/classes/InsightsTest.cls" />
+        <option value="$PROJECT_DIR$/src/pages/Insights.page" />
+        <option value="$PROJECT_DIR$/src/pages/CreditCardExporter.page" />
+        <option value="$PROJECT_DIR$/src/pages/QuotePreview.page" />
+        <option value="$PROJECT_DIR$/src/classes/PrimaryQuoteController.cls" />
+        <option value="$PROJECT_DIR$/src/classes/TogglCalloutTest.cls" />
+        <option value="$PROJECT_DIR$/src/triggers/AccountTrigger.trigger" />
+        <option value="$PROJECT_DIR$/src/classes/TogglCallout.cls" />
+        <option value="$PROJECT_DIR$/src/classes/CashflowGenerator.cls" />
+        <option value="$PROJECT_DIR$/src/classes/QuickbooksChangeDataCapture.cls" />
+      </list>
+    </option>
+  </component>
+  <component name="IlluminatedCloudWorkspaceSettings">
+    <option name="moduleWorkspaceSettings">
+      <map>
+        <entry key="Live Group Developer 4">
+          <value>
+            <ModuleWorkspaceSettings>
+              <option name="moduleContentsLastModified" value="1577710851299" />
+            </ModuleWorkspaceSettings>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="projectWorkspaceSettings">
+      <ProjectWorkspaceSettings>
+        <option name="anonymousApexSettings">
+          <AnonymousApexSettings>
+            <option name="documentText" value="//for (Expense__c ex : [SELECT  Id FROM Expense__c LIMIT 6]){&#10;////    ex.QuoteLine__c = null;&#10;////    ex.Assigned__c = false;&#10;////    update ex;&#10;//&#10;//    ex.Opportunity__c = '0060C000002pLU4QAM';&#10;//    update ex;&#10;//&#10;//&#10;////system.debug(ex.QuoteLine__r.SBQQ__Quote__r.SBQQ__Type__c);&#10;//}&#10;&#10;//TogglCallout.postProject([SELECT Id FROM Opportunity ORDER BY Amount DESC LIMIT 1].Id);&#10;&#10;//String data = '2019-11-14T10:17:21+00:00';&#10;//Datetime dt = (DateTime)JSON.deserialize('&quot;' + data + '&quot;', DateTime.class);&#10;//&#10;//System.debug(dt);&#10;&#10;//delete [SELECT Id FROM TimeEntry__c];&#10;&#10;//System.debug(String.valueOf(Date.today()));&#10;&#10;&#10;//TogglCallout.getTimeEntries();&#10;&#10;&#10;&#10;//  CALLOUT 4: Get vendor credits from Quickbooks Online&#10;//String vendorCreditQuery = 'query?query=select%20%2a%20from%20vendorcredit%20where%20Balance%20' +&#10;//        '%21%3d%20%270%27&amp;minorversion=4';&#10;&#10;//String vendorCreditQuery = 'query?query=select%20%2a%20from%20vendorcredit%20&amp;minorversion=12';&#10;&#10;//&#10;//&#10;//CashflowGenerator.buildFlow(false,false,null);&#10;TogglCallout.getTimeEntries();&#10;&#10;&#10;//Map&lt;Id,Product2&gt; prodM = new Map&lt;Id,Product2&gt;([SELECT Id FROM Product2 WHERE TogglId__c = NULL AND IsActive = TRUE lIMIT 10 ]);&#10;//&#10;//system.debug('keyset ' + prodM.keySet());&#10;//&#10;//TogglCallout.postProduct(prodM.keySet());&#10;&#10;&#10;&#10;//System.debug([SELECT Id, TogglId__c FROM Account ORDER BY Name DESC LIMIT 1]);" />
+            <option name="splitterProportion" value="0.31646425" />
+          </AnonymousApexSettings>
+        </option>
+        <option name="connectionWorkspaceSettings">
+          <map>
+            <entry key="Live Group Developer 4">
+              <value>
+                <ConnectionWorkspaceSettings>
+                  <option name="buildSuccessDatesBySourceRootRelativePath">
+                    <map>
+                      <entry key="APEXCLASS:CALDERPIPELINECONTROLLER" value="1568451694174" />
+                      <entry key="APEXCLASS:CASHFLOWGENERATOR" value="1579855654827" />
+                      <entry key="APEXCLASS:CASHFLOWGENERATORTEST" value="1574422703185" />
+                      <entry key="APEXCLASS:CREDITCARDEXPORTCONTROLLER" value="1563282129317" />
+                      <entry key="APEXCLASS:EMAILERROR" value="1573233079378" />
+                      <entry key="APEXCLASS:INSIGHTSCONTROLLER" value="1574091523472" />
+                      <entry key="APEXCLASS:INSIGHTSTEST" value="1574423046204" />
+                      <entry key="APEXCLASS:JSONPARSERQBOVENDORCREDITFLOW" value="1574422059516" />
+                      <entry key="APEXCLASS:JSONPARSERQBOVENDORCREDITFLOWMOCK" value="1574423046204" />
+                      <entry key="APEXCLASS:MOCKHANDLER" value="1574240495000" />
+                      <entry key="APEXCLASS:OPPORTUNITYTRIGGERHANDLER" value="1573488541731" />
+                      <entry key="APEXCLASS:PEOPLEHRCALLOUT" value="1571950468621" />
+                      <entry key="APEXCLASS:PRIMARYQUOTECONTROLLER" value="1576228243267" />
+                      <entry key="APEXCLASS:PRODUCTTRIGGERHANDLER" value="1574257968817" />
+                      <entry key="APEXCLASS:PROJECTTRACKERREMOTER" value="1571950464376" />
+                      <entry key="APEXCLASS:QUICKBOOKSCHANGEDATACAPTURE" value="1579855654827" />
+                      <entry key="APEXCLASS:QUICKBOOKSCLASSSYNCTEST" value="1568581061280" />
+                      <entry key="APEXCLASS:QUICKBOOKSMONTHENDCOS" value="1574421321861" />
+                      <entry key="APEXCLASS:QUOTEINTERFACETEST" value="1574264292820" />
+                      <entry key="APEXCLASS:QUOTEPREVIEWCONTROLLER" value="1573662459986" />
+                      <entry key="APEXCLASS:SALESDASHBOARDUTILS" value="1570201423509" />
+                      <entry key="APEXCLASS:SCHEDULEDOPPCLASSID" value="1568580399257" />
+                      <entry key="APEXCLASS:SCHEDULEDOPPORTUNITYADJUSTMENTS" value="1568579329593" />
+                      <entry key="APEXCLASS:SCHEDULEDTOGGLCALLOUT" value="1574240564323" />
+                      <entry key="APEXCLASS:TESTCUSTOMSETTING" value="1565171442013" />
+                      <entry key="APEXCLASS:TOGGLCALLOUT" value="1577799152622" />
+                      <entry key="APEXCLASS:TOGGLCALLOUTTEST" value="1577710992000" />
+                      <entry key="APEXPAGE:CREDITCARDEXPORTER" value="1574857483263" />
+                      <entry key="APEXPAGE:INSIGHTS" value="1574424667172" />
+                      <entry key="APEXPAGE:PROJECTTRACKER" value="1566986900588" />
+                      <entry key="APEXPAGE:QUOTEPREVIEW" value="1576068613218" />
+                      <entry key="APEXTRIGGER:ACCOUNTTRIGGER" value="1577711260941" />
+                      <entry key="APEXTRIGGER:OPPORTUNITYTRIGGER" value="1574165179414" />
+                      <entry key="APEXTRIGGER:PRODUCTTRIGGER" value="1574165681025" />
+                      <entry key="AURADEFINITIONBUNDLE:PRIMARYQUOTEVIEWER" value="1574273059000" />
+                      <entry key="AURADEFINITIONBUNDLE:QUOTELINE" value="1574336724000" />
+                      <entry key="AURADEFINITIONBUNDLE:QUOTELINEGROUP" value="1573822227000" />
+                      <entry key="AURADEFINITIONBUNDLE:TIMEENTRYDRAG" value="1573818488000" />
+                      <entry key="AURADEFINITIONBUNDLE:TIMEENTRYDROP" value="1573818554000" />
+                      <entry key="AURADEFINITIONBUNDLE:TOGGLCARD" value="1574082653000" />
+                      <entry key="AURADEFINITIONBUNDLE:TOGGLENTRY" value="1574415636000" />
+                      <entry key="STATICRESOURCE:INSIGHTS" value="1570262494342" />
+                      <entry key="STATICRESOURCE:INSIGHTS.CSS" value="1569942928000" />
+                      <entry key="STATICRESOURCE:INSIGHTSCSS" value="1570202187000" />
+                    </map>
+                  </option>
+                </ConnectionWorkspaceSettings>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="soqlQuerySettings">
+          <SoqlQuerySettings>
+            <option name="documentText" value="&#10;&#10;&#10;SELECT Id, Name, Gross_profit_2__c &#10;FROM Opportunity &#10;WHERE Name IN ('this','that')&#10;AND CloseDate = THIS_FISCAL_YEAR &#10;ORDER BY Name ASC&#10;LIMIT 200" />
+          </SoqlQuerySettings>
+        </option>
+      </ProjectWorkspaceSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="679" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Live Group Developer 4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Live Group Developer 4" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Live Group Developer 4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Live Group Developer 4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Live Group Developer 4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Live Group Developer 4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="aura" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Live Group Developer 4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Live Group Developer 4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="aura" type="462c0819:PsiDirectoryNode" />
+              <item name="QuickbooksExpense" type="edc2aaaf:IlluminatedCloudProjectTreeStructureProvider$BundleDirectoryNode" />
+            </path>
+            <path>
+              <item name="Live Group Developer 4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Live Group Developer 4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Live Group Developer 4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Live Group Developer 4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Live Group Developer 4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Live Group Developer 4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="triggers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Live Group Developer 4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Apex Unit Tests.TogglCalloutTest">
+    <configuration name="CashflowGeneratorTest.buildFlow" type="com.illuminatedcloud.intellij" factoryName="Apex Unit Tests" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
+      <option name="allTests" value="false" />
+      <option name="allowRunningInParallel" value="false" />
+      <option name="apexLogLevel" value="DEBUG" />
+      <option name="calloutsLogLevel" value="INFO" />
+      <option name="connectionName" value="Live Group Developer 4" />
+      <option name="connectionType" value="MDAPI" />
+      <option name="contextConfiguration" value="true" />
+      <option name="databaseLogLevel" value="INFO" />
+      <option name="logLevelsInitialized" value="false" />
+      <option name="moduleToTestClassNames">
+        <map>
+          <entry key="Live Group Developer 4">
+            <value>
+              <set>
+                <option value="CashflowGeneratorTest" />
+              </set>
+            </value>
+          </entry>
+        </map>
+      </option>
+      <option name="nbaLogLevel" value="INFO" />
+      <option name="profilingLogLevel" value="INFO" />
+      <option name="systemLogLevel" value="DEBUG" />
+      <option name="testClassToTestMethodNames">
+        <map>
+          <entry key="CashflowGeneratorTest">
+            <value>
+              <set>
+                <option value="buildFlow" />
+              </set>
+            </value>
+          </entry>
+        </map>
+      </option>
+      <option name="testSuiteName" />
+      <option name="validationLogLevel" value="INFO" />
+      <option name="visualforceLogLevel" value="INFO" />
+      <option name="waveLogLevel" value="INFO" />
+      <option name="workflowLogLevel" value="INFO" />
+      <method v="2" />
+    </configuration>
+    <configuration name="InsightsTest" type="com.illuminatedcloud.intellij" factoryName="Apex Unit Tests" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
+      <option name="allTests" value="false" />
+      <option name="allowRunningInParallel" value="false" />
+      <option name="apexLogLevel" value="DEBUG" />
+      <option name="calloutsLogLevel" value="INFO" />
+      <option name="connectionName" value="Live Group Developer 4" />
+      <option name="connectionType" value="MDAPI" />
+      <option name="contextConfiguration" value="true" />
+      <option name="databaseLogLevel" value="INFO" />
+      <option name="logLevelsInitialized" value="false" />
+      <option name="moduleToTestClassNames">
+        <map>
+          <entry key="Live Group Developer 4">
+            <value>
+              <set>
+                <option value="InsightsTest" />
+              </set>
+            </value>
+          </entry>
+        </map>
+      </option>
+      <option name="nbaLogLevel" value="INFO" />
+      <option name="profilingLogLevel" value="INFO" />
+      <option name="systemLogLevel" value="DEBUG" />
+      <option name="testClassToTestMethodNames">
+        <map />
+      </option>
+      <option name="testSuiteName" />
+      <option name="validationLogLevel" value="INFO" />
+      <option name="visualforceLogLevel" value="INFO" />
+      <option name="waveLogLevel" value="INFO" />
+      <option name="workflowLogLevel" value="INFO" />
+      <method v="2" />
+    </configuration>
+    <configuration name="QuoteInterfaceTest" type="com.illuminatedcloud.intellij" factoryName="Apex Unit Tests" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
+      <option name="allTests" value="false" />
+      <option name="allowRunningInParallel" value="false" />
+      <option name="apexLogLevel" value="DEBUG" />
+      <option name="calloutsLogLevel" value="INFO" />
+      <option name="connectionName" value="Live Group Developer 4" />
+      <option name="connectionType" value="MDAPI" />
+      <option name="contextConfiguration" value="true" />
+      <option name="databaseLogLevel" value="INFO" />
+      <option name="logLevelsInitialized" value="false" />
+      <option name="moduleToTestClassNames">
+        <map>
+          <entry key="Live Group Developer 4">
+            <value>
+              <set>
+                <option value="QuoteInterfaceTest" />
+              </set>
+            </value>
+          </entry>
+        </map>
+      </option>
+      <option name="nbaLogLevel" value="INFO" />
+      <option name="profilingLogLevel" value="INFO" />
+      <option name="systemLogLevel" value="DEBUG" />
+      <option name="testClassToTestMethodNames">
+        <map />
+      </option>
+      <option name="testSuiteName" />
+      <option name="validationLogLevel" value="INFO" />
+      <option name="visualforceLogLevel" value="INFO" />
+      <option name="waveLogLevel" value="INFO" />
+      <option name="workflowLogLevel" value="INFO" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TogglCalloutTest" type="com.illuminatedcloud.intellij" factoryName="Apex Unit Tests" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
+      <option name="allTests" value="false" />
+      <option name="allowRunningInParallel" value="false" />
+      <option name="apexLogLevel" value="DEBUG" />
+      <option name="calloutsLogLevel" value="INFO" />
+      <option name="connectionName" value="Live Group Developer 4" />
+      <option name="connectionType" value="MDAPI" />
+      <option name="contextConfiguration" value="true" />
+      <option name="databaseLogLevel" value="INFO" />
+      <option name="logLevelsInitialized" value="false" />
+      <option name="moduleToTestClassNames">
+        <map>
+          <entry key="Live Group Developer 4">
+            <value>
+              <set>
+                <option value="TogglCalloutTest" />
+              </set>
+            </value>
+          </entry>
+        </map>
+      </option>
+      <option name="nbaLogLevel" value="INFO" />
+      <option name="profilingLogLevel" value="INFO" />
+      <option name="systemLogLevel" value="DEBUG" />
+      <option name="testClassToTestMethodNames">
+        <map />
+      </option>
+      <option name="testSuiteName" />
+      <option name="validationLogLevel" value="INFO" />
+      <option name="visualforceLogLevel" value="INFO" />
+      <option name="waveLogLevel" value="INFO" />
+      <option name="workflowLogLevel" value="INFO" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TogglCalloutTest.testSchedule" type="com.illuminatedcloud.intellij" factoryName="Apex Unit Tests" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
+      <option name="allTests" value="false" />
+      <option name="allowRunningInParallel" value="false" />
+      <option name="apexLogLevel" value="DEBUG" />
+      <option name="calloutsLogLevel" value="INFO" />
+      <option name="connectionName" value="Live Group Developer 4" />
+      <option name="connectionType" value="MDAPI" />
+      <option name="contextConfiguration" value="true" />
+      <option name="databaseLogLevel" value="INFO" />
+      <option name="logLevelsInitialized" value="false" />
+      <option name="moduleToTestClassNames">
+        <map>
+          <entry key="Live Group Developer 4">
+            <value>
+              <set>
+                <option value="TogglCalloutTest" />
+              </set>
+            </value>
+          </entry>
+        </map>
+      </option>
+      <option name="nbaLogLevel" value="INFO" />
+      <option name="profilingLogLevel" value="INFO" />
+      <option name="systemLogLevel" value="DEBUG" />
+      <option name="testClassToTestMethodNames">
+        <map>
+          <entry key="TogglCalloutTest">
+            <value>
+              <set>
+                <option value="testSchedule" />
+              </set>
+            </value>
+          </entry>
+        </map>
+      </option>
+      <option name="testSuiteName" />
+      <option name="validationLogLevel" value="INFO" />
+      <option name="visualforceLogLevel" value="INFO" />
+      <option name="waveLogLevel" value="INFO" />
+      <option name="workflowLogLevel" value="INFO" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Apex Unit Tests.TogglCalloutTest" />
+        <item itemvalue="Apex Unit Tests.InsightsTest" />
+        <item itemvalue="Apex Unit Tests.CashflowGeneratorTest.buildFlow" />
+        <item itemvalue="Apex Unit Tests.QuoteInterfaceTest" />
+        <item itemvalue="Apex Unit Tests.TogglCalloutTest.testSchedule" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0f913885-d6c5-4dd4-bfb5-4c818d84e219" name="Default Changelist" comment="" />
+      <created>1563268490100</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1563268490100</updated>
+      <workItem from="1563268498954" duration="206000" />
+      <workItem from="1563268721282" duration="973000" />
+      <workItem from="1563274461671" duration="2661000" />
+      <workItem from="1563283374525" duration="2509000" />
+      <workItem from="1563290099860" duration="250000" />
+      <workItem from="1563352075483" duration="2087000" />
+      <workItem from="1563358140112" duration="1203000" />
+      <workItem from="1563373092651" duration="7341000" />
+      <workItem from="1563779133003" duration="3035000" />
+      <workItem from="1563787597124" duration="598000" />
+      <workItem from="1563897461800" duration="96000" />
+      <workItem from="1565110354365" duration="1629000" />
+      <workItem from="1565174547582" duration="3492000" />
+      <workItem from="1565780018901" duration="1672000" />
+      <workItem from="1565963913824" duration="71000" />
+      <workItem from="1565967366826" duration="492000" />
+      <workItem from="1566295189427" duration="1027000" />
+      <workItem from="1566310063022" duration="598000" />
+      <workItem from="1566471336474" duration="591000" />
+      <workItem from="1566984458051" duration="1070000" />
+      <workItem from="1567440340331" duration="5575000" />
+      <workItem from="1568020529333" duration="2173000" />
+      <workItem from="1568364606922" duration="1092000" />
+      <workItem from="1568380972988" duration="6705000" />
+      <workItem from="1568819254389" duration="242000" />
+      <workItem from="1569419204099" duration="401000" />
+      <workItem from="1569499375045" duration="259000" />
+      <workItem from="1569942020300" duration="4561000" />
+      <workItem from="1570198763874" duration="9775000" />
+      <workItem from="1570706534121" duration="1742000" />
+      <workItem from="1571048679651" duration="3323000" />
+      <workItem from="1571485631937" duration="4047000" />
+      <workItem from="1571911646899" duration="2385000" />
+      <workItem from="1572069500183" duration="539000" />
+      <workItem from="1572150443885" duration="248000" />
+      <workItem from="1572351931454" duration="123265000" />
+      <workItem from="1574780447954" duration="1057000" />
+      <workItem from="1575448623855" duration="841000" />
+      <workItem from="1575625322052" duration="4764000" />
+      <workItem from="1576845332140" duration="1457000" />
+      <workItem from="1577093012945" duration="545000" />
+      <workItem from="1577623527424" duration="6445000" />
+      <workItem from="1578934235888" duration="4032000" />
+      <workItem from="1580454446285" duration="21000" />
+      <workItem from="1580648961518" duration="6000" />
+    </task>
+    <task id="LOCAL-00001" summary="INIT on Thursday 16 July 2019">
+      <created>1563282985114</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1563282985114</updated>
+    </task>
+    <task id="LOCAL-00002" summary="INIT on Thursday 16 July 2019">
+      <created>1563283498151</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1563283498151</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Monday 22 July 2019">
+      <created>1563783283586</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1563783283586</updated>
+    </task>
+    <task id="LOCAL-00004" summary="28.08.2019">
+      <created>1566987067969</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1566987067969</updated>
+    </task>
+    <task id="LOCAL-00005" summary="14.09.2019">
+      <created>1568451116809</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1568451116809</updated>
+    </task>
+    <task id="LOCAL-00006" summary="1.10.2019">
+      <created>1569942051579</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1569942051580</updated>
+    </task>
+    <task id="LOCAL-00007" summary="1.10.2019">
+      <created>1569942597410</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1569942597410</updated>
+    </task>
+    <task id="LOCAL-00008" summary="5.10.2019">
+      <created>1570264993008</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1570264993008</updated>
+    </task>
+    <task id="LOCAL-00009" summary="15.10.2019">
+      <created>1571141866536</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1571141866536</updated>
+    </task>
+    <task id="LOCAL-00010" summary="30.10.2019">
+      <created>1572432306873</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1572432306874</updated>
+    </task>
+    <task id="LOCAL-00011" summary="30.10.2019 2">
+      <created>1572437151249</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1572437151249</updated>
+    </task>
+    <task id="LOCAL-00012" summary="11.11.2019">
+      <created>1573479465394</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1573479465395</updated>
+    </task>
+    <task id="LOCAL-00013" summary="13.11.2019">
+      <created>1573644635054</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1573644635054</updated>
+    </task>
+    <task id="LOCAL-00014" summary="13.11.2019 2">
+      <created>1573666030405</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1573666030405</updated>
+    </task>
+    <task id="LOCAL-00015" summary="13.11.2019 3">
+      <created>1573667230422</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1573667230422</updated>
+    </task>
+    <task id="LOCAL-00016" summary="14.11.2019">
+      <created>1573724537453</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1573724537453</updated>
+    </task>
+    <task id="LOCAL-00017" summary="14.11.2019 2">
+      <created>1573751731645</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1573751731645</updated>
+    </task>
+    <task id="LOCAL-00018" summary="15.11.2019">
+      <created>1573816802681</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1573816802681</updated>
+    </task>
+    <task id="LOCAL-00019" summary="18.11.2019">
+      <created>1574074568237</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1574074568237</updated>
+    </task>
+    <task id="LOCAL-00020" summary="18.11.2019 2">
+      <created>1574081745437</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1574081745437</updated>
+    </task>
+    <task id="LOCAL-00021" summary="18.11.2019 3">
+      <created>1574093635160</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1574093635160</updated>
+    </task>
+    <task id="LOCAL-00022" summary="19.11.2019">
+      <created>1574161605498</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1574161605499</updated>
+    </task>
+    <task id="LOCAL-00023" summary="19.11.2019 2">
+      <created>1574182741455</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1574182741455</updated>
+    </task>
+    <task id="LOCAL-00024" summary="20.11.2019">
+      <created>1574257617034</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1574257617034</updated>
+    </task>
+    <task id="LOCAL-00025" summary="20.11.2019 2">
+      <created>1574257918329</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1574257918329</updated>
+    </task>
+    <task id="LOCAL-00026" summary="20.11.2019 3">
+      <created>1574258443922</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1574258443922</updated>
+    </task>
+    <task id="LOCAL-00027" summary="20.11.2019 4">
+      <created>1574273116643</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1574273116643</updated>
+    </task>
+    <task id="LOCAL-00028" summary="21.11.2019">
+      <created>1574340273607</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1574340273607</updated>
+    </task>
+    <task id="LOCAL-00029" summary="22.11.2019">
+      <created>1574424159638</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1574424159638</updated>
+    </task>
+    <task id="LOCAL-00030" summary="22.11.2019 2">
+      <created>1574425775303</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1574425775303</updated>
+    </task>
+    <task id="LOCAL-00031" summary="13.12.2019">
+      <created>1576225050029</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1576225050029</updated>
+    </task>
+    <task id="LOCAL-00032" summary="30.12.2019">
+      <created>1577711272679</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1577711272679</updated>
+    </task>
+    <task id="LOCAL-00033" summary="2.1.2020">
+      <created>1577960037128</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1577960037128</updated>
+    </task>
+    <task id="LOCAL-00034" summary="24.1.2020">
+      <created>1579855720101</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1579855720101</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="TogglCalloutTest_testSchedule - 2019.11.20 at 13h 46m 21s.xml">
+      <configuration name="TogglCalloutTest.testSchedule" configurationId="com.illuminatedcloud.intellij" />
+    </history-entry>
+    <history-entry file="TogglCalloutTest - 2019.11.20 at 13h 53m 10s.xml">
+      <configuration name="TogglCalloutTest" configurationId="com.illuminatedcloud.intellij" />
+    </history-entry>
+    <history-entry file="TogglCalloutTest - 2019.11.20 at 14h 15m 19s.xml">
+      <configuration name="TogglCalloutTest" configurationId="com.illuminatedcloud.intellij" />
+    </history-entry>
+    <history-entry file="QuoteInterfaceTest - 2019.11.20 at 15h 30m 41s.xml">
+      <configuration name="QuoteInterfaceTest" configurationId="com.illuminatedcloud.intellij" />
+    </history-entry>
+    <history-entry file="CashflowGeneratorTest_buildFlow - 2019.11.22 at 11h 37m 05s.xml">
+      <configuration name="CashflowGeneratorTest.buildFlow" configurationId="com.illuminatedcloud.intellij" />
+    </history-entry>
+    <history-entry file="CashflowGeneratorTest_buildFlow - 2019.11.22 at 11h 38m 50s.xml">
+      <configuration name="CashflowGeneratorTest.buildFlow" configurationId="com.illuminatedcloud.intellij" />
+    </history-entry>
+    <history-entry file="InsightsTest - 2019.11.22 at 11h 45m 58s.xml">
+      <configuration name="InsightsTest" configurationId="com.illuminatedcloud.intellij" />
+    </history-entry>
+    <history-entry file="TogglCalloutTest - 2019.12.29 at 13h 08m 53s.xml">
+      <configuration name="TogglCalloutTest" configurationId="com.illuminatedcloud.intellij" />
+    </history-entry>
+    <history-entry file="TogglCalloutTest - 2019.12.30 at 13h 04m 39s.xml">
+      <configuration name="TogglCalloutTest" configurationId="com.illuminatedcloud.intellij" />
+    </history-entry>
+    <history-entry file="TogglCalloutTest - 2019.12.31 at 13h 20m 14s.xml">
+      <configuration name="TogglCalloutTest" configurationId="com.illuminatedcloud.intellij" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="217101000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49926144" visible="true" weight="0.490701" />
+      <window_info id="Structure" order="1" sideWeight="0.50073856" side_tool="true" weight="0.18743344" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.50073856" side_tool="true" weight="0.18743344" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.56626505" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39914772" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Log Viewer" order="7" weight="0.4609929" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32650602" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.07868383" side_tool="true" weight="0.8638554" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32891566" />
+      <window_info anchor="bottom" id="Anonymous Apex" order="12" sideWeight="0.92131615" weight="0.61566263" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
+      <window_info anchor="bottom" id="Version Control" order="14" weight="0.3272472" />
+      <window_info anchor="bottom" id="SOQL Query" order="15" weight="0.8168317" />
+      <window_info anchor="bottom" id="Illuminated Cloud" order="16" weight="0.77590364" />
+      <window_info anchor="bottom" id="Log Analyzer" order="17" />
+      <window_info anchor="bottom" id="Thumbnails" order="18" weight="0.32954547" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Maven" order="6" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Coverage" order="9" side_tool="true" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49926144" weight="0.35953265" />
+      <window_info id="Structure" order="1" sideWeight="0.50073856" side_tool="true" weight="0.18743344" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.50073856" side_tool="true" weight="0.18743344" />
+      <window_info anchor="bottom" id="Thumbnails" order="0" weight="0.32954547" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" />
+      <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.48279512" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.39914772" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" />
+      <window_info anchor="bottom" id="Log Viewer" order="8" weight="0.4609929" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32771084" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.07868383" side_tool="true" weight="0.765625" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32891566" />
+      <window_info anchor="bottom" id="Anonymous Apex" order="13" sideWeight="0.92131615" weight="0.40921122" />
+      <window_info anchor="bottom" id="Database Changes" order="14" />
+      <window_info anchor="bottom" id="Version Control" order="15" weight="0.328125" />
+      <window_info anchor="bottom" id="SOQL Query" order="16" weight="0.8168317" />
+      <window_info anchor="bottom" id="Illuminated Cloud" order="17" weight="0.7769886" />
+      <window_info anchor="bottom" id="Log Analyzer" order="18" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Maven" order="6" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Coverage" order="9" side_tool="true" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="30.10.2019" />
+    <MESSAGE value="30.10.2019 2" />
+    <MESSAGE value="11.11.2019" />
+    <MESSAGE value="13.11.2019" />
+    <MESSAGE value="13.11.2019 2" />
+    <MESSAGE value="13.11.2019 3" />
+    <MESSAGE value="14.11.2019" />
+    <MESSAGE value="14.11.2019 2" />
+    <MESSAGE value="15.11.2019" />
+    <MESSAGE value="18.11.2019" />
+    <MESSAGE value="18.11.2019 2" />
+    <MESSAGE value="18.11.2019 3" />
+    <MESSAGE value="19.11.2019" />
+    <MESSAGE value="19.11.2019 2" />
+    <MESSAGE value="20.11.2019" />
+    <MESSAGE value="20.11.2019 2" />
+    <MESSAGE value="20.11.2019 3" />
+    <MESSAGE value="20.11.2019 4" />
+    <MESSAGE value="21.11.2019" />
+    <MESSAGE value="22.11.2019" />
+    <MESSAGE value="22.11.2019 2" />
+    <MESSAGE value="13.12.2019" />
+    <MESSAGE value="30.12.2019" />
+    <MESSAGE value="2.1.2020" />
+    <MESSAGE value="24.1.2020" />
+    <option name="LAST_COMMIT_MESSAGE" value="24.1.2020" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Live_Group_Developer_4$TogglCalloutTest.null" NAME="Live Group Developer 4 Coverage Results" MODIFIED="1577798385342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="Apex" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true" PROJECT_NAME="Live Group Developer 4" CONNECTION_NAME="Live Group Developer 4" CONNECTION_TYPE="MDAPI" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/aura/ExpenseDrag/ExpenseDrag.evt">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/TimeEntryDrag/TimeEntryDrag.evt">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/ExpenseDrop/ExpenseDrop.evt">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/TimeEntryDrop/TimeEntryDrop.evt">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/QuickbooksExpense/QuickbooksExpenseController.js">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningControllerFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/QuoteLineGroup/QuoteLineGroup.cmp">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningHelperFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningStyleFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningControllerFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/PrimaryQuoteViewer/PrimaryQuoteViewer.cmp">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningHelperFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningRendererFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningControllerFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningStyleFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/QuoteLine/QuoteLine.cmp">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningHelperFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningStyleFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningControllerFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/TogglCard/TogglCard.cmp">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningStyleFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningControllerFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/InsightsController.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/triggers/ProductTrigger.trigger">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/TogglEntry/TogglEntryController.js">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningControllerFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/ScheduledOppClassId.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/ScheduledQuickbooksCDCVendorCredits.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/RevenueSummaryUpdateSchedulerTest.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/ProductTriggerHandler.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/QuoteInterfaceTest.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/PrimaryQuoteViewer/PrimaryQuoteViewerController.js">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningHelperFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningRendererFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningControllerFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningStyleFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/QuoteLine/QuoteLine.css">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningHelperFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningStyleFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningControllerFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/ScheduledTogglCallout.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/MonthEndInvoiceJournalMock.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/RevenueSummaryUpdateScheduler.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/RevenueSummaryUpdate.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/QBProfitAndLossCalloutTest.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/QuickbooksProfitAndLossCallout.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/TogglEntry/TogglEntry.cmp">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningControllerFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/CashflowGeneratorTest.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/QuickbooksMonthEndRevenue.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/JSONParserQBOVendorCreditFlow.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/JSONParserQBOVendorCreditFlowMock.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/CashFlowReviewController.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/QuickbooksMonthEndCOS.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/InsightsTest.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/Insights.page">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/MonthEndRevenueJournalMock.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/CreditCardExporter.page">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/PrimaryQuoteController.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/QuotePreview.page">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/TogglCallout.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/TogglCalloutTest.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/OpportunityInvoiceScheduleTest.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/CashflowGenerator.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/SalesDashboardUtils.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/QuickbooksChangeDataCapture.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/triggers/AccountTrigger.trigger">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/triggers/OpportunityTrigger.trigger">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/cashFlowReview.page">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/MockHandler.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/UnsupportedObjectTypeException.cls">
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.MetadataFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/QuickbooksCard/QuickbooksCard.cmp">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningStyleFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningControllerFileEditorProvider" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aura/QuickbooksExpense/QuickbooksExpense.cmp">
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.MetaXmlFileEditorProvider" />
+      <provider editor-type-id="com.illuminatedcloud.intellij.editor.LightningControllerFileEditorProvider" />
+      <provider selected="true" editor-type-id="com.illuminatedcloud.intellij.editor.LightningMarkupFileEditorProvider" />
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Illuminated Cloud</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>IlluminatedCloud (Live Group Developer 4/Live Group Developer 4)</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Live Group Developer 4</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

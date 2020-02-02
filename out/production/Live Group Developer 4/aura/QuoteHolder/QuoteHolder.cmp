@@ -1,0 +1,80 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId"
+                access="global" controller="QuoteListViewController" >
+
+    <aura:attribute name="quotes" type="SBQQ__Quote__c[]" />
+    <aura:attribute name="estimates" type="SBQQ__Quote__c[]"/>
+    <aura:attribute name="contracts" type="SBQQ__Quote__c[]"/>
+    <aura:attribute name="reconciliations" type="SBQQ__Quote__c[]"/>
+    <aura:attribute name="estimatesOpen" type="Boolean" default="false"/>
+    <aura:attribute name="contractsOpen" type="Boolean" default="false"/>
+    <aura:attribute name="reconciliationsOpen" type="Boolean" default="false"/>
+    <aura:attribute name="opportunity" type="Opportunity" />
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>    
+    <aura:handler event="c:Refresh" action="{!c.refresh}" />
+    <aura:handler name="deleteDocument" event="c:DeleteDocument" action="{!c.deleteDocument}" />
+    <aura:handler name="change" value="{!v.opportunity}" action="{!c.assessChange}"/>
+
+    <force:recordData aura:id="forceRecordCmp"
+                      recordId="{!v.recordId}"
+                      layoutType="FULL"
+                      fields="StageName,QuoteType__c,SBQQ__Contracted__c"
+                      targetFields="{!v.opportunity}"
+                      mode="VIEW"
+                      targetError="{!v.error}" />
+
+    <lightning:card class="slds-p-around_medium">
+    
+        <lightning:layout class="slds-m-bottom_small">
+            <lightning:layoutItem >
+                <lightning:icon iconName="standard:quotes" size="small" alternativeText="Quotes"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="horizontal-small">
+                <div class="page-section page-header">
+                    <h1 class="slds-text-heading--medium" style="font-weight:bold;">Quotes</h1>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>   
+
+
+        <aura:if isTrue="{!v.estimates.length > 0}">
+            <div class="typeTitle" style="background-color: #66C1BF; color:#66C1BF;cursor:pointer;" onclick="{!c.toggleEstimates}">
+                <div class="title">ESTIMATES {!v.estimates.length > 1 ? v.estimatesOpen ? '&#x21E7;' : '&#x21E9;' : ''}</div>
+            </div>
+
+            <div style="position: relative;">
+                <aura:iteration items="{!v.estimates}" var="quote">
+                    <div style="{!and(not(v.estimatesOpen),quote.position != 0) ? (and(quote.SBQQ__Primary__c, quote.position &lt; v.estimates.length -1))  ?
+                    'margin-top:-83px;margin-bottom:75px;position:relative;' : 'margin-top:-83px;position:relative;' : ''}">
+                        <c:QuoteCard quote="{!quote}" primary="{!quote.SBQQ__Primary__c}"/>
+                    </div>
+                </aura:iteration>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!v.contracts.length > 0}">
+            <div class="typeTitle" style="background-color: #2c7495; color:#2c7495;margin-top: 25px;cursor:pointer;" onclick="{!c.toggleContracts}">
+                <div class="title">CONTRACTS {!v.contracts.length > 1 ? v.contractsOpen ? '&#x21E7;' : '&#x21E9;' : ''}</div>
+            </div>
+            <aura:iteration items="{!v.contracts}" var="quote">
+                <!--<div style="{!and(not(v.contractsOpen),quote.position != 0) ? 'margin-top:-83px;position:relative;' : ''}">-->
+                    <div style="{!and(not(v.contractsOpen),quote.position != 0) ? (and(quote.SBQQ__Primary__c, quote.position &lt; v.contracts.length -1))  ?
+                    'margin-top:-83px;margin-bottom:75px;position:relative;' : 'margin-top:-83px;position:relative;' : ''}">
+                    <c:QuoteCard quote="{!quote}" primary="{!quote.SBQQ__Primary__c}"/>
+                </div>
+            </aura:iteration>
+        </aura:if>
+        <aura:if isTrue="{!v.reconciliations.length > 0}">
+            <div class="typeTitle" style="background-color: #d43b8f; color:#d43b8f;margin-top: 25px;cursor:pointer;" onclick="{!c.toggleReconciliations}">
+                <div class="title">RECONCILIATIONS {!v.reconciliations.length > 1 ? v.reconciliationsOpen ? '&#x21E7;' : '&#x21E9;' : ''}</div>
+            </div>
+            <aura:iteration items="{!v.reconciliations}" var="quote">
+                <!--<div style="{!and(not(v.reconciliationsOpen),quote.position != 0) ? 'margin-top:-83px;position:relative;' : ''}">-->
+                <div style="{!and(not(v.reconciliationsOpen),quote.position != 0) ? (and(quote.SBQQ__Primary__c, quote.position &lt; v.reconciliations.length -1))  ?
+                    'margin-top:-83px;margin-bottom:75px;position:relative;' : 'margin-top:-83px;position:relative;' : ''}">
+                    <c:QuoteCard quote="{!quote}" primary="{!quote.SBQQ__Primary__c}"/>
+                </div>
+            </aura:iteration>
+        </aura:if>
+
+    </lightning:card>
+</aura:component>
