@@ -300,7 +300,11 @@
                     <!-- THANKYOU AND SIGNATURE -->
                     <apex:outputPanel layout="none" rendered="{!pageOneCount < 20}" >
                         <div style="width: 90%;color:{!theme};font-size: 30px;margin-top: 30px;">
+<<<<<<< HEAD
                             Thank you 
+=======
+                            Thank you
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
                         </div>
                         <div style="width: 95%;color:{!theme};font-size: 11px;margin-top: 5px;font-weight: lighter;">
                             Dear {!contact.FirstName},<br/><br/>
@@ -433,7 +437,11 @@
                             </tr>
                         </table>
                     </div>
+<<<<<<< HEAD
                     <apex:outputPanel rendered="{!invoices != null && !quote.SBQQ__Opportunity2__r.Calder_Opportunity__c}">
+=======
+                    <apex:outputPanel rendered="{!invoices != null}">
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
                         <div style="margin-top: 30px;width: 100%;padding-left: 8px;">
                             <div style="padding-left:2px;color:{!theme};font-size: 18px;font-weight: lighter;margin-bottom: 4px;">Invoicing schedule</div>
                             <table style="width: 100%;font-style:sans-serif;font-size: 11px;">
@@ -1036,6 +1044,7 @@
         <apex:outputPanel rendered="{!showTnCs}" layout="none">
             <!-- PAGE 1 -->
             <div style="page-break-before:always;"/>
+<<<<<<< HEAD
             <apex:image url="{!URLFOR($Resource.TNC,'TNC-1.png')}" width="115%" style="margin-left:-9%;margin-top:-90px;" />
             <!-- END PAGE 1 -->
             <!-- PAGE 2 -->
@@ -1053,6 +1062,25 @@
             <!-- PAGE 5 -->
             <div style="page-break-before:always;"/>
             <apex:image url="{!URLFOR($Resource.TNC,'TNC-5.png')}" width="115%" style="margin-left:-9%;margin-top:-90px;" />
+=======
+            <apex:image url="{!URLFOR($Resource.TNC,'TNCpdf-1.png')}" width="115%" style="margin-left:-9%;margin-top:-90px;" />
+            <!-- END PAGE 1 -->
+            <!-- PAGE 2 -->
+            <div style="page-break-before:always;"/>
+            <apex:image url="{!URLFOR($Resource.TNC,'TNCpdf-2.png')}" width="115%" style="margin-left:-9%;margin-top:-90px;" />
+            <!-- END PAGE 2 -->
+            <!-- PAGE 3 -->
+            <div style="page-break-before:always;"/>
+            <apex:image url="{!URLFOR($Resource.TNC,'TNCpdf-3.png')}" width="115%" style="margin-left:-9%;margin-top:-90px;" />
+            <!-- END PAGE 3 -->
+            <!-- PAGE 4 -->
+            <div style="page-break-before:always;"/>
+            <apex:image url="{!URLFOR($Resource.TNC,'TNCpdf-4.png')}" width="115%" style="margin-left:-9%;margin-top:-90px;" />
+            <!-- END PAGE 4 -->
+            <!-- PAGE 5 -->
+            <div style="page-break-before:always;"/>
+            <apex:image url="{!URLFOR($Resource.TNC,'TNCpdf-5.png')}" width="115%" style="margin-left:-9%;margin-top:-90px;" />
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
             <!-- END PAGE 5 -->
         </apex:outputPanel>
         <!-- END TERMS AND CONDITIONS -->

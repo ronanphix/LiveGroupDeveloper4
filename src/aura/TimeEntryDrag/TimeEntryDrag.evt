@@ -4,4 +4,8 @@
 
 <aura:event type="APPLICATION" description="Time entry drag" >
     <aura:attribute name="entryId" type="string" />
+<<<<<<< HEAD
 </aura:event>
+=======
+</aura:event>
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0

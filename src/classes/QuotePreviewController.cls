@@ -95,7 +95,11 @@ public class QuotePreviewController {
                         SBQQ__NetAmount__c, Optional_total__c, SBQQ__Opportunity2__r.Venue__c, SBQQ__Opportunity2__r.Location__c,
                         SBQQ__Opportunity2__r.Event_start__c, SBQQ__Opportunity2__r.Event_end__c,
                         SOW_Entity_Name__c, SOW_Entity_Name_Caps__c, SOWDate__c, SOW_Services__c,
+<<<<<<< HEAD
                         SBQQ__Opportunity2__r.Project_Manager__r.Name, SBQQ__Opportunity2__r.Calder_Opportunity__c,
+=======
+                        SBQQ__Opportunity2__r.Project_Manager__r.Name,
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
                     (SELECT Name, Id, SBQQ__NetTotal__c FROM SBQQ__LineItemGroups__r ORDER BY SBQQ__Number__c ASC)
                 FROM SBQQ__Quote__c
                 WHERE Id = :ApexPages.currentPage().getParameters().get('id')];

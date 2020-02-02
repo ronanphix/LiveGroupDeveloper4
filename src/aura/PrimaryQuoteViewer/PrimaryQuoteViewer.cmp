@@ -400,9 +400,13 @@
                                     <span onclick="{!c.selectOption}" id="optionalSummary"> &nbsp;Optionals summary</span><br/>
                                     <input type="checkbox" aura:id="{!v.quote.Id + 'vat'}" id="{!v.quote.Id + 'vatCheckbox'}" checked="{!v.quote.Stage__c != 'Estimate'}" onchange="{!c.setPreviewChanged}"/>
                                     <span onclick="{!c.selectOption}" id="vat"> &nbsp;VAT total</span><br/>
+<<<<<<< HEAD
                                     <input type="checkbox" aura:id="{!v.quote.Id + 'invoices'}" id="{!v.quote.Id + 'invoicesCheckbox'}"
                                            checked="{!and(v.quote.Stage__c != 'Estimate',not(v.quote.SBQQ__Opportunity2__r.Calder_Opportunity__c))}"
                                            disabled="{!v.quote.SBQQ__Opportunity2__r.Calder_Opportunity__c}" onchange="{!c.setPreviewChanged}"/>
+=======
+                                    <input type="checkbox" aura:id="{!v.quote.Id + 'invoices'}" id="{!v.quote.Id + 'invoicesCheckbox'}" checked="{!v.quote.Stage__c != 'Estimate'}" onchange="{!c.setPreviewChanged}"/>
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
                                     <span onclick="{!c.selectOption}" id="invoices"> &nbsp;Invoice schedule</span><br/>
                                     <input type="checkbox" aura:id="{!v.quote.Id + 'termsAndConditions'}" id="{!v.quote.Id + 'termsAndConditionsCheckbox'}" onchange="{!c.setPreviewChanged}"/>
                                     <span onclick="{!c.selectOption}" id="termsAndConditions"> &nbsp;Terms &amp; Conditions</span><br/>

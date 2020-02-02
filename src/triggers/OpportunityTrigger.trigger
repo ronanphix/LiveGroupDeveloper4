@@ -44,7 +44,11 @@ trigger OpportunityTrigger on Opportunity (after insert, after update) {
 						createContracts.add(opp.Id);
 						if (Trigger.new.size() == 1) {
 							OpportunityTriggerHandler.sendDesignAlerts(opp.Id);
+<<<<<<< HEAD
 							if (opp.TogglId__c == null && !System.isFuture()) TogglCallout.postProject(opp.Id);
+=======
+							if (opp.TogglId__c == null) TogglCallout.postProject(opp.Id);
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
 						}
 	            	}
 		    		// Opportunity set to closed won on update and parent account does not have Quickbooks Id            	

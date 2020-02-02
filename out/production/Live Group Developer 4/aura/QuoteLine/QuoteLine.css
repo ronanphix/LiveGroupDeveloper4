@@ -1,0 +1,43 @@
+.THIS .quickbooksTotal {
+	padding:5px;
+	margin-bottom: 3px;
+	opacity: 0.5;    
+}
+
+.THIS .quoteGrid {
+    display: grid;
+	grid-template-columns: 40% 71%;    
+}
+
+.THIS .figures {
+    display: grid;
+    grid-template-columns: 11.2% 11.2% 15.4% 15.4% 15.4% 15.4% 15.4%;
+}
+
+.THIS.quoteLine {
+    border-bottom: 0.5px solid #e0e0e0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    vertical-align: middle;
+    align-items: center;
+}
+.THIS .quoteLine:hover {
+    background-color: #f4f4f4;
+}
+.THIS .quoteLine:active {
+    cursor: move;
+}
+
+.THIS.optionalLine {
+    font-style: italic;
+    color: grey;
+}
+
+.THIS.dragOver {
+    background-color: #e6eff6;
+}
+
+.THIS.selected {
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1), 0 3px 8px 0 rgba(0, 0, 0, 0.1);
+    background-color: #f4f4f4;
+}

@@ -15,9 +15,14 @@
         <br/>
         <div style="height:calc(95% - 50px); overflow-y:scroll;"  ondragover="{!c.dragOver}" 
              ondragleave="{!c.dragLeave}" ondrop="{!c.drop}">
+<<<<<<< HEAD
             
             <aura:iteration items="{!v.expenses}" var="expense" >
                 <aura:if isTrue="{!not(expense.QuoteLine__c)}">
+=======
+            <aura:iteration items="{!v.expenses}" var="expense" >
+                <aura:if isTrue="{!expense.QuoteLine__c == null}">
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
                 	<c:QuickbooksExpense expense="{!expense}" />
                 </aura:if>
             </aura:iteration>

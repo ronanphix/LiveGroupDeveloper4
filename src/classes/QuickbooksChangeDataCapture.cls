@@ -423,7 +423,11 @@ public class QuickbooksChangeDataCapture {
 
 	            		for (JSONParserQBOBillCDC.cls_Line line : bill.Line) {
 
+<<<<<<< HEAD
                             if (line.AccountBasedExpenseLineDetail.ClassRef != null){
+=======
+                            if (line.AccountBasedExpenseLineDetail != null){
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
 	            				if (jobNumberOppMap.containsKey(oppClassMap.get(line.AccountBasedExpenseLineDetail.ClassRef.value))){
 
                                     Id oppId                = jobNumberOppMap.get(oppClassMap.get(line.AccountBasedExpenseLineDetail.ClassRef.value));

@@ -23,9 +23,12 @@ global class ProjectTrackerRemoter {
 
     }
 
+<<<<<<< HEAD
 
     // A FINAL COMMENT mnnb,mbm,jbgi
 
+=======
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
     @RemoteAction
     global static Opportunity getOppDetail(String Id) {
 

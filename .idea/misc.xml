@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ProjectRootManager">
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_12" default="false" project-jdk-name="IlluminatedCloud (Live Group Developer 4/Live Group Developer 4)" project-jdk-type="IlluminatedCloud">
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

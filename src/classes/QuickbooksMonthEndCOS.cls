@@ -363,7 +363,11 @@ public class QuickbooksMonthEndCOS {
         return totalOppCOS + totalAdjCOS;
     }
 
+<<<<<<< HEAD
     private static HttpRequest buildCallout(String query) {
+=======
+    public static HttpRequest buildCallout(String query) {
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
 
         // build callout parameters
         HttpRequest request = new HttpRequest();

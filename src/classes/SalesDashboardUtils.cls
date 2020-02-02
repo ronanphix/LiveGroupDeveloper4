@@ -173,10 +173,15 @@ public class SalesDashboardUtils  {
         month.Month__c = commitMonth;
         update month;
 
+<<<<<<< HEAD
 
     }
 
 
+=======
+    }
+
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
     public static void adjustOpportunities(){
 
         Date lastClosedMonth = QBClosedMonth__c.getInstance('SFCommitMonth').Month__c;

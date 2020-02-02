@@ -19,7 +19,11 @@ public with sharing class PrimaryQuoteController {
                         'SBQQ__Opportunity2__r.StageName, SBQQ__Opportunity2__r.Committed__c, Event_End__c, ' +
                         'SBQQ__Opportunity2__r.Quickbooks_COS__c, SBQQ__Opportunity2__r.COSRemaining__c, ' +
                         'SBQQ__Opportunity2__r.UnassignedExpenses__c,SBQQ__Opportunity2__r.UnassignedTime__c,' +
+<<<<<<< HEAD
                         'SBQQ__Opportunity2__r.Quote_Status__c,SBQQ__Opportunity2__r.Calder_Opportunity__c' +
+=======
+                        'SBQQ__Opportunity2__r.Quote_Status__c,' +
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
                         'SBQQ__Opportunity2__r.SBQQ__PrimaryQuote__c, SBQQ__LineItemCount__c,' +
                         'SBQQ__Opportunity2__r.Percent_Invoiced__c, SBQQ__Opportunity2__r.Invoice_Status__c,' +
                         'SOW_Entity_Name__c, SOW_Entity_Name_Caps__c, SOW_Service_Description__c, SOW_Services__c, SOWDate__c,' +

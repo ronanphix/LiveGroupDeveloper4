@@ -4,10 +4,17 @@
     <option name="connections">
       <list>
         <IlluminatedCloudConnection>
+<<<<<<< HEAD
           <option name="connectionName" value="Live Group Developer" />
           <option name="connectionType" value="MDAPI" />
           <option name="defaultModuleName" value="Live Group Developer" />
           <option name="offlineSymbolTablePath" value="$PROJECT_DIR$/IlluminatedCloud/Live_Group_Developer/OfflineSymbolTable.zip" />
+=======
+          <option name="connectionName" value="Live Group Developer 4" />
+          <option name="connectionType" value="MDAPI" />
+          <option name="defaultModuleName" value="Live Group Developer 4" />
+          <option name="offlineSymbolTablePath" value="$PROJECT_DIR$/IlluminatedCloud/Live_Group_Developer_4/OfflineSymbolTable.zip" />
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
         </IlluminatedCloudConnection>
       </list>
     </option>

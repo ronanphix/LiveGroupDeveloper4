@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/Live Group Developer.iml" filepath="$PROJECT_DIR$/Live Group Developer.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/Live Group Developer 4.iml" filepath="$PROJECT_DIR$/Live Group Developer 4.iml" />
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
     </modules>
   </component>
 </project>

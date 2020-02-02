@@ -867,6 +867,7 @@ public class InsightsController {
 
             for (CashFlow__c flow : [SELECT Date__c, InConfirmed__c, InPipeline__c, InBudget__c,
                                             OutConfirmed__c, OutPipeline__c, OutBudget__c,
+<<<<<<< HEAD
                                     (SELECT Category__c, Amount__c, Out__c, Description__c, Source__c,
                                             CashFlow__r.DayMonthYear__c, QuickbooksId__c, Comment__c,
                                             TempDownloadUri__c, Details__c, VendorRef__c, BudgetKey__c,
@@ -874,6 +875,15 @@ public class InsightsController {
                                     FROM CashFlowEntries__r
                                     WHERE Paid__c = FALSE
                                     ORDER BY CreatedDate )
+=======
+                                            (SELECT Category__c, Amount__c, Out__c, Description__c, Source__c,
+                                                    CashFlow__r.DayMonthYear__c, QuickbooksId__c, Comment__c,
+                                                    TempDownloadUri__c, Details__c, VendorRef__c, BudgetKey__c,
+                                                    AmountAdjusted__c, HiddenBudget__c, AdjustedDate__c
+                                            FROM CashFlowEntries__r
+                                            WHERE Paid__c = FALSE
+                                            ORDER BY Name DESC)
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
                                     FROM CashFlow__c
                                     WHERE Date__c >= : startDate
                                     AND Date__c <= : endDate]){

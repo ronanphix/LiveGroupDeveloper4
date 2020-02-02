@@ -1,0 +1,168 @@
+.THIS.quoteCardPrimary {
+    background-color: #ededed;
+    border-radius: 4px;
+    border: 0.5px solid #ccc9c9;
+	margin-bottom: 7px;
+}
+
+.THIS .primary {
+    border-radius: 3px;
+    background-color: black;
+    color: white;
+    margin-left: 10px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: -3px;
+}
+
+.THIS .buttonHolder {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    position:relative;
+    font-size:10px;
+    padding-bottom:5px;
+    margin-bottom:4px;
+}
+
+.THIS .totalsField {
+    font-size:13px;
+    color:grey;
+}
+
+.THIS .totals {
+    font-size:15px;
+    font-weight: bold;
+}
+
+.THIS .backdrop {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    opacity: 0.8;
+    z-index:100;
+}
+.THIS.toggle {
+    display: none;
+}
+
+.THIS label {
+    display: none;
+}
+
+.THIS .quotePreview {
+    position: fixed;
+    top: 30px;
+    left: 150px;
+    right:  150px;
+    bottom: 20px;
+    background-color: white;
+    border-radius: 5px;
+    border: 0.5px solid grey; 
+    z-index: 10000;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.THIS .cloneModal {
+    position: fixed;
+    top: 90px;
+    left: calc(50% - 250px);
+    right:  calc(50% - 250px);
+    background-color: white;
+    border-radius: 5px;
+    border: 0.5px solid grey;
+    z-index: 10001;
+    padding: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+
+}
+
+.THIS.cloneModal button {
+    text-align: center;
+}
+
+.THIS  .cloneBlock {
+    margin-top: 15px;
+    border-radius: 5px;
+    z-index: 10001;
+    padding: 10px;
+    display: flex;
+    font-size: 16px;
+    position:relative;
+}
+.THIS .cloneRadio {
+    border-radius: 5px;
+    height: 100%;
+    text-align: center;
+    vertical-align: center;
+}
+.THIS .cloneText {
+    height: 100%;
+    cursor: pointer;
+    margin-left: 20px;
+}
+.THIS.quoteLineDragover {
+    
+}
+.THIS .expenseRow {
+    display:grid;
+    grid-template-columns: 10% 65% 25%; 
+    border-radius: 3px;
+    border: 0.5px solid grey;
+    margin-bottom: 3px;
+    padding:5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+    cursor: all-scroll;
+}
+
+.THIS .slds-truncate {
+    white-space: normal;
+}
+
+.THIS.slds-spinner_container {
+    z-index: 10 !important;
+}
+
+.THIS .slds-textarea {
+    /*height:400px !important;*/
+    height:250px !important;
+}
+
+@keyframes blink {
+    0% {
+        opacity: .2;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: .2;
+    }
+}
+
+.THIS .saving span {
+    animation-name: blink;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.THIS .saving span:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.THIS .saving span:nth-child(3) {
+    animation-delay: .4s;
+}
+
+.THIS .recPanel {
+    border-radius: 3px;
+    padding-left: 5px;
+    border-left: 0.5px solid #d3d3d3;
+}

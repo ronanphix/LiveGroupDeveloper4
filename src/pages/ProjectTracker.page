@@ -1102,9 +1102,12 @@
 
             for (var x = 0; x < result.length; x++) {
 
+<<<<<<< HEAD
             console.log(result[x]);
             console.log(' for ' + result[x].Name + ' start ' + new Date(result[x].Project_Start__c) + ' end ' + new Date(result[x].Project_End__c));
 
+=======
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
                 var startDate    = new Date(result[x].Project_Start__c);
                 var start        = (startDate.getDay() === 0) ? 7 : startDate.getDay();
                 var endDate      = new Date(result[x].Project_End__c) < startDate ? startDate : new Date(result[x].Project_End__c);
@@ -1209,6 +1212,7 @@
         }
 
         function chunkAllocate(startDate, endDate, name, Id, type, sObjectType, classType, recAlert) {
+<<<<<<< HEAD
             
 
             
@@ -1219,14 +1223,23 @@
                 console.log(start);
             }
 
+=======
+
+            var start = 1;
+            if (startDate != null) {
+                start = (startDate.getDay() === 0) ? 7 : startDate.getDay();
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
             }
 
             var end         = (endDate.getDay() === 0) ? 7 : endDate.getDay();
             var startOfWeek = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate() - end + 1);
             var length      = (startDate != null) ? daysBetween(startDate, endDate) : daysBetween(startOfWeek, endDate);
             var weekId      = makeId(startOfWeek);
+<<<<<<< HEAD
             
             
+=======
+>>>>>>> c7bba63c22a90b7c7191f21ae970d661f867f8b0
             var patch       = ('1').repeat(length);
             var index       = 0;
             var day         = document.getElementById(weekId);
